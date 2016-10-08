@@ -66,6 +66,7 @@
     </Compile>
     <Compile Include="Configuration\MessageFormatterTest.cs" />
     <Compile Include="Configuration\RoslynCallerContextTest.cs" />
+    <Compile Include="Configuration\TestConfigurationTest.cs" />
     <Compile Include="Core\ShouldExtensionsTest.cs" />
     <Compile Include="Assert\StringValidatorTest.cs" />
     <Compile Include="Playground.cs" />
