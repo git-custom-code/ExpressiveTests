@@ -10,7 +10,7 @@
     public sealed class MessageFormatterTest
     {
         [Fact(DisplayName = "FormatMessage (without reason)")]
-        [Trait("Category", "Assert")]
+        [Trait("Category", "Configuration")]
         public void FormatMessageWithoutReasonSuccess()
         {
             // Given
@@ -25,7 +25,7 @@
         }
 
         [Fact(DisplayName = "FormatMessage (with reason)")]
-        [Trait("Category", "Assert")]
+        [Trait("Category", "Configuration")]
         public void FormatMessageWithReasonSuccess()
         {
             // Given

@@ -43,7 +43,7 @@
         /// This property is called when you use the <see cref="TestConfigurationAttribute"/> to
         /// configure an test specific <see cref="ICallerContext"/>.
         /// </remarks>
-        public static ICallerContext CallerContext
+        internal static ICallerContext CallerContext
         {
             get
             {
@@ -108,7 +108,7 @@
         /// This method is called when you use the <see cref="GlobalTestConfigurationAttribute"/> to
         /// configure an assembly wide <see cref="ICallerContext"/> or <see cref="IMessageFormatter"/>.
         /// </remarks>
-        public static void Initialize(ICallerContext context = null, IMessageFormatter formatter = null)
+        internal static void Initialize(ICallerContext context = null, IMessageFormatter formatter = null)
         {
             DefaultCallerContext = context ?? new RoslynCallerContext();
             DefaultMessageFormatter = formatter ?? new MessageFormatter();

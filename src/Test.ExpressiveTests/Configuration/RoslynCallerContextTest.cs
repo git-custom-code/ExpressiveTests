@@ -34,14 +34,14 @@
         }
 
         [Fact(DisplayName = "GetCallerContext")]
-        [Trait("Category", "Assert")]
+        [Trait("Category", "Configuration")]
         public void ParseCallerContextSuccess()
         {
             // Given
             var context = new RoslynCallerContext();
 
             // When
-            var actual = context.GetCallerContext("bar", nameof(TestMethod), "Be", 22, GetSourcePath());
+            var actual = context.GetCallerContext("bar", nameof(TestMethod), "Be", 23, GetSourcePath());
 
             // Then
             Assert.Equal("@string", actual);
