@@ -7,7 +7,7 @@
 
     <AssemblyName>CustomCode.Test.BehaviorDrivenDevelopment.UnitTests</AssemblyName>
 
-    <RootNamespace>CustomCode.Test.BehaviorDrivenDevelopment.Test</RootNamespace>
+    <RootNamespace>CustomCode.Test.BehaviorDrivenDevelopment.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

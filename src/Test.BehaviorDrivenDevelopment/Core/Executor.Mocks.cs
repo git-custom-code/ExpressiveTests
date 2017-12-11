@@ -1,26 +1,22 @@
 ﻿namespace CustomCode.Test.BehaviorDrivenDevelopment
 {
-    using CustomCode.Test.BehaviorDrivenDevelopment.Composition;
     using LightInject;
-    using Moq;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Linq.Expressions;
-    using System.Reflection;
-
+    
     /// <summary>
     /// Executes a method (to be tested) on an instance of type <typeparamref name="T"/>.
     /// </summary>
-    /// <typeparam name="T"> The type to be tested. </typeparam>
-    public sealed class MockExecutor<T> where T : class
+    /// <typeparam name="T"> The type under test. </typeparam>
+    public sealed class ExecutorWithMocks<T> : IFluentInterface where T : class
     {
         #region Dependencies
 
-        public MockExecutor()
+        public ExecutorWithMocks()
         { }
 
-        public MockExecutor(IEnumerable<ServiceRegistration> mockArrangements, ServiceRegistration arrange)
+        public ExecutorWithMocks(IEnumerable<ServiceRegistration> mockArrangements, ServiceRegistration arrange)
         {
             MockArrangments.AddRange(mockArrangements);
             MockArrangments.Add(arrange);
@@ -36,22 +32,31 @@
 
         #region Logic
 
-        public Validator When()
+        /// <summary>
+        /// Define the (void) method under test via the <paramref name="act"/> delegate.
+        /// </summary>
+        /// <param name="act"> A delegate that executes the (void) method under test. </param>
+        /// <returns>
+        /// A <see cref="ValidatorWithMocks{T}"/> that can be used to execute any number of assertions
+        /// on the type under test.
+        /// </returns>
+        public ValidatorWithMocks<T> When(Action<T> act)
         {
-            var container = new ServiceContainer();
-            container.RegisterWithMocks(typeof(T));
+            return new ValidatorWithMocks<T>(act);
+        }
 
-            /*
-            //container.RegisterAssembly(Assembly.GetEntryAssembly());
-            foreach (var mock in MockArrangments)
-            {
-                container.Register(mock);
-                var instance = container.GetInstance(mock.ServiceType);
-            }*/
-
-            var typeUnderTest = container.GetInstance(typeof(T));
-
-            return new Validator();
+        /// <summary>
+        /// Define the (non-void) method under test via the <paramref name="act"/> delegate.
+        /// </summary>
+        /// <typeparam name="TResult"> The type of the result of the method under test. </typeparam>
+        /// <param name="act"> A delegate that executes the (void) method under test. </param>
+        /// <returns>
+        /// A <see cref="ValidatorWithMocks{T, TResult}"/> that can be used to execute any number of
+        /// assertions on the method result.
+        /// </returns>
+        public ValidatorWithMocks<T, TResult> When<TResult>(Func<T, TResult> act)
+        {
+            return new ValidatorWithMocks<T, TResult>(act);
         }
 
         /*
