@@ -73,9 +73,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExpressiveTests\ExpressiveTests.csproj">
+    <ProjectReference Include="..\ExpressiveTests\Old.csproj">
       <Project>{5743b019-4b81-448e-869d-17c5af29410d}</Project>
-      <Name>ExpressiveTests</Name>
+      <Name>Old</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

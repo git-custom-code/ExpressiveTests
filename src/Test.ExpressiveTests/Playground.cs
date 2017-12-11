@@ -16,12 +16,6 @@ namespace Test.ExpressiveTests
         [UnitTest]
         public void Success()
         {
-            Given(() => new List<string>())
-            .When(l => l.Add("a"))
-            .Then(l =>
-                {
-                    l[0].Should().Be("b");
-                });
         }
     }
 }
