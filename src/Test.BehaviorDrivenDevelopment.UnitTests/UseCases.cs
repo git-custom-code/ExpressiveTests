@@ -1,5 +1,6 @@
 namespace CustomCode.Test.BehaviorDrivenDevelopment.Tests
 {
+    using Moq;
     using Xunit;
 
     public sealed class UseCases : TestCase
@@ -50,6 +51,16 @@ namespace CustomCode.Test.BehaviorDrivenDevelopment.Tests
         public void AutoMockDependenciesWithoutResult()
         {
             Given<Foo>()
+            .When(foo => foo.DoSomethingWithoutResult(0, 0))
+            .Then(foo => { });
+        }
+
+        [Fact]
+        [IntegrationTest]
+        public void AutoMockDependenciesWithoutResultAndMockExpectation()
+        {
+            Given<Foo>()
+            .With((IBar bar) => bar.DoSomethingElse()).Returns(42)
             .When(foo => foo.DoSomethingWithoutResult(0, 0))
             .Then(foo => { });
         }

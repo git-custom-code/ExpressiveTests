@@ -1,8 +1,10 @@
 ﻿namespace CustomCode.Test.BehaviorDrivenDevelopment
 {
-    using Composition;
+    using Extensions;
     using LightInject;
+    using Moq;
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Define any number of assertions on an instance of type <typeparamref name="T"/>.
@@ -13,18 +15,31 @@
         #region Dependencies
 
         /// <summary>
-        /// Create a new instance of type <see cref="ValidatorWithMocks{T}"/>.
+        /// Create a new instance of the <see cref="ValidatorWithMocks{T}"/> type.
         /// </summary>
         /// <param name="act"> A delegate that executes the (void) method under test. </param>
-        public ValidatorWithMocks(Action<T> act)
+        /// <param name="arrangements">
+        /// A collection of arrangements that should be applied to instanciated mock objects.
+        /// </param>
+        public ValidatorWithMocks(Action<T> act, IDictionary<Type, List<Action<Mock>>> arrangements)
         {
             Act = act ?? throw new ArgumentNullException(nameof(act), "Act delegate cannot be null.");
+            Arrangements = arrangements ?? new Dictionary<Type, List<Action<Mock>>>();
         }
+
+        #endregion
+
+        #region Data
 
         /// <summary>
         /// Gets a delegate that executes the (void) method under test.
         /// </summary>
         private Action<T> Act { get; }
+
+        /// <summary>
+        /// Gets a collection of arrangements that should be applied to instanciated mock objects.
+        /// </summary>
+        private IDictionary<Type, List<Action<Mock>>> Arrangements { get; }
 
         #endregion
 
@@ -43,7 +58,7 @@
             {
                 // given
                 var container = new ServiceContainer();
-                var instanciatedMocks = container.RegisterWithMocks(typeof(T));
+                var instanciatedMocks = container.RegisterWithMocks(typeof(T), Arrangements);
                 var typeUnderTest = container.GetInstance<T>();
 
                 // when
@@ -51,7 +66,7 @@
 
                 // then
                 assert(typeUnderTest);
-                foreach(var mock in instanciatedMocks)
+                foreach (var mock in instanciatedMocks)
                 {
                     mock.VerifyAll();
                 }

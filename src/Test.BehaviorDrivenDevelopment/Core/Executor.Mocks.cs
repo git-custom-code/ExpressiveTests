@@ -1,10 +1,10 @@
 ﻿namespace CustomCode.Test.BehaviorDrivenDevelopment
 {
-    using LightInject;
+    using Moq;
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
-    
+
     /// <summary>
     /// Executes a method (to be tested) on an instance of type <typeparamref name="T"/>.
     /// </summary>
@@ -13,20 +13,33 @@
     {
         #region Dependencies
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="ExecutorWithMocks{T}"/> type.
+        /// </summary>
         public ExecutorWithMocks()
-        { }
-
-        public ExecutorWithMocks(IEnumerable<ServiceRegistration> mockArrangements, ServiceRegistration arrange)
         {
-            MockArrangments.AddRange(mockArrangements);
-            MockArrangments.Add(arrange);
+            Arrangements = new Dictionary<Type, List<Action<Mock>>>();
+        }
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="ExecutorWithMocks{T}"/> type.
+        /// </summary>
+        /// <param name="arrangements">
+        /// A collection of arrangements that should be applied to instanciated mock objects.
+        /// </param>
+        public ExecutorWithMocks(IDictionary<Type, List<Action<Mock>>> arrangements)
+        {
+            Arrangements = arrangements;
         }
 
         #endregion
 
         #region Data
 
-        private List<ServiceRegistration> MockArrangments { get; } = new List<ServiceRegistration>();
+        /// <summary>
+        /// Gets a collection of arrangements that should be applied to instanciated mock objects.
+        /// </summary>
+        private IDictionary<Type, List<Action<Mock>>> Arrangements { get; }
 
         #endregion
 
@@ -42,7 +55,7 @@
         /// </returns>
         public ValidatorWithMocks<T> When(Action<T> act)
         {
-            return new ValidatorWithMocks<T>(act);
+            return new ValidatorWithMocks<T>(act, Arrangements);
         }
 
         /// <summary>
@@ -56,31 +69,28 @@
         /// </returns>
         public ValidatorWithMocks<T, TResult> When<TResult>(Func<T, TResult> act)
         {
-            return new ValidatorWithMocks<T, TResult>(act);
+            return new ValidatorWithMocks<T, TResult>(act, Arrangements);
         }
 
-        /*
-        public MockExecutor<T> With<TMock>(Expression<Action<TMock>> arrange) where TMock : class
+        /// <summary>
+        /// Define an arrangment for a method that should be called on the specified mock object.
+        /// </summary>
+        /// <typeparam name="TMock"> The type of the mock object. </typeparam>
+        /// <typeparam name="TResult">
+        /// The result of the method of the mock object that should return a specific value.
+        /// </typeparam>
+        /// <param name="arrange">
+        /// A delegate that can be used to define the type of a mock object as well as a method that should return a
+        /// specific value.
+        /// </param>
+        /// <returns>
+        /// A <see cref="MockReturnValue{T, TMock, TResult}"/> that can be used to specify the return value of the
+        /// arranged mock object's method.
+        /// </returns>
+        public MockReturnValue<T, TMock, TResult> With<TMock, TResult>(Expression<Func<TMock, TResult>> arrange)
+            where TMock : class
         {
-            var @base = arrange as Expression;
-            var mock = new Mock<TMock>();
-            var setup = mock.Setup(@base as Expression<Action<TMock>>);
-
-            return null;
-        }*/
-
-        public MockArrangement<T, TMock, TResult> With<TMock, TResult>(Expression<Func<TMock, TResult>> arrange) where TMock : class
-        {
-            //var methodCall = arrange.Body as MethodCallExpression;
-            //var instance = methodCall.Object as ParameterExpression;
-            //var method = methodCall.Method;
-            //var instanceType = instance.Type;
-
-            //var mock = new Mock<TMock>();
-            //var setup = mock.Setup(arrange);
-
-            return new MockArrangement<T, TMock, TResult>(arrange);
-            //return new MockExecutor<T>(MockArrangments, arrange);
+            return new MockReturnValue<T, TMock, TResult>(arrange, Arrangements);
         }
 
         #endregion

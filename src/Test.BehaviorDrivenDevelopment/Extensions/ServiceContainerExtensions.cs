@@ -1,4 +1,4 @@
-﻿namespace CustomCode.Test.BehaviorDrivenDevelopment.Composition
+﻿namespace CustomCode.Test.BehaviorDrivenDevelopment.Extensions
 {
     using LightInject;
     using Moq;
@@ -19,23 +19,27 @@
         /// </summary>
         /// <param name="iocContainer"> The extended <see cref="ServiceContainer"/>. </param>
         /// <param name="typeUnderTest">
-        /// The type under test that should be registered along with mocks for it's dependencies.
+        /// The type under test that should be registered along with mock objects for it's dependencies.
+        /// </param>
+        /// <param name="arrangments">
+        /// An optional list of arrangments that should be applied to the mock objects.
         /// </param>
         /// <returns>
-        /// A collection of instanciated <see cref="Mock"/> objects for each of the <paramref name="typeUnderTest"/>'s
-        /// dependencies.
+        /// A collection of instanciated <see cref="Mock"/> objects for each of the
+        /// <paramref name="typeUnderTest"/>'s dependencies.
         /// </returns>
         /// <remarks>
         /// Note that this will currently only work for constructor injection (and not for property injection).
         /// </remarks>
-        public static HashSet<Mock> RegisterWithMocks(this ServiceContainer iocContainer, Type typeUnderTest)
+        public static HashSet<Mock> RegisterWithMocks(
+            this ServiceContainer iocContainer,
+            Type typeUnderTest, IDictionary<Type,
+            List<Action<Mock>>> arrangments = null)
         {
             var instanciatedMocks = new HashSet<Mock>();
             foreach (var dependency in FindDependenciesFor(typeUnderTest))
             {
                 var mockType = typeof(Mock<>).MakeGenericType(dependency);
-                mockType.GetConstructor(new Type[0]).Invoke(new object[0]);
-
                 var mockedDependency = new ServiceRegistration();
                 mockedDependency.FactoryExpression = (Func<IServiceFactory, object>)((IServiceFactory f) =>
                     {
@@ -43,6 +47,11 @@
                         if (!instanciatedMocks.Contains(mock))
                         {
                             instanciatedMocks.Add(mock);
+                        }
+
+                        if (arrangments.TryGetValue(mockType, out List<Action<Mock>> mockArrangements))
+                        {
+                            mockArrangements.ForEach(arrange => arrange(mock));
                         }
                         return mock.Object;
                     });
