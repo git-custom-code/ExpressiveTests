@@ -73,5 +73,15 @@ namespace CustomCode.Test.BehaviorDrivenDevelopment.Tests
             .When(foo => foo.DoSomething(0, 0))
             .Then(result => { });
         }
+
+        [Fact]
+        [IntegrationTest]
+        public void AutoMockDependenciesWithResultAndMockExpectation()
+        {
+            Given<Foo>()
+            .With((IBar bar) => bar.DoSomethingElse()).Returns(42)
+            .When(foo => foo.DoSomething(0, 0))
+            .Then(result => { });
+        }
     }
 }
