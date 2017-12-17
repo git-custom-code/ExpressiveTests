@@ -1,38 +1,63 @@
 ﻿namespace CustomCode.Test.BehaviorDrivenDevelopment
 {
-    using Moq;
     using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
+    using Xunit.Sdk;
 
     /// <summary>
-    /// Executes a constructor (to be tested) of a type.
+    /// Executes a method (to be tested) on an instance of type <typeparamref name="T"/>.
     /// </summary>
-    public sealed class Executor : IFluentInterface
+    /// <typeparam name="T"> The type under test. </typeparam>
+    public sealed class Executor<T> : IFluentInterface where T : class
     {
         #region Dependencies
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Executor"/> type.
+        /// Creates a new instance of the <see cref="Executor{T}"/> type.
         /// </summary>
-        public Executor()
-        { }
+        /// <param name="arrange"> A delegate that creates the type under test. </param>
+        public Executor(Func<T> arrange)
+        {
+            Arrange = arrange ?? throw new XunitException($"{Environment.NewLine}The {nameof(arrange)} delegate cannot be null");
+        }
+
+        #endregion
+
+        #region Data
+
+        /// <summary>
+        /// Gets a delegate that creates the type under test.
+        /// </summary>
+        private Func<T> Arrange { get; }
 
         #endregion
 
         #region Logic
 
         /// <summary>
-        /// Define the constructor under test via the <paramref name="act"/> delegate.
+        /// Define the (void) method under test via the <paramref name="act"/> delegate.
         /// </summary>
-        /// <param name="act"> A delegate that executes the constructor under test. </param>
+        /// <param name="act"> A delegate that executes the (void) method under test. </param>
         /// <returns>
         /// A <see cref="Validator{T}"/> that can be used to execute any number of assertions
         /// on the type under test.
         /// </returns>
-        public Validator<T> When<T>(Func<T> act) where T : class
+        public Validator<T> When(Action<T> act)
         {
-            return new Validator<T>(act);
+            return new Validator<T>(Arrange, act);
+        }
+
+        /// <summary>
+        /// Define the (non-void) method under test via the <paramref name="act"/> delegate.
+        /// </summary>
+        /// <typeparam name="TResult"> The type of the result of the method under test. </typeparam>
+        /// <param name="act"> A delegate that executes the (void) method under test. </param>
+        /// <returns>
+        /// A <see cref="Validator{T, TResult}"/> that can be used to execute any number of
+        /// assertions on the method result.
+        /// </returns>
+        public Validator<T, TResult> When<TResult>(Func<T, TResult> act)
+        {
+            return new Validator<T, TResult>(Arrange, act);
         }
 
         #endregion

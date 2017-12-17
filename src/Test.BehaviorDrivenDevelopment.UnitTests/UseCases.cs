@@ -1,10 +1,9 @@
 namespace CustomCode.Test.BehaviorDrivenDevelopment.Tests
 {
-    using Moq;
     using System;
     using Xunit;
 
-    public sealed class UseCases : TestCase
+    public sealed partial class UseCases : TestCase
     {
         #region Foo
 
@@ -49,106 +48,55 @@ namespace CustomCode.Test.BehaviorDrivenDevelopment.Tests
         {
             public int DoSomethingElse(params int[] parameter)
             {
+                return 13;
+            }
+        }
+
+        public sealed class BarWithException : IBar
+        {
+            public int DoSomethingElse(params int[] parameter)
+            {
                 throw new NotImplementedException();
             }
         }
 
         #endregion
 
-        [Fact(DisplayName = "Type constructor")]
+        [Fact(DisplayName = "Method without result")]
         [IntegrationTest]
-        public void TypeConstructor()
+        public void MethodWithoutResult()
         {
-            Given()
-            .When(() => new Foo(new Bar()))
-            .Then(foo => { });
-        }
-
-        [Fact(DisplayName = "Type constructor with exception")]
-        [IntegrationTest]
-        public void TypeConstructorWithException()
-        {
-            Given()
-            .When(() => new Foo(null))
-            .ThenThrow<ArgumentNullException>();
-        }
-
-        [Fact(DisplayName = "Mocked dependencies without result")]
-        [IntegrationTest]
-        public void AutoMockDependenciesWithoutResult()
-        {
-            Given<Foo>()
+            Given(() => new Foo(new Bar()))
             .When(foo => foo.DoSomethingWithoutResult(0, 0))
             .Then(foo => { });
         }
 
-        [Fact(DisplayName = "Mocked and arranged dependencies without result")]
+        [Fact(DisplayName = "Method without result and exception")]
         [IntegrationTest]
-        public void AutoMockDependenciesWithoutResultAndMockExpectation()
+        public void MethodWithoutResultAndException()
         {
-            Given<Foo>()
-            .With((IBar bar) => bar.DoSomethingElse()).Returns(42)
+            Given(() => new Foo(new BarWithException()))
             .When(foo => foo.DoSomethingWithoutResult(0, 0))
-            .Then(foo => { });
+            .ThenThrow<NotImplementedException>();
         }
 
-        [Fact(DisplayName = "Mocked dependencies without result and exception")]
+        [Fact(DisplayName = "Method with result")]
         [IntegrationTest]
-        public void AutoMockDependenciesWithoutResultAndException()
+        public void MethodWithResult()
         {
-            Given<Foo>()
-            .With((IBar bar) => bar.DoSomethingElse()).Throws<ArgumentNullException>()
-            .When(foo => foo.DoSomethingWithoutResult(0, 0))
-            .ThenThrow<ArgumentNullException>();
-        }
-
-        [Fact(DisplayName = "Mocked dependencies without result and exception factory")]
-        [IntegrationTest]
-        public void AutoMockDependenciesWithoutResultAndExceptionFactory()
-        {
-            Given<Foo>()
-            .With((IBar bar) => bar.DoSomethingElse()).Throws(() => new ArgumentNullException("Foo"))
-            .When(foo => foo.DoSomething(0, 0))
-            .ThenThrow<ArgumentNullException>();
-        }
-
-        [Fact(DisplayName = "Mocked dependencies with result")]
-        [IntegrationTest]
-        public void AutoMockDependenciesWithResult()
-        {
-            Given<Foo>()
+            Given(() => new Foo(new Bar()))
             .When(foo => foo.DoSomething(0, 0))
             .Then(result => { });
         }
 
-        [Fact(DisplayName = "Mocked and arranged dependencies with result")]
+        [Fact(DisplayName = "Method without result and exception")]
         [IntegrationTest]
-        public void AutoMockDependenciesWithResultAndMockArrangement()
+        public void MethodWithException()
         {
-            Given<Foo>()
-            .With((IBar bar) => bar.DoSomethingElse()).Returns(42)
+            Given(() => new Foo(new BarWithException()))
             .When(foo => foo.DoSomething(0, 0))
-            .Then(result => { });
+            .ThenThrow<NotImplementedException>(e => { });
         }
 
-        [Fact(DisplayName = "Mocked dependencies with result and exception")]
-        [IntegrationTest]
-        public void AutoMockDependenciesWithResultAndException()
-        {
-            Given<Foo>()
-            .With((IBar bar) => bar.DoSomethingElse()).Throws<ArgumentNullException>()
-            .When(foo => foo.DoSomething(0, 0))
-            .ThenThrow<ArgumentNullException>();
-        }
-
-        [Fact(DisplayName = "Mocked dependencies with result and exception factory")]
-        [IntegrationTest]
-        public void AutoMockDependenciesWithResultAndExceptionFactory()
-        {
-            Given<Foo>()
-            .With((IBar bar) => bar.DoSomethingElse()).Throws(() => new ArgumentNullException("Foo"))
-            .When(foo => foo.DoSomething(0, 0))
-            .ThenThrow<ArgumentNullException>();
-        }
     }
 }

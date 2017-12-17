@@ -4,20 +4,19 @@
     using Xunit.Sdk;
 
     /// <summary>
-    /// Define any number of assertions on a method result of type <typeparamref name="TResult"/>.
+    /// Define any number of assertions on an instance of type <typeparamref name="T"/>.
     /// </summary>
     /// <typeparam name="T"> The type under test. </typeparam>
-    /// <typeparam name="TResult"> The type of the result of the method under test. </typeparam>
-    public sealed class Validator<T, TResult> : IFluentInterface where T : class
+    public sealed class Validator<T> : IFluentInterface where T : class
     {
         #region Dependencies
 
         /// <summary>
-        /// Create a new instance of the <see cref="ValidatorWithMocks{T, TResult}"/> type.
+        /// Creates a new instance of the <see cref="Validator{T}"/> type.
         /// </summary>
         /// <param name="arrange"> A delegate that creates the type under test. </param>
-        /// <param name="act"> A delegate that executes the (non-void) method under test. </param>
-        public Validator(Func<T> arrange, Func<T, TResult> act)
+        /// <param name="act"> A delegate that executes the (void) method under test. </param>
+        public Validator(Func<T> arrange, Action<T> act)
         {
             Arrange = arrange ?? throw new XunitException($"The {nameof(arrange)} delegate cannot be null.");
             Act = act ?? throw new XunitException($"The {nameof(act)} delegate cannot be null.");
@@ -28,9 +27,9 @@
         #region Data
 
         /// <summary>
-        /// Gets a delegate that executes the (non-void) method under test.
+        /// Gets a delegate that executes the (void) method under test.
         /// </summary>
-        private Func<T, TResult> Act { get; }
+        private Action<T> Act { get; }
 
         /// <summary>
         /// Gets a delegate that creates the type under test.
@@ -42,13 +41,13 @@
         #region Logic
 
         /// <summary>
-        /// Define any number of assertions on the result of the method under test after it was
+        /// Define any number of assertions on the type under test after the method under test was
         /// successfully executed.
         /// </summary>
         /// <param name="assert">
-        /// A delegate that is used to execute any number of assertions on the result of the method under test.
+        /// A delegate that is used to execute any number of assertions on the type under test.
         /// </param>
-        public void Then(Action<TResult> assert)
+        public void Then(Action<T> assert)
         {
             try
             {
@@ -56,10 +55,10 @@
                 var typeUnderTest = Arrange();
 
                 // when
-                var result = Act(typeUnderTest);
+                Act(typeUnderTest);
 
                 // then
-                assert(result);
+                assert(typeUnderTest);
             }
             catch (Exception e)
             {

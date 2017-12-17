@@ -4,23 +4,20 @@
     using Xunit.Sdk;
 
     /// <summary>
-    /// Define any number of assertions on a method result of type <typeparamref name="TResult"/>.
+    /// Define any number of assertions on an instance of a created type (when testing the constructor call).
     /// </summary>
-    /// <typeparam name="T"> The type under test. </typeparam>
-    /// <typeparam name="TResult"> The type of the result of the method under test. </typeparam>
-    public sealed class Validator<T, TResult> : IFluentInterface where T : class
+    public sealed class ValidatorForConstructor<T> : IFluentInterface where T : class
     {
         #region Dependencies
 
         /// <summary>
-        /// Create a new instance of the <see cref="ValidatorWithMocks{T, TResult}"/> type.
+        /// Creates a new instance of the <see cref="ValidatorForConstructor{T}"/> type.
         /// </summary>
-        /// <param name="arrange"> A delegate that creates the type under test. </param>
-        /// <param name="act"> A delegate that executes the (non-void) method under test. </param>
-        public Validator(Func<T> arrange, Func<T, TResult> act)
+        /// <param name="act"> A delegate that executes the constructor under test. </param>
+
+        public ValidatorForConstructor(Func<T> act)
         {
-            Arrange = arrange ?? throw new XunitException($"The {nameof(arrange)} delegate cannot be null.");
-            Act = act ?? throw new XunitException($"The {nameof(act)} delegate cannot be null.");
+            Act = act ?? throw new ArgumentNullException(nameof(act), "Act delegate cannot be null.");
         }
 
         #endregion
@@ -28,38 +25,32 @@
         #region Data
 
         /// <summary>
-        /// Gets a delegate that executes the (non-void) method under test.
+        /// Gets a delegate that executes the constructor under test.
         /// </summary>
-        private Func<T, TResult> Act { get; }
-
-        /// <summary>
-        /// Gets a delegate that creates the type under test.
-        /// </summary>
-        private Func<T> Arrange { get; }
+        private Func<T> Act { get; }
 
         #endregion
 
         #region Logic
 
         /// <summary>
-        /// Define any number of assertions on the result of the method under test after it was
-        /// successfully executed.
+        /// Define any number of assertions on the instance under test after it was
+        /// successfully created.
         /// </summary>
         /// <param name="assert">
-        /// A delegate that is used to execute any number of assertions on the result of the method under test.
+        /// A delegate that is used to execute any number of assertions on the instance under test.
         /// </param>
-        public void Then(Action<TResult> assert)
+        public void Then(Action<T> assert)
         {
             try
             {
                 // given
-                var typeUnderTest = Arrange();
 
                 // when
-                var result = Act(typeUnderTest);
+                var typeUnderTest = Act();
 
                 // then
-                assert(result);
+                assert(typeUnderTest);
             }
             catch (Exception e)
             {
@@ -69,12 +60,12 @@
         }
 
         /// <summary>
-        /// Define any number of assertions on the thrown and expected exception of the method under test
+        /// Define any number of assertions on the thrown and expected exception of the constructor under test
         /// after it was executed.
         /// </summary>
         /// <typeparam name="TException"> The type of the exception that is thrown. </typeparam>
         /// <param name="assert">
-        /// A delegate that is used to execute any number of assertions on the thrown exception of the method under test.
+        /// A delegate that is used to execute any number of assertions on the thrown exception.
         /// </param>
         public void ThenThrow<TException>(Action<TException> assert = null)
             where TException : Exception
@@ -82,12 +73,11 @@
             try
             {
                 // given
-                var typeUnderTest = Arrange();
 
                 // when
                 try
                 {
-                    Act(typeUnderTest);
+                    Act();
 
                     var rn = Environment.NewLine;
                     var message = $"{rn}Expected exception of type {typeof(TException).Name}{rn}but no exception was thrown";
