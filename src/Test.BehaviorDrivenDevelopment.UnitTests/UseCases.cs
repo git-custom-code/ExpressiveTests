@@ -26,7 +26,7 @@ namespace CustomCode.Test.BehaviorDrivenDevelopment.Tests
         {
             public Foo(IBar bar)
             {
-                Bar = bar;
+                Bar = bar ?? throw new ArgumentNullException(nameof(bar));
             }
 
             private IBar Bar { get; }
@@ -45,7 +45,33 @@ namespace CustomCode.Test.BehaviorDrivenDevelopment.Tests
             }
         }
 
+        public sealed class Bar : IBar
+        {
+            public int DoSomethingElse(params int[] parameter)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         #endregion
+
+        [Fact(DisplayName = "Type constructor")]
+        [IntegrationTest]
+        public void TypeConstructor()
+        {
+            Given()
+            .When(() => new Foo(new Bar()))
+            .Then(foo => { });
+        }
+
+        [Fact(DisplayName = "Type constructor with exception")]
+        [IntegrationTest]
+        public void TypeConstructorWithException()
+        {
+            Given()
+            .When(() => new Foo(null))
+            .ThenThrow<ArgumentNullException>();
+        }
 
         [Fact(DisplayName = "Mocked dependencies without result")]
         [IntegrationTest]

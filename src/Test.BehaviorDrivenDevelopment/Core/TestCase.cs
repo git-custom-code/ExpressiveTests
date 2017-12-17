@@ -9,6 +9,19 @@
         #region Logic
 
         /// <summary>
+        /// Use this overload if you want to write a test for a type constructor and therefore don't need
+        /// to arrange anything.
+        /// </summary>
+        /// <returns>
+        /// An <see cref="Executor"/> that can be used to create a new instance of a type under test
+        /// (for testing type constructors).
+        /// </returns>
+        public Executor Given()
+        {
+            return new Executor();
+        }
+
+        /// <summary>
         /// Create a new instance of type <typeparamref name="T"/> (to be tested) whose dependencies are replaced
         /// with mock objects (using <see cref="Moq.Mock"/> and <see cref="LightInject.ServiceContainer"/>).
         /// </summary>
