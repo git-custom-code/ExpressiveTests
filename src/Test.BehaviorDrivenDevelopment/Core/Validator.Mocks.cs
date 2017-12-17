@@ -82,11 +82,11 @@
 
         /// <summary>
         /// Define any number of assertions on the thrown and expected exception of the method under test
-        /// after it was successfully executed.
+        /// after it was executed.
         /// </summary>
         /// <typeparam name="TException"> The type of the exception that is thrown. </typeparam>
         /// <param name="assert">
-        /// A delegate that is used to execute any number of assertions on the result of the method under test.
+        /// A delegate that is used to execute any number of assertions on the thrown exception of the method under test.
         /// </param>
         public void ThenThrow<TException>(Action<TException> assert = null)
             where TException : Exception
@@ -102,6 +102,14 @@
                 try
                 {
                     Act(typeUnderTest);
+
+                    var rn = Environment.NewLine;
+                    var message = $"{rn}Expected exception of type {typeof(TException).Name}{rn}but no exception was thrown";
+                    throw new XunitException(message);
+                }
+                catch (XunitException)
+                {
+                    throw;
                 }
                 catch (TException exception)
                 {
