@@ -5,6 +5,7 @@
     using Moq;
     using System;
     using System.Collections.Generic;
+    using Xunit.Sdk;
 
     /// <summary>
     /// Define any number of assertions on a method result of type <typeparamref name="TResult"/>.
@@ -76,6 +77,59 @@
             {
                 throw e;
                 // TODO
+            }
+        }
+
+        /// <summary>
+        /// Define any number of assertions on the thrown and expected exception of the method under test
+        /// after it was successfully executed.
+        /// </summary>
+        /// <typeparam name="TException"> The type of the exception that is thrown. </typeparam>
+        /// <param name="assert">
+        /// A delegate that is used to execute any number of assertions on the result of the method under test.
+        /// </param>
+        public void ThenThrow<TException>(Action<TException> assert = null)
+            where TException : Exception
+        {
+            try
+            {
+                // given
+                var container = new ServiceContainer();
+                var instanciatedMocks = container.RegisterWithMocks(typeof(T), Arrangements);
+                var typeUnderTest = container.GetInstance<T>();
+
+                // when
+                try
+                {
+                    Act(typeUnderTest);
+                }
+                catch (TException exception)
+                {
+                    // then
+                    assert?.Invoke(exception);
+                }
+                catch (Exception exception)
+                {
+                    var rn = Environment.NewLine;
+                    var message = $"{rn}Expected exception of type {typeof(TException).Name}{rn}but instead caught {exception.GetType().Name}";
+                    throw new XunitException(message);
+                }
+                finally
+                {
+                    foreach (var mock in instanciatedMocks)
+                    {
+                        mock.VerifyAll();
+                    }
+                }
+            }
+            catch (XunitException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                // TODO
+                throw e;
             }
         }
 

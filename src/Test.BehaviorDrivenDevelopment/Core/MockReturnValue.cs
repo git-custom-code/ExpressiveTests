@@ -54,28 +54,17 @@
         #region Logic
 
         /// <summary>
-        /// Specify the return value of the arranged mock object's method call.
+        /// Creates an <see cref="ExecutorWithMocks{T}"/> that can be used to arrange mock objects and/or execute a method
+        /// (to be tested) on an instance of type <typeparamref name="T"/>.
         /// </summary>
-        /// <param name="result"> The value to be returned. </param>
-        /// <param name="returnIfParametersMatch">
-        /// True if the return value should only be returned if the arranged method's input parameters match,
-        /// false otherwise.
-        /// </param>
+        /// <param name="mockType"> The type under test. </param>
+        /// <param name="arrangement"> The arrangement that shoud be applied to the mock object. </param>
         /// <returns>
         /// An <see cref="ExecutorWithMocks{T}"/> that can be used to arrange mock objects and/or execute a method
         /// (to be tested) on an instance of type <typeparamref name="T"/>.
         /// </returns>
-        public ExecutorWithMocks<T> Returns(TResult result, bool returnOnlyIfParametersMatch = false)
+        private ExecutorWithMocks<T> CreateExecutor(Type mockType, Action<Mock> arrangement)
         {
-            var mockType = typeof(Mock<TMock>);
-            var expression = Arrange;
-            if (returnOnlyIfParametersMatch == false)
-            {
-                var visitor = new IgnoreMockParametersVisitor();
-                expression = visitor.VisitAndConvert(Arrange, nameof(Returns));
-            }
-            Action<Mock> arrangement = (mock) => ((Mock<TMock>)mock).Setup(expression).Returns(result);
-
             if (Arrangements.TryGetValue(mockType, out List<Action<Mock>> arrangements))
             {
                 arrangements.Add(arrangement);
@@ -86,6 +75,91 @@
             }
 
             return new ExecutorWithMocks<T>(Arrangements);
+        }
+
+        /// <summary>
+        /// Specify the return value of the arranged mock object's method call.
+        /// </summary>
+        /// <param name="result"> The value to be returned. </param>
+        /// <param name="onlyIfParametersMatch">
+        /// True if the return value should only be returned if the arranged method's input parameters match,
+        /// false otherwise.
+        /// </param>
+        /// <returns>
+        /// An <see cref="ExecutorWithMocks{T}"/> that can be used to arrange mock objects and/or execute a method
+        /// (to be tested) on an instance of type <typeparamref name="T"/>.
+        /// </returns>
+        public ExecutorWithMocks<T> Returns(TResult result, bool onlyIfParametersMatch = false)
+        {
+            var expression = Arrange;
+            if (onlyIfParametersMatch == false)
+            {
+                var visitor = new IgnoreMockParametersVisitor();
+                expression = visitor.VisitAndConvert(Arrange, nameof(Returns));
+            }
+
+            var mockType = typeof(Mock<TMock>);
+            Action<Mock> arrangement = (mock) => ((Mock<TMock>)mock).Setup(expression).Returns(result);
+            return CreateExecutor(mockType, arrangement);
+        }
+
+        /// <summary>
+        /// Specify an exception that is thrown when the arranged mock object's method is called.
+        /// </summary>
+        /// <typeparam name="TException"> The type of the exception to be thrown. </typeparam>
+        /// <param name="onlyIfParametersMatch">
+        /// True if the exception should only be thrown if the arranged method's input parameters match,
+        /// false otherwise.
+        /// </param>
+        /// <returns>
+        /// An <see cref="ExecutorWithMocks{T}"/> that can be used to arrange mock objects and/or execute a method
+        /// (to be tested) on an instance of type <typeparamref name="T"/>.
+        /// </returns>
+        public ExecutorWithMocks<T> Throws<TException>(bool onlyIfParametersMatch = false)
+            where TException : Exception, new()
+        {
+            var expression = Arrange;
+            if (onlyIfParametersMatch == false)
+            {
+                var visitor = new IgnoreMockParametersVisitor();
+                expression = visitor.VisitAndConvert(Arrange, nameof(Returns));
+            }
+
+            var mockType = typeof(Mock<TMock>);
+            Action<Mock> arrangement = (mock) => ((Mock<TMock>)mock).Setup(expression).Throws<TException>();
+            return CreateExecutor(mockType, arrangement);
+        }
+
+        /// <summary>
+        /// Specify an exception that is thrown when the arranged mock object's method is called.
+        /// </summary>
+        /// <typeparam name="TException"> The type of the exception to be thrown. </typeparam>
+        /// <param name="exceptionFactory"> A delegate that creates the exception to be thrown. </param>
+        /// <param name="onlyIfParametersMatch">
+        /// True if the exception should only be thrown if the arranged method's input parameters match,
+        /// false otherwise.
+        /// </param>
+        /// <returns>
+        /// An <see cref="ExecutorWithMocks{T}"/> that can be used to arrange mock objects and/or execute a method
+        /// (to be tested) on an instance of type <typeparamref name="T"/>.
+        /// </returns>
+        public ExecutorWithMocks<T> Throws<TException>(Func<TException> exceptionFactory, bool onlyIfParametersMatch = false)
+            where TException : Exception
+        {
+            var expression = Arrange;
+            if (onlyIfParametersMatch == false)
+            {
+                var visitor = new IgnoreMockParametersVisitor();
+                expression = visitor.VisitAndConvert(Arrange, nameof(Returns));
+            }
+
+            var mockType = typeof(Mock<TMock>);
+            Action<Mock> arrangement = (mock) =>
+                {
+                    var exception = exceptionFactory();
+                    ((Mock<TMock>)mock).Setup(expression).Throws(exception);
+                };
+            return CreateExecutor(mockType, arrangement);
         }
 
         #endregion
