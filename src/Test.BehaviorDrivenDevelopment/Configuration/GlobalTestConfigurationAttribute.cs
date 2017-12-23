@@ -20,12 +20,12 @@
         #region Data
 
         /// <summary>
-        /// The type of the custom <see cref="ICallerContext"/> that should be used by all tests.
+        /// Gets or sets the type of the custom <see cref="ICallerContext"/> that should be used by all tests.
         /// </summary>
         public Type CallerContext { get; set; }
 
         /// <summary>
-        /// The type of the custom <see cref="IMessageFormatter"/> that should be used by all tests.
+        /// Gets or sets the type of the custom <see cref="IMessageFormatter"/> that should be used by all tests.
         /// </summary>
         public Type MessageFormatter { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace CustomCode.Test.BehaviorDrivenDevelopment.Configuration
 {
-    using System.Diagnostics;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Global test configuration that can be overriden via <see cref="TestConfigurationAttribute"/>
@@ -24,77 +24,31 @@
         #region Data
 
         /// <summary>
-        /// The default <see cref="ICallerContext"/> implementation that is used by all tests.
+        /// Gets a dictionary with custom <see cref="ICallerContext"/>s for specific test methods.
+        /// </summary>
+        private static Dictionary<string, ICallerContext> CustomCallerContexts { get; } = new Dictionary<string, ICallerContext>();
+
+        /// <summary>
+        /// Gets a dictionary with custom <see cref="IMessageFormatter"/>s for specific test methods.
+        /// </summary>
+        private static Dictionary<string, IMessageFormatter> CustomMessageFormatters { get; } = new Dictionary<string, IMessageFormatter>();
+
+        /// <summary>
+        /// Gets or sets the default <see cref="ICallerContext"/> implementation that is used by all tests.
         /// </summary>
         private static ICallerContext DefaultCallerContext { get; set; }
 
         /// <summary>
-        /// The default <see cref="IMessageFormatter"/> implementation that is used by all tests.
+        /// Gets or sets the default <see cref="IMessageFormatter"/> implementation that is used by all tests.
         /// </summary>
         private static IMessageFormatter DefaultMessageFormatter { get; set; }
-
-        #region CallerContext
-
-        /// <summary>
-        /// The <see cref="ICallerContext"/> that is used by the currently executing test.
-        /// </summary>
-        /// <value> Modifies the <see cref="_callerContext"/> field. </value>
-        /// <remarks>
-        /// This property is called when you use the <see cref="TestConfigurationAttribute"/> to
-        /// configure an test specific <see cref="ICallerContext"/>.
-        /// </remarks>
-        internal static ICallerContext CallerContext
-        {
-            get
-            {
-                return _callerContext ?? DefaultCallerContext;
-            }
-            set
-            {
-                _callerContext = value;
-            }
-        }
-
-        /// <summary> The <see cref="ICallerContext"/> that is used by the currently executing test. </summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static ICallerContext _callerContext;
-
-        #endregion
-
-        #region MessageFormatter
-
-        /// <summary>
-        /// The <see cref="IMessageFormatter"/> that is used by the currently executing test.
-        /// </summary>
-        /// <value> Modifies the <see cref="_messageFormatter"/> field. </value>
-        /// <remarks>
-        /// This property is called when you use the <see cref="TestConfigurationAttribute"/> to
-        /// configure an test specific <see cref="IMessageFormatter"/>.
-        /// </remarks>
-        internal static IMessageFormatter MessageFormatter
-        {
-            get
-            {
-                return _messageFormatter ?? DefaultMessageFormatter;
-            }
-            set
-            {
-                _messageFormatter = value;
-            }
-        }
-
-        /// <summary> The <see cref="IMessageFormatter"/> that is used by the currently executing test. </summary>
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static IMessageFormatter _messageFormatter;
-
-        #endregion
 
         #endregion
 
         #region Logic
 
         /// <summary>
-        /// Initialize the <see cref="DefaultCallerContext"/> and <see cref="DefaultMessageFormatter"/>.
+        /// Initializes the <see cref="DefaultCallerContext"/> and <see cref="DefaultMessageFormatter"/>.
         /// </summary>
         /// <param name="context">
         /// A <see cref="ICallerContext"/> instance that should be used as default or null to use the
@@ -112,6 +66,92 @@
         {
             DefaultCallerContext = context ?? new RoslynCallerContext();
             DefaultMessageFormatter = formatter ?? new MessageFormatter();
+        }
+
+        /// <summary>
+        /// Gets a custom <see cref="ICallerContext"/> for a test method (specified by <paramref name="testMethodName"/>)
+        /// or the <see cref="DefaultCallerContext"/> if no custom context was defined.
+        /// </summary>
+        /// <param name="testMethodName"> The name of the method under test. </param>
+        /// <returns> The specified method's <see cref="ICallerContext"/>. </returns>
+        internal static ICallerContext GetCallerContextFor(string testMethodName)
+        {
+            if (CustomCallerContexts.TryGetValue(testMethodName, out ICallerContext context))
+            {
+                return context;
+            }
+
+            return DefaultCallerContext;
+        }
+
+        /// <summary>
+        /// Set a custom <see cref="ICallerContext"/> for a test method (specified by <paramref name="testMethodName"/>).
+        /// </summary>
+        /// <param name="testMethodName"> The name of the method under test. </param>
+        /// <param name="context"> The method's custom <see cref="ICallerContext"/>. </param>
+        internal static void SetCallerContextFor(string testMethodName, ICallerContext context)
+        {
+            if (CustomCallerContexts.ContainsKey(testMethodName))
+            {
+                CustomCallerContexts[testMethodName] = context;
+            }
+            else
+            {
+                CustomCallerContexts.Add(testMethodName, context);
+            }
+        }
+
+        /// <summary>
+        /// Removes a custom <see cref="ICallerContext"/> for a test method (specified by <paramref name="testMethodName"/>)
+        /// and use the <see cref="DefaultCallerContext"/> instead.
+        /// </summary>
+        /// <param name="testMethodName"> The name of the method under test. </param>
+        internal static void ResetCallerContextFor(string testMethodName)
+        {
+            CustomCallerContexts.Remove(testMethodName);
+        }
+
+        /// <summary>
+        /// Gets a custom <see cref="IMessageFormatter"/> for a test method (specified by <paramref name="testMethodName"/>)
+        /// or the <see cref="DefaultMessageFormatter"/> if no custom formatter was defined.
+        /// </summary>
+        /// <param name="testMethodName"> The name of the method under test. </param>
+        /// <returns> The specified method's <see cref="IMessageFormatter"/>. </returns>
+        internal static IMessageFormatter GetMessageFormatterFor(string testMethodName)
+        {
+            if (CustomMessageFormatters.TryGetValue(testMethodName, out IMessageFormatter formatter))
+            {
+                return formatter;
+            }
+
+            return DefaultMessageFormatter;
+        }
+
+        /// <summary>
+        /// Set a custom <see cref="IMessageFormatter"/> for a test method (specified by <paramref name="testMethodName"/>).
+        /// </summary>
+        /// <param name="testMethodName"> The name of the method under test. </param>
+        /// <param name="formatter"> The method's custom <see cref="IMessageFormatter"/>. </param>
+        internal static void SetMessageFormatterFor(string testMethodName, IMessageFormatter formatter)
+        {
+            if (CustomMessageFormatters.ContainsKey(testMethodName))
+            {
+                CustomMessageFormatters[testMethodName] = formatter;
+            }
+            else
+            {
+                CustomMessageFormatters.Add(testMethodName, formatter);
+            }
+        }
+
+        /// <summary>
+        /// Removes a custom <see cref="IMessageFormatter"/> for a test method (specified by <paramref name="testMethodName"/>)
+        /// and use the <see cref="DefaultMessageFormatter"/> instead.
+        /// </summary>
+        /// <param name="testMethodName"> The name of the method under test. </param>
+        internal static void ResetMessageFormatterFor(string testMethodName)
+        {
+            CustomMessageFormatters.Remove(testMethodName);
         }
 
         #endregion

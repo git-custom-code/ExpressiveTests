@@ -5,19 +5,19 @@
     using Xunit.Sdk;
 
     /// <summary>
-    /// Use this attribute on a "per test level" (i.e. on the method level) to set a custom
-    /// <see cref="ICallerContext"/> and/or <see cref="IMessageFormatter"/> that should be used by the
-    /// test.
+    /// Use this attribute on the "per test level" (i.e. on the method level) to set a custom
+    /// <see cref="ICallerContext"/> and/or <see cref="IMessageFormatter"/>
+    /// that should be used by the test.
     /// </summary>
     /// <example>
-    /// 
+    ///
     /// [Fact]
     /// [TestConfiguration(CallerContext = typeof(MyContext), MessageFormatter = typeof(MyFormattter))]
     /// public void TestMethod()
     /// {
     ///   ...
     /// }
-    /// 
+    ///
     /// </example>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public sealed class TestConfigurationAttribute : BeforeAfterTestAttribute
@@ -25,12 +25,12 @@
         #region Data
 
         /// <summary>
-        /// The type of the custom <see cref="ICallerContext"/> that should be used by the test.
+        /// Gets or sets the type of the custom <see cref="ICallerContext"/> that should be used by the test.
         /// </summary>
         public Type CallerContext { get; set; }
 
         /// <summary>
-        /// The type of the custom <see cref="IMessageFormatter"/> that should be used by the test.
+        /// Gets or sets the type of the custom <see cref="IMessageFormatter"/> that should be used by the test.
         /// </summary>
         public Type MessageFormatter { get; set; }
 
@@ -46,11 +46,15 @@
         {
             if (MessageFormatter != null && typeof(IMessageFormatter).IsAssignableFrom(MessageFormatter))
             {
-                TestConfiguration.MessageFormatter = (IMessageFormatter)Activator.CreateInstance(MessageFormatter);
+                TestConfiguration.SetMessageFormatterFor(
+                    methodUnderTest.Name,
+                    (IMessageFormatter)Activator.CreateInstance(MessageFormatter));
             }
             if (CallerContext != null && typeof(ICallerContext).IsAssignableFrom(CallerContext))
             {
-                TestConfiguration.CallerContext = (ICallerContext)Activator.CreateInstance(CallerContext);
+                TestConfiguration.SetCallerContextFor(
+                    methodUnderTest.Name,
+                    (ICallerContext)Activator.CreateInstance(CallerContext));
             }
         }
 
@@ -60,8 +64,8 @@
         /// <param name="methodUnderTest"> The method under test. </param>
         public override void After(MethodInfo methodUnderTest)
         {
-            TestConfiguration.MessageFormatter = null;
-            TestConfiguration.CallerContext = null;
+            TestConfiguration.ResetMessageFormatterFor(methodUnderTest.Name);
+            TestConfiguration.ResetCallerContextFor(methodUnderTest.Name);
         }
 
         #endregion
