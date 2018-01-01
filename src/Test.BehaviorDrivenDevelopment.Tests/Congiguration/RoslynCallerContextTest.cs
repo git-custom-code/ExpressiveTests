@@ -9,8 +9,12 @@
     /// <remarks>
     /// Carefully when changing line numbers inside of this file, because the integration test depends on it!
     /// </remarks>
+    [UnitTest]
+    [Category("Configuration")]
     public sealed class RoslynCallerContextTest : TestCase
     {
+        #region Mockup
+
         /// <summary>
         /// Dummy method that simulates a failed test whose caller context should be extracted.
         /// </summary>
@@ -31,15 +35,16 @@
             return sourcePath;
         }
 
+        #endregion
+
         [Fact(DisplayName = "GetCallerContext")]
-        [Trait("Category", "Configuration")]
         public void ParseCallerContextSuccess()
         {
             // Given
             var context = new RoslynCallerContext();
 
             // When
-            var actual = context.GetCallerContext("bar", nameof(TestMethod), "Be", 21, GetSourcePath());
+            var actual = context.GetCallerContext("bar", nameof(TestMethod), "Be", 25, GetSourcePath());
 
             // Then
             Assert.Equal("@string", actual);

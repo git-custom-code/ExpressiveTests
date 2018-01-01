@@ -8,7 +8,7 @@
     /// </summary>
     /// <remarks>
     /// If you group your tests by trait in the test explorer, tests marked this way will be
-    /// displayed under the Category [Integration Test].
+    /// displayed under the Type [Integration Test].
     /// </remarks>
     [TraitDiscoverer("CustomCode.Test.BehaviorDrivenDevelopment.IntegrationTestDiscoverer", "CustomCode.Test.BehaviorDrivenDevelopment")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]

@@ -7,40 +7,48 @@
     /// <summary>
     /// Test cases for the <see cref="StringValidator"/> type.
     /// </summary>
+    [UnitTest]
+    [Category("Assert", "StringValidation")]
     public sealed class StringValidatorTest
     {
         #region string.Be()
 
         [Fact(DisplayName = "string.Be(string)")]
-        [UnitTest]
         public void ValidateStringToBeValue()
         {
+            // Given
             var validator = new StringValidator("string");
 
+            // When
             validator.Be("string");
 
+            // Then
             Assert.True(true);
         }
 
         [Fact(DisplayName = "null.Be(null)")]
-        [UnitTest]
         public void ValidateNullStringToBeNull()
         {
+            // Given
             var validator = new StringValidator(null);
 
+            // When
             validator.Be(null);
 
+            // Then
             Assert.True(true);
         }
 
         [Fact(DisplayName = "string.Be(other)")]
-        [UnitTest]
         public void ValidateStringToBeValueViolated()
         {
+            // Given
             var validator = new StringValidator("string");
 
+            // When
             var exception = Assert.Throws<XunitException>(() => validator.Be("other", "that's the bottom line"));
 
+            // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
@@ -49,13 +57,15 @@
         }
 
         [Fact(DisplayName = "null.Be(other)")]
-        [UnitTest]
         public void ValidateNullStringToBeValueViolated()
         {
+            // Given
             var validator = new StringValidator(null);
 
+            // When
             var exception = Assert.Throws<XunitException>(() => validator.Be("other"));
 
+            // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
@@ -64,13 +74,15 @@
         }
 
         [Fact(DisplayName = "string.Be(null)")]
-        [UnitTest]
         public void ValidateStringToBeNullViolated()
         {
+            // Given
             var validator = new StringValidator("string");
 
+            // When
             var exception = Assert.Throws<XunitException>(() => validator.Be(null));
 
+            // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
@@ -79,13 +91,15 @@
         }
 
         [Fact(DisplayName = "string.Be(STRING)")]
-        [UnitTest]
         public void ValidateStringToBeCaseSensitiveValueViolated()
         {
+            // Given
             var validator = new StringValidator("string");
 
+            // When
             var exception = Assert.Throws<XunitException>(() => validator.Be("STRING"));
 
+            // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
@@ -94,13 +108,15 @@
         }
 
         [Fact(DisplayName = "string.Be(string, ignoreCase: true)")]
-        [UnitTest]
         public void ValidateStringToBeCaseInsensitiveValue()
         {
+            // Given
             var validator = new StringValidator("string");
 
+            // When
             validator.Be("STRING", ignoreCase: true);
 
+            // Then
             Assert.True(true);
         }
 
@@ -109,24 +125,28 @@
         #region string.StartWith()
 
         [Fact(DisplayName = "string.StartWith(str)")]
-        [UnitTest]
         public void ValidateStringStartWithValue()
         {
+            // Given
             var validator = new StringValidator("string");
 
+            // When
             validator.StartWith("str");
 
+            // Then
             Assert.True(true);
         }
 
         [Fact(DisplayName = "string.StartWith(other)")]
-        [UnitTest]
         public void ValidateStringStartWithValueViolated()
         {
+            // Given
             var validator = new StringValidator("string");
 
+            // When
             var exception = Assert.Throws<XunitException>(() => validator.StartWith("other", "that's the bottom line"));
 
+            // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
@@ -135,13 +155,15 @@
         }
 
         [Fact(DisplayName = "null.StartWith(other)")]
-        [UnitTest]
         public void ValidateNullStringStartWithValueViolated()
         {
+            // Given
             var validator = new StringValidator(null);
 
+            // When
             var exception = Assert.Throws<XunitException>(() => validator.StartWith("other"));
 
+            // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
@@ -150,13 +172,15 @@
         }
 
         [Fact(DisplayName = "string.StartWith(null)")]
-        [UnitTest]
         public void ValidateStringStartWithNullViolated()
         {
+            // Given
             var validator = new StringValidator("string");
 
+            // When
             var exception = Assert.Throws<XunitException>(() => validator.StartWith(null));
 
+            // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
@@ -165,13 +189,15 @@
         }
 
         [Fact(DisplayName = "null.StartWith(null)")]
-        [UnitTest]
         public void ValidateNullStringStartWithNullViolated()
         {
+            // Given
             var validator = new StringValidator(null);
 
+            // When
             var exception = Assert.Throws<XunitException>(() => validator.StartWith(null));
 
+            // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
@@ -184,24 +210,28 @@
         #region string.EndWith()
 
         [Fact(DisplayName = "string.EndWith(ing)")]
-        [UnitTest]
         public void ValidateStringEndWithValue()
         {
+            // Given
             var validator = new StringValidator("string");
 
+            // When
             validator.EndWith("ing");
 
+            // Then
             Assert.True(true);
         }
 
         [Fact(DisplayName = "string.EndWith(other)")]
-        [UnitTest]
         public void ValidateStringEndWithValueViolated()
         {
+            // Given
             var validator = new StringValidator("string");
 
+            // When
             var exception = Assert.Throws<XunitException>(() => validator.EndWith("other", "that's the bottom line"));
 
+            // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
@@ -210,13 +240,15 @@
         }
 
         [Fact(DisplayName = "null.EndWith(other)")]
-        [UnitTest]
         public void ValidateNullStringEndWithValueViolated()
         {
+            // Given
             var validator = new StringValidator(null);
 
+            // When
             var exception = Assert.Throws<XunitException>(() => validator.EndWith("other"));
 
+            // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
@@ -225,13 +257,15 @@
         }
 
         [Fact(DisplayName = "string.EndWith(null)")]
-        [UnitTest]
         public void ValidateStringEndWithNullViolated()
         {
+            // Given
             var validator = new StringValidator("string");
 
+            // When
             var exception = Assert.Throws<XunitException>(() => validator.EndWith(null));
 
+            // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
@@ -240,13 +274,15 @@
         }
 
         [Fact(DisplayName = "null.EndWith(null)")]
-        [UnitTest]
         public void ValidateNullStringEndWithNullViolated()
         {
+            // Given
             var validator = new StringValidator(null);
 
+            // When
             var exception = Assert.Throws<XunitException>(() => validator.EndWith(null));
 
+            // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(

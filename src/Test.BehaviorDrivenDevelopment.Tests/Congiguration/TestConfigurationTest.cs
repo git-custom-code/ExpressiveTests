@@ -7,8 +7,12 @@
     /// <summary>
     /// Test cases for the <see cref="TestConfiguration"/> type.
     /// </summary>
+    [UnitTest]
+    [Category("Configuration")]
     public sealed class TestConfigurationTest
     {
+        #region Mockup
+
         /// <summary>
         /// Mock for the <see cref="ICallerContext"/> interface.
         /// </summary>
@@ -31,8 +35,9 @@
             }
         }
 
+        #endregion
+
         [Fact(DisplayName = "Override caller context")]
-        [Trait("Category", "Configuration")]
         public void OverrideCallerContextSuccess()
         {
             // Given
@@ -49,7 +54,6 @@
         }
 
         [Fact(DisplayName = "Override message formatter")]
-        [Trait("Category", "Configuration")]
         public void OverrideMessageFormatterSuccess()
         {
             // Given
@@ -65,7 +69,6 @@
         }
 
         [Fact(DisplayName = "Reset caller context to default")]
-        [Trait("Category", "Configuration")]
         public void ResetCallerContextSuccess()
         {
             // Given
@@ -80,7 +83,6 @@
         }
 
         [Fact(DisplayName = "Reset message formatter to default")]
-        [Trait("Category", "Configuration")]
         public void ResetMessageFormatterSuccess()
         {
             // Given

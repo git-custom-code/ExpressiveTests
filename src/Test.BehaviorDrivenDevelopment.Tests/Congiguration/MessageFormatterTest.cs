@@ -6,7 +6,8 @@
     /// <summary>
     /// Test cases for the <see cref="MessageFormatter"/> type.
     /// </summary>
-    [Trait("Category", "Configuration")]
+    [UnitTest]
+    [Category("Configuration")]
     public sealed class MessageFormatterTest
     {
         [Fact(DisplayName = "FormatMessage (without reason)")]
