@@ -11,7 +11,7 @@
     /// Define any number of assertions on an instance of type <typeparamref name="T"/>.
     /// </summary>
     /// <typeparam name="T"> The type under test. </typeparam>
-    public sealed class ValidatorWithMocks<T> : IFluentInterface where T : class
+    public struct ValidatorWithMocks<T> : IFluentInterface where T : class
     {
         #region Dependencies
 

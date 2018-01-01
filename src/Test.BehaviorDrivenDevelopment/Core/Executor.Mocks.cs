@@ -9,17 +9,9 @@
     /// Executes a method (to be tested) on an instance of type <typeparamref name="T"/>.
     /// </summary>
     /// <typeparam name="T"> The type under test. </typeparam>
-    public sealed class ExecutorWithMocks<T> : IFluentInterface where T : class
+    public struct ExecutorWithMocks<T> : IFluentInterface where T : class
     {
         #region Dependencies
-
-        /// <summary>
-        /// Creates a new instance of the <see cref="ExecutorWithMocks{T}"/> type.
-        /// </summary>
-        public ExecutorWithMocks()
-        {
-            Arrangements = new Dictionary<Type, List<Action<Mock>>>();
-        }
 
         /// <summary>
         /// Creates a new instance of the <see cref="ExecutorWithMocks{T}"/> type.
@@ -29,7 +21,7 @@
         /// </param>
         public ExecutorWithMocks(IDictionary<Type, List<Action<Mock>>> arrangements)
         {
-            Arrangements = arrangements;
+            Arrangements = arrangements ?? new Dictionary<Type, List<Action<Mock>>>();
         }
 
         #endregion

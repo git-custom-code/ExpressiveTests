@@ -4,9 +4,9 @@
     using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// A <see cref="ContextValidator{T}"/> that defines assertions for the <see cref="string"/> data type.
+    /// A validator that defines assertions for the <see cref="string"/> data type.
     /// </summary>
-    public sealed class StringValidator : ContextValidator<string>
+    public struct StringValidator : IFluentInterface
     {
         #region Dependencies
 
@@ -16,12 +16,18 @@
         /// <param name="value"> The string value to be validated. </param>
         public StringValidator(string value)
         {
+            Context = new ValidationContext<string>();
             Value = value;
         }
 
         #endregion
 
         #region Data
+
+        /// <summary>
+        /// Gets the context validator.
+        /// </summary>
+        private ValidationContext<string> Context { get; }
 
         /// <summary>
         /// Gets the string value to be validated.
@@ -48,16 +54,16 @@
             {
                 if (!string.Equals(Value, expected, StringComparison.OrdinalIgnoreCase))
                 {
-                    var context = GetContext(testMethodName, expected, sourceCodePath, lineNumber);
-                    throw ValidationException(testMethodName, context, $"\"{Value}\"", $"be \"{expected}\"", because);
+                    var context =  Context.GetCallerContext(testMethodName, expected, sourceCodePath, lineNumber);
+                    throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"be \"{expected}\"", because);
                 }
             }
             else
             {
                 if (!string.Equals(Value, expected))
                 {
-                    var context = GetContext(testMethodName, expected, sourceCodePath, lineNumber);
-                    throw ValidationException(testMethodName, context, $"\"{Value}\"", $"be \"{expected}\"", because);
+                    var context = Context.GetCallerContext(testMethodName, expected, sourceCodePath, lineNumber);
+                    throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"be \"{expected}\"", because);
                 }
             }
         }
@@ -78,16 +84,16 @@
             {
                 if (Value == null || string.IsNullOrEmpty(start) || !Value.StartsWith(start, StringComparison.OrdinalIgnoreCase))
                 {
-                    var context = GetContext(testMethodName, start, sourceCodePath, lineNumber);
-                    throw ValidationException(testMethodName, context, $"\"{Value}\"", $"start with \"{start}\"", because);
+                    var context = Context.GetCallerContext(testMethodName, start, sourceCodePath, lineNumber);
+                    throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"start with \"{start}\"", because);
                 }
             }
             else
             {
                 if (Value == null || string.IsNullOrEmpty(start) || !Value.StartsWith(start))
                 {
-                    var context = GetContext(testMethodName, start, sourceCodePath, lineNumber);
-                    throw ValidationException(testMethodName, context, $"\"{Value}\"", $"start with \"{start}\"", because);
+                    var context = Context.GetCallerContext(testMethodName, start, sourceCodePath, lineNumber);
+                    throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"start with \"{start}\"", because);
                 }
             }
         }
@@ -108,16 +114,16 @@
             {
                 if (Value == null || string.IsNullOrEmpty(end) || !Value.EndsWith(end, StringComparison.OrdinalIgnoreCase))
                 {
-                    var context = GetContext(testMethodName, end, sourceCodePath, lineNumber);
-                    throw ValidationException(testMethodName, context, $"\"{Value}\"", $"end with \"{end}\"", because);
+                    var context = Context.GetCallerContext(testMethodName, end, sourceCodePath, lineNumber);
+                    throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"end with \"{end}\"", because);
                 }
             }
             else
             {
                 if (Value == null || string.IsNullOrEmpty(end) || !Value.EndsWith(end))
                 {
-                    var context = GetContext(testMethodName, end, sourceCodePath, lineNumber);
-                    throw ValidationException(testMethodName, context, $"\"{Value}\"", $"end with \"{end}\"", because);
+                    var context = Context.GetCallerContext(testMethodName, end, sourceCodePath, lineNumber);
+                    throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"end with \"{end}\"", because);
                 }
             }
         }

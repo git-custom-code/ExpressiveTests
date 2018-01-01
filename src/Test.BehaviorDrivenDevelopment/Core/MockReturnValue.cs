@@ -12,7 +12,7 @@
     /// <typeparam name="T"> The type under test. </typeparam>
     /// <typeparam name="TMock"> The type of the mock object. </typeparam>
     /// <typeparam name="TResult"> The result value of the mock object's arranged method call. </typeparam>
-    public sealed class MockReturnValue<T, TMock, TResult> : IFluentInterface
+    public struct MockReturnValue<T, TMock, TResult> : IFluentInterface
         where T : class
         where TMock : class
     {

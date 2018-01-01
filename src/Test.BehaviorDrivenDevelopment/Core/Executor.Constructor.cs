@@ -5,18 +5,8 @@
     /// <summary>
     /// Executes a constructor (to be tested) of a type.
     /// </summary>
-    public sealed class Executor : IFluentInterface
+    public struct Executor : IFluentInterface
     {
-        #region Dependencies
-
-        /// <summary>
-        /// Creates a new instance of the <see cref="Executor"/> type.
-        /// </summary>
-        public Executor()
-        { }
-
-        #endregion
-
         #region Logic
 
         /// <summary>

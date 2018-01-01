@@ -48,7 +48,7 @@
         /// </returns>
         public ExecutorWithMocks<T> Given<T>() where T : class
         {
-            return new ExecutorWithMocks<T>();
+            return new ExecutorWithMocks<T>(null);
         }
 
         #endregion

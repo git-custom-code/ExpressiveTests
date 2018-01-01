@@ -6,11 +6,11 @@
     using Xunit.Sdk;
 
     /// <summary>
-    /// Base type for custom validators that provides support for formatted validation exceptions
-    /// as well as call context informations.
+    /// A type that can be used by other validators to get the coresponding <see cref="ICallerContext"/> 
+    /// and a correctly formatted validation exception.
     /// </summary>
     /// <typeparam name="T"> The type of the value that is validated by this instance. </typeparam>
-    public abstract class ContextValidator<T> : IFluentInterface
+    public sealed class ValidationContext<T>
     {
         #region Logic
 
@@ -27,7 +27,7 @@
         /// An optional reason why the <paramref name="actual"/> value should equal the <paramref name="expected"/> value.
         /// </param>
         /// <returns> An exception with the a formatted an human readable validation message. </returns>
-        protected Exception ValidationException(string testMethodName, string context, string actual, string expected,
+        public Exception GetFormattedException(string testMethodName, string context, string actual, string expected,
             string because = null)
         {
             var messageFormatter = TestConfiguration.GetMessageFormatterFor(testMethodName);
@@ -48,7 +48,7 @@
         /// <param name="lineNumber"> The line number that contains the call to the validation method. </param>
         /// <param name="validationMethodName"> The name of the called validation method. </param>
         /// <returns> The parsed caller context or null. </returns>
-        protected string GetContext(string testMethodName, T expected, string sourceCodePath, int lineNumber,
+        public string GetCallerContext(string testMethodName, T expected, string sourceCodePath, int lineNumber,
             [CallerMemberName] string validationMethodName = null)
         {
             var callerContext = TestConfiguration.GetCallerContextFor(testMethodName);

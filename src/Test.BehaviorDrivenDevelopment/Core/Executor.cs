@@ -7,7 +7,7 @@
     /// Executes a method (to be tested) on an instance of type <typeparamref name="T"/>.
     /// </summary>
     /// <typeparam name="T"> The type under test. </typeparam>
-    public sealed class Executor<T> : IFluentInterface where T : class
+    public struct Executor<T> : IFluentInterface where T : class
     {
         #region Dependencies
 
