@@ -5,9 +5,10 @@
 
     <IsPackable>false</IsPackable>
 
-    <AssemblyName>CustomCode.Test.BehaviorDrivenDevelopment.UnitTests</AssemblyName>
+    <AssemblyName>CustomCode.Test.BehaviorDrivenDevelopment.Tests</AssemblyName>
 
     <RootNamespace>CustomCode.Test.BehaviorDrivenDevelopment.Tests</RootNamespace>
+
   </PropertyGroup>
 
   <ItemGroup>

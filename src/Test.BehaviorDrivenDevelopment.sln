@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Old", "ExpressiveTests\Old.csproj", "{5743B019-4B81-448E-869D-17C5AF29410D}"
 EndProject
@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DF0474
 		.nuget\NuGet.config = .nuget\NuGet.config
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.BehaviorDrivenDevelopment.UnitTests", "Test.BehaviorDrivenDevelopment.UnitTests\Test.BehaviorDrivenDevelopment.UnitTests.csproj", "{4085605C-465E-4FEC-9340-FA9D392608C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.BehaviorDrivenDevelopment.Tests", "Test.BehaviorDrivenDevelopment.UnitTests\Test.BehaviorDrivenDevelopment.Tests.csproj", "{4085605C-465E-4FEC-9340-FA9D392608C8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.BehaviorDrivenDevelopment", "Test.BehaviorDrivenDevelopment\Test.BehaviorDrivenDevelopment.csproj", "{6186319D-4D3C-401C-855A-68E6837BDBFD}"
 EndProject
