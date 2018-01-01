@@ -8,9 +8,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DF0474
 		.nuget\NuGet.config = .nuget\NuGet.config
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.BehaviorDrivenDevelopment.Tests", "Test.BehaviorDrivenDevelopment.UnitTests\Test.BehaviorDrivenDevelopment.Tests.csproj", "{4085605C-465E-4FEC-9340-FA9D392608C8}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.BehaviorDrivenDevelopment", "Test.BehaviorDrivenDevelopment\Test.BehaviorDrivenDevelopment.csproj", "{6186319D-4D3C-401C-855A-68E6837BDBFD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.BehaviorDrivenDevelopment.Tests", "Test.BehaviorDrivenDevelopment.Tests\Test.BehaviorDrivenDevelopment.Tests.csproj", "{89813ECD-C9E3-4FAA-AEAA-92802ED9972B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,18 +19,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4085605C-465E-4FEC-9340-FA9D392608C8}.CodeAnalysis|Any CPU.ActiveCfg = Debug|Any CPU
-		{4085605C-465E-4FEC-9340-FA9D392608C8}.CodeAnalysis|Any CPU.Build.0 = Debug|Any CPU
-		{4085605C-465E-4FEC-9340-FA9D392608C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4085605C-465E-4FEC-9340-FA9D392608C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4085605C-465E-4FEC-9340-FA9D392608C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4085605C-465E-4FEC-9340-FA9D392608C8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6186319D-4D3C-401C-855A-68E6837BDBFD}.CodeAnalysis|Any CPU.ActiveCfg = Debug|Any CPU
 		{6186319D-4D3C-401C-855A-68E6837BDBFD}.CodeAnalysis|Any CPU.Build.0 = Debug|Any CPU
 		{6186319D-4D3C-401C-855A-68E6837BDBFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6186319D-4D3C-401C-855A-68E6837BDBFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6186319D-4D3C-401C-855A-68E6837BDBFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6186319D-4D3C-401C-855A-68E6837BDBFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89813ECD-C9E3-4FAA-AEAA-92802ED9972B}.CodeAnalysis|Any CPU.ActiveCfg = Debug|Any CPU
+		{89813ECD-C9E3-4FAA-AEAA-92802ED9972B}.CodeAnalysis|Any CPU.Build.0 = Debug|Any CPU
+		{89813ECD-C9E3-4FAA-AEAA-92802ED9972B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89813ECD-C9E3-4FAA-AEAA-92802ED9972B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89813ECD-C9E3-4FAA-AEAA-92802ED9972B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89813ECD-C9E3-4FAA-AEAA-92802ED9972B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
