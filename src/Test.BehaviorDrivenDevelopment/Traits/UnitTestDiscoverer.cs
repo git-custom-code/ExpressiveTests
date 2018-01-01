@@ -21,7 +21,7 @@
         /// <returns> The trait values. </returns>
         public IEnumerable<KeyValuePair<string, string>> GetTraits(IAttributeInfo traitAttribute)
         {
-            yield return new KeyValuePair<string, string>("Category", "Unit Test");
+            yield return new KeyValuePair<string, string>("Type", "Unit Test");
         }
 
         #endregion
