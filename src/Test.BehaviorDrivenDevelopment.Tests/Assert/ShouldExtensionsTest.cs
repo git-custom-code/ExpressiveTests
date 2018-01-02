@@ -9,6 +9,34 @@
     [Category("Assert")]
     public sealed class ShouldExtensionsTest
     {
+        [Fact(DisplayName = "Nullable.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithNullables()
+        {
+            // Given
+            int? @int = null;
+
+            // When
+            var intValidator = @int.Should();
+
+            // Then
+            Assert.IsType<NullableValidator<int>>(intValidator);
+        }
+
+        [Fact(DisplayName = "Nullable.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithNullables()
+        {
+            // Given
+            int? @int = null;
+
+            // When
+            var intValidator = @int.ShouldNot();
+
+            // Then
+            Assert.IsType<NullableInverseValidator<int>>(intValidator);
+        }
+
         [Fact(DisplayName = "ReferenceType.Should()")]
         [Category("Should")]
         public void UseShouldExtensionWithReferenceTypes()

@@ -10,6 +10,26 @@ namespace CustomCode.Test.BehaviorDrivenDevelopment
         #region Logic
 
         /// <summary>
+        /// Assertions for nullable data types.
+        /// </summary>
+        /// <param name="nullable"> The nullable value to be checked. </param>
+        /// <returns> A <see cref="NullableValidator{T}"/> for specifying assertions. </returns>
+        public static NullableValidator<T> Should<T>(this T? nullable) where T : struct
+        {
+            return new NullableValidator<T>(nullable);
+        }
+
+        /// <summary>
+        /// Inverse assertions for nullable data types.
+        /// </summary>
+        /// <param name="@referenceType"> The nullable value to be checked. </param>
+        /// <returns> A <see cref="NullableInverseValidator{T}"/> for specifying inverse assertions. </returns>
+        public static NullableInverseValidator<T> ShouldNot<T>(this T? nullable) where T : struct
+        {
+            return new NullableInverseValidator<T>(nullable);
+        }
+
+        /// <summary>
         /// Assertions for reference data types.
         /// </summary>
         /// <param name="@referenceType"> The reference type value to be checked. </param>
