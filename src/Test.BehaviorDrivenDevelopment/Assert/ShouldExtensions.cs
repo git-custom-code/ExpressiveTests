@@ -1,4 +1,6 @@
-﻿namespace CustomCode.Test.BehaviorDrivenDevelopment
+﻿using System;
+
+namespace CustomCode.Test.BehaviorDrivenDevelopment
 {
     /// <summary>
     /// Extension methods for defining assertions on various data types.
@@ -6,6 +8,26 @@
     public static class ShouldExtensions
     {
         #region Logic
+
+        /// <summary>
+        /// Assertions for reference data types.
+        /// </summary>
+        /// <param name="@referenceType"> The reference type value to be checked. </param>
+        /// <returns> A <see cref="ReferenceTypeValidator{T}"/> for specifying assertions. </returns>
+        public static ReferenceTypeValidator<T> Should<T>(this T referenceType) where T : class
+        {
+            return new ReferenceTypeValidator<T>(referenceType);
+        }
+
+        /// <summary>
+        /// Inverse assertions for reference data types.
+        /// </summary>
+        /// <param name="@referenceType"> The reference type value to be checked. </param>
+        /// <returns> A <see cref="ReferenceTypeInverseValidator{T}"/> for specifying inverse assertions. </returns>
+        public static ReferenceTypeInverseValidator<T> ShouldNot<T>(this T referenceType) where T : class
+        {
+            return new ReferenceTypeInverseValidator<T>(referenceType);
+        }
 
         /// <summary>
         /// Assertions for the <see cref="string"/> data type.

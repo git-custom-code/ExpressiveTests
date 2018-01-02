@@ -9,6 +9,40 @@
     [Category("Assert")]
     public sealed class ShouldExtensionsTest
     {
+        [Fact(DisplayName = "ReferenceType.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithReferenceTypes()
+        {
+            // Given
+            var @object = new object();
+            var @string = "string";
+
+            // When
+            var objectValidator = @object.Should();
+            var stringValidator = @string.Should<string>();
+
+            // Then
+            Assert.IsType<ReferenceTypeValidator<object>>(objectValidator);
+            Assert.IsType<ReferenceTypeValidator<string>>(stringValidator);
+        }
+
+        [Fact(DisplayName = "ReferenceType.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithReferenceTypes()
+        {
+            // Given
+            var @object = new object();
+            var @string = "string";
+
+            // When
+            var objectValidator = @object.ShouldNot();
+            var stringValidator = @string.ShouldNot<string>();
+
+            // Then
+            Assert.IsType<ReferenceTypeInverseValidator<object>>(objectValidator);
+            Assert.IsType<ReferenceTypeInverseValidator<string>>(stringValidator);
+        }
+
         [Fact(DisplayName = "string.Should()")]
         [Category("Should")]
         public void UseShouldExtensionWithStrings()
@@ -20,7 +54,6 @@
             var validator = @string.Should();
 
             // Then
-            Assert.NotNull(validator);
             Assert.IsType<StringValidator>(validator);
         }
 
@@ -35,7 +68,6 @@
             var validator = @string.ShouldNot();
 
             // Then
-            Assert.NotNull(validator);
             Assert.IsType<StringInverseValidator>(validator);
         }
     }
