@@ -5,19 +5,19 @@
     using Xunit.Sdk;
 
     /// <summary>
-    /// Test cases for the <see cref="NullableInverseValidator{T}"/> type.
+    /// Test cases for the <see cref="ReferenceTypeInverseValidator{T}"/> type.
     /// </summary>
     [UnitTest]
-    [Category("Assert", "NullableValidation")]
-    public sealed class NullableInverseValidatorTest
+    [Category("Assert", "ReferenceTypeValidation")]
+    public sealed class ReferenceTypeInverseValidatorTest
     {
-        #region Nullable.BeNull()
+        #region ReferenceType.BeNull()
 
-        [Fact(DisplayName = "((T?)0).NotBeNull()")]
-        public void ValidateNullableNotToBeNull()
+        [Fact(DisplayName = "((object)o).NotBeNull()")]
+        public void ValidateReferenceTypeNotToBeNull()
         {
             // Given
-            var validator = new NullableInverseValidator<int>(0);
+            var validator = new ReferenceTypeInverseValidator<object>(new object());
 
             // When
             validator.BeNull();
@@ -26,11 +26,11 @@
             Assert.True(true);
         }
 
-        [Fact(DisplayName = "((T?)null).NotBeNull()")]
-        public void ValidateNullableNotToBeNullViolated()
+        [Fact(DisplayName = "((object)null).NotBeNull()")]
+        public void ValidateReferenceTypeNotToBeNullViolated()
         {
             // Given
-            var validator = new NullableInverseValidator<int>(null);
+            var validator = new ReferenceTypeInverseValidator<object>(null);
 
             // When
             var exception = Assert.Throws<XunitException>(() => validator.BeNull());
@@ -43,11 +43,11 @@
                 exception.UserMessage);
         }
 
-        [Fact(DisplayName = "((T?)null).NotBeNull(reason)")]
-        public void ValidateNullableNotToBeNullWithReasonViolated()
+        [Fact(DisplayName = "((object)null).NotBeNull(reason)")]
+        public void ValidateReferenceTypeNotToBeNullWithReasonViolated()
         {
             // Given
-            var validator = new NullableInverseValidator<int>(null);
+            var validator = new ReferenceTypeInverseValidator<object>(null);
 
             // When
             var exception = Assert.Throws<XunitException>(() => validator.BeNull("that's the bottom line"));

@@ -5,19 +5,19 @@
     using Xunit.Sdk;
 
     /// <summary>
-    /// Test cases for the <see cref="NullableInverseValidator{T}"/> type.
+    /// Test cases for the <see cref="ReferenceTypeValidator{T}"/> type.
     /// </summary>
     [UnitTest]
-    [Category("Assert", "NullableValidation")]
-    public sealed class NullableInverseValidatorTest
+    [Category("Assert", "ReferenceTypeValidation")]
+    public sealed class ReferenceTypeValidatorTest
     {
-        #region Nullable.BeNull()
+        #region ReferenceType.BeNull()
 
-        [Fact(DisplayName = "((T?)0).NotBeNull()")]
-        public void ValidateNullableNotToBeNull()
+        [Fact(DisplayName = "((object)null).BeNull()")]
+        public void ValidateReferenceTypeToBeNull()
         {
             // Given
-            var validator = new NullableInverseValidator<int>(0);
+            var validator = new ReferenceTypeValidator<object>(null);
 
             // When
             validator.BeNull();
@@ -26,11 +26,11 @@
             Assert.True(true);
         }
 
-        [Fact(DisplayName = "((T?)null).NotBeNull()")]
-        public void ValidateNullableNotToBeNullViolated()
+        [Fact(DisplayName = "((object)o).BeNull()")]
+        public void ValidateReferenceTypeToBeNullViolated()
         {
             // Given
-            var validator = new NullableInverseValidator<int>(null);
+            var validator = new ReferenceTypeValidator<object>(new object());
 
             // When
             var exception = Assert.Throws<XunitException>(() => validator.BeNull());
@@ -39,15 +39,15 @@
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
-                $"{rn}validator{rn}is null{rn}but was expected not to be null",
+                $"{rn}validator{rn}is \"System.Object\"{rn}but was expected to be null",
                 exception.UserMessage);
         }
 
-        [Fact(DisplayName = "((T?)null).NotBeNull(reason)")]
-        public void ValidateNullableNotToBeNullWithReasonViolated()
+        [Fact(DisplayName = "((object)o).BeNull(reason)")]
+        public void ValidateReferenceTypeToBeNullWithReasonViolated()
         {
             // Given
-            var validator = new NullableInverseValidator<int>(null);
+            var validator = new ReferenceTypeValidator<object>(new object());
 
             // When
             var exception = Assert.Throws<XunitException>(() => validator.BeNull("that's the bottom line"));
@@ -56,7 +56,7 @@
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
-                $"{rn}validator{rn}is null{rn}but was expected not to be null{rn}because that's the bottom line",
+                $"{rn}validator{rn}is \"System.Object\"{rn}but was expected to be null{rn}because that's the bottom line",
                 exception.UserMessage);
         }
 
