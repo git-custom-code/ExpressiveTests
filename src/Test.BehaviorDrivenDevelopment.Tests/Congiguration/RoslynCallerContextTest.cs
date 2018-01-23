@@ -28,11 +28,31 @@
         /// <summary>
         /// Dummy method that simulates a failed test whose caller context should be extracted.
         /// </summary>
+        private void TestCallerContextForShouldWithOneParameterAndWithReason()
+        {
+            Given()
+            .When(() => new string(new char[] { 'f', 'o', 'o' }))
+            .Then(@string => @string.Should().Be("bar", because: "that's the bottom line"));
+        }
+
+        /// <summary>
+        /// Dummy method that simulates a failed test whose caller context should be extracted.
+        /// </summary>
         private void TestCallerContextForShouldWithoutParameterAndWithoutReason()
         {
             Given()
             .When(() => new string(new char[] { 'f', 'o', 'o' }))
             .Then(@string => @string.Should().BeNull());
+        }
+
+        /// <summary>
+        /// Dummy method that simulates a failed test whose caller context should be extracted.
+        /// </summary>
+        private void TestCallerContextForShouldWithoutParameterAndWithReason()
+        {
+            Given()
+            .When(() => new string(new char[] { 'f', 'o', 'o' }))
+            .Then(@string => @string.Should().BeNull(because: "that's the bottom line"));
         }
 
         /// <summary>
@@ -54,7 +74,30 @@
             var context = new RoslynCallerContext();
 
             // When
-            var actual = context.GetCallerContext("bar", nameof(TestCallerContextForShouldWithOneParameterAndWithoutReason), "Be", 25, GetSourcePath());
+            var actual = context.GetCallerContext(
+                "bar",
+                nameof(TestCallerContextForShouldWithOneParameterAndWithoutReason),
+                "Be",
+                25, 
+                GetSourcePath());
+
+            // Then
+            Assert.Equal("@string", actual);
+        }
+
+        [Fact(DisplayName = "Caller context for should with 1 parameter and with reason")]
+        public void ParseCallerContextForShouldWithOneParameterAndWithReasonSuccess()
+        {
+            // Given
+            var context = new RoslynCallerContext();
+
+            // When
+            var actual = context.GetCallerContext(
+                "bar",
+                nameof(TestCallerContextForShouldWithOneParameterAndWithReason),
+                "Be",
+                35,
+                GetSourcePath());
 
             // Then
             Assert.Equal("@string", actual);
@@ -67,7 +110,30 @@
             var context = new RoslynCallerContext();
 
             // When
-            var actual = context.GetCallerContext("bar", nameof(TestCallerContextForShouldWithoutParameterAndWithoutReason), "BeNull", 35, GetSourcePath());
+            var actual = context.GetCallerContext(
+                (string)null,
+                nameof(TestCallerContextForShouldWithoutParameterAndWithoutReason),
+                "BeNull",
+                45,
+                GetSourcePath());
+
+            // Then
+            Assert.Equal("@string", actual);
+        }
+
+        [Fact(DisplayName = "Caller context for should without parameter and with reason")]
+        public void ParseCallerContextForShouldWithoutParameterAndWithReasonSuccess()
+        {
+            // Given
+            var context = new RoslynCallerContext();
+
+            // When
+            var actual = context.GetCallerContext(
+                (string)null,
+                nameof(TestCallerContextForShouldWithoutParameterAndWithReason),
+                "BeNull",
+                55,
+                GetSourcePath());
 
             // Then
             Assert.Equal("@string", actual);

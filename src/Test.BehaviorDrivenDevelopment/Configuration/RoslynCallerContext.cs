@@ -65,7 +65,7 @@
                 {
                     var signature = nodeWithValidatorCall.Parent as InvocationExpressionSyntax;
                     var parameter = signature?.ArgumentList?.Arguments.FirstOrDefault();
-                    if (parameter != null && parameter.Expression is LiteralExpressionSyntax)
+                    if (expected != null && parameter != null && parameter.Expression is LiteralExpressionSyntax)
                     {
                         if (!Equals(((LiteralExpressionSyntax)parameter.Expression).Token.Value, expected))
                         {
