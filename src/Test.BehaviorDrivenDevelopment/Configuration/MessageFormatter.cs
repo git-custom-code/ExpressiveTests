@@ -25,9 +25,9 @@
             var rn = Environment.NewLine;
             if (string.IsNullOrEmpty(reason))
             {
-                return $"{rn}{context}{rn}is {actualValue}{rn}but was expected to {expectation}";
+                return $"{rn}{context}{rn}is {actualValue}{rn}but was expected {expectation}";
             }
-            return $"{rn}{context}{rn}is {actualValue}{rn}but was expected to {expectation}{rn}because {reason}";
+            return $"{rn}{context}{rn}is {actualValue}{rn}but was expected {expectation}{rn}because {reason}";
         }
 
         #endregion

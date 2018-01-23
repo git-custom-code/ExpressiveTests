@@ -18,11 +18,21 @@
         /// <summary>
         /// Dummy method that simulates a failed test whose caller context should be extracted.
         /// </summary>
-        private void TestMethod()
+        private void TestCallerContextForShouldWithOneParameterAndWithoutReason()
         {
             Given()
             .When(() => new string(new char[] { 'f', 'o', 'o' }))
             .Then(@string => @string.Should().Be("bar"));
+        }
+
+        /// <summary>
+        /// Dummy method that simulates a failed test whose caller context should be extracted.
+        /// </summary>
+        private void TestCallerContextForShouldWithoutParameterAndWithoutReason()
+        {
+            Given()
+            .When(() => new string(new char[] { 'f', 'o', 'o' }))
+            .Then(@string => @string.Should().BeNull());
         }
 
         /// <summary>
@@ -37,14 +47,27 @@
 
         #endregion
 
-        [Fact(DisplayName = "GetCallerContext")]
-        public void ParseCallerContextSuccess()
+        [Fact(DisplayName = "Caller context for should with 1 parameter and without reason")]
+        public void ParseCallerContextForShouldWithOneParameterAndWithoutReasonSuccess()
         {
             // Given
             var context = new RoslynCallerContext();
 
             // When
-            var actual = context.GetCallerContext("bar", nameof(TestMethod), "Be", 25, GetSourcePath());
+            var actual = context.GetCallerContext("bar", nameof(TestCallerContextForShouldWithOneParameterAndWithoutReason), "Be", 25, GetSourcePath());
+
+            // Then
+            Assert.Equal("@string", actual);
+        }
+
+        [Fact(DisplayName = "Caller context for should without parameter and without reason")]
+        public void ParseCallerContextForShouldWithoutParameterAndWithoutReasonSuccess()
+        {
+            // Given
+            var context = new RoslynCallerContext();
+
+            // When
+            var actual = context.GetCallerContext("bar", nameof(TestCallerContextForShouldWithoutParameterAndWithoutReason), "BeNull", 35, GetSourcePath());
 
             // Then
             Assert.Equal("@string", actual);

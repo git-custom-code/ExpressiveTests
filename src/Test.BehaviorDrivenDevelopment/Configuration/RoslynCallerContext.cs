@@ -67,24 +67,26 @@
                     var parameter = signature?.ArgumentList?.Arguments.FirstOrDefault();
                     if (parameter != null && parameter.Expression is LiteralExpressionSyntax)
                     {
-                        if (Equals(((LiteralExpressionSyntax)parameter.Expression).Token.Value, expected))
+                        if (!Equals(((LiteralExpressionSyntax)parameter.Expression).Token.Value, expected))
                         {
-                            var callerNameBuilder = new StringBuilder();
-                            var identifier = nodeWithValidatorCall
-                                .DescendantNodes()
-                                .OfType<IdentifierNameSyntax>();
-                            foreach (var i in identifier)
-                            {
-                                if (validationMethodName != i.Identifier.Text &&
-                                   nameof(ShouldExtensions.Should) != i.Identifier.Text)
-                                {
-                                    callerNameBuilder.AppendFormat("{0}.", i.Identifier.Text);
-                                }
-                            }
-
-                            return callerNameBuilder.ToString(0, callerNameBuilder.Length - 1);
+                            return null;
                         }
                     }
+
+                    var callerNameBuilder = new StringBuilder();
+                    var identifier = nodeWithValidatorCall
+                        .DescendantNodes()
+                        .OfType<IdentifierNameSyntax>();
+                    foreach (var i in identifier)
+                    {
+                        if (validationMethodName != i.Identifier.Text &&
+                           nameof(ShouldExtensions.Should) != i.Identifier.Text)
+                        {
+                            callerNameBuilder.AppendFormat("{0}.", i.Identifier.Text);
+                        }
+                    }
+
+                    return callerNameBuilder.ToString(0, callerNameBuilder.Length - 1);
                 }
 
                 return null;

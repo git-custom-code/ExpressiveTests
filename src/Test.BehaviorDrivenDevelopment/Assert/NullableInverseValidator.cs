@@ -50,7 +50,7 @@
             if (Value.HasValue == false)
             {
                 var context = Context.GetCallerContext(testMethodName, null, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, "null", "not be null", because);
+                throw Context.GetFormattedException(testMethodName, context, "null", "not to be null", because);
             }
         }
 
