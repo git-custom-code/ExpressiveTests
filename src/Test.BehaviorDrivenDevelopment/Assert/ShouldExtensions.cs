@@ -48,6 +48,26 @@
         }
 
         /// <summary>
+        /// Assertions for the <see cref="long"/> data type.
+        /// </summary>
+        /// <param name="long"> The long value to be checked. </param>
+        /// <returns> A <see cref="LongValidator"/> for specifying assertions. </returns>
+        public static LongValidator Should(this long @long)
+        {
+            return new LongValidator(@long);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the <see cref="long"/> data type.
+        /// </summary>
+        /// <param name="long"> The long value to be checked. </param>
+        /// <returns> A <see cref="LongInverseValidator"/> for specifying inverse assertions. </returns>
+        public static LongInverseValidator ShouldNot(this long @long)
+        {
+            return new LongInverseValidator(@long);
+        }
+
+        /// <summary>
         /// Assertions for nullable data types.
         /// </summary>
         /// <param name="nullable"> The nullable value to be checked. </param>

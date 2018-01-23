@@ -127,6 +127,34 @@
             Assert.IsType<IntInverseValidator>(validator);
         }
 
+        [Fact(DisplayName = "long.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithLongs()
+        {
+            // Given
+            long @long = 42;
+
+            // When
+            var validator = @long.Should();
+
+            // Then
+            Assert.IsType<LongValidator>(validator);
+        }
+
+        [Fact(DisplayName = "long.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithLongs()
+        {
+            // Given
+            long @long = 42;
+
+            // When
+            var validator = @long.ShouldNot();
+
+            // Then
+            Assert.IsType<LongInverseValidator>(validator);
+        }
+
         [Fact(DisplayName = "short.Should()")]
         [Category("Should")]
         public void UseShouldExtensionWithShorts()
