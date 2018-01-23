@@ -4,6 +4,7 @@
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Microsoft.CodeAnalysis.Text;
+    using System;
     using System.Collections;
     using System.IO;
     using System.Linq;
@@ -109,7 +110,9 @@
                     var parameter = signature?.ArgumentList?.Arguments.ElementAt(index);
                     if (expected != null && parameter != null && parameter.Expression is LiteralExpressionSyntax)
                     {
-                        if (!Equals(((LiteralExpressionSyntax)parameter.Expression).Token.Value, expectedValue))
+                        var elementType = expectedList.GetType().GetElementType();
+                        var value = Convert.ChangeType(((LiteralExpressionSyntax)parameter.Expression).Token.Value, elementType);
+                        if (!Equals(value, expectedValue))
                         {
                             return false;
                         }
@@ -122,7 +125,8 @@
                 var parameter = signature?.ArgumentList?.Arguments.FirstOrDefault();
                 if (!Equals(expected, default(T)) && parameter != null && parameter.Expression is LiteralExpressionSyntax)
                 {
-                    if (!Equals(((LiteralExpressionSyntax)parameter.Expression).Token.Value, expected))
+                    var value = Convert.ChangeType(((LiteralExpressionSyntax)parameter.Expression).Token.Value, typeof(T));
+                    if (!Equals(value, expected))
                     {
                         return false;
                     }

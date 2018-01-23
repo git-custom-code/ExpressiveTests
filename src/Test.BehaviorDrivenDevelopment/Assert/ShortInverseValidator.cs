@@ -5,19 +5,19 @@
     using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// A validator that defines inverse assertions for the <see cref="int"/> data type.
+    /// A validator that defines inverse assertions for the <see cref="short"/> data type.
     /// </summary>
-    public struct IntInverseValidator : IFluentInterface
+    public struct ShortInverseValidator : IFluentInterface
     {
         #region Dependencies
 
         /// <summary>
-        /// Creates a new instance of the <see cref="IntInverseValidator"/> type.
+        /// Creates a new instance of the <see cref="ShortInverseValidator"/> type.
         /// </summary>
-        /// <param name="value"> The integer value to be validated. </param>
-        public IntInverseValidator(int value)
+        /// <param name="value"> The short value to be validated. </param>
+        public ShortInverseValidator(short value)
         {
-            Context = new ValidationContext<int>();
+            Context = new ValidationContext<short>();
             Value = value;
         }
 
@@ -28,26 +28,26 @@
         /// <summary>
         /// Gets the context validator.
         /// </summary>
-        private ValidationContext<int> Context { get; }
+        private ValidationContext<short> Context { get; }
 
         /// <summary>
-        /// Gets the integer value to be validated.
+        /// Gets the short value to be validated.
         /// </summary>
-        private int Value { get; }
+        private short Value { get; }
 
         #endregion
 
         #region Logic
 
         /// <summary>
-        /// Assert that a given integer doese not equal another integer.
+        /// Assert that a given short doese not equal another short.
         /// </summary>
-        /// <param name="expected"> The expected value of a given integer. </param>
+        /// <param name="expected"> The expected value of a given short. </param>
         /// <param name="because"> A reason why this assertion needs to be correct. </param>
         /// <param name="testMethodName"> Supplied by the compiler. </param>
         /// <param name="lineNumber"> Supplied by the compiler. </param>
         /// <param name="sourceCodePath"> Supplied by the compiler. </param>
-        public void Be(int expected, string because = null,
+        public void Be(short expected, string because = null,
             [CallerMemberName] string testMethodName = null, [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string sourceCodePath = null)
         {
             if (Value == expected)
@@ -58,15 +58,15 @@
         }
 
         /// <summary>
-        /// Assert that a given integer is not between (or equal to) a specified minimum and maximum value.
+        /// Assert that a given short is not between (or equal to) a specified minimum and maximum value.
         /// </summary>
-        /// <param name="minimum"> The allowed minimum value for the integer. </param>
-        /// <param name="maximum"> The allowed maximum value for the integer. </param>
+        /// <param name="minimum"> The allowed minimum value for the short. </param>
+        /// <param name="maximum"> The allowed maximum value for the short. </param>
         /// <param name="because"> A reason why this assertion needs to be correct. </param>
         /// <param name="testMethodName"> Supplied by the compiler. </param>
         /// <param name="lineNumber"> Supplied by the compiler. </param>
         /// <param name="sourceCodePath"> Supplied by the compiler. </param>
-        public void BeBetween(int minimum, int maximum, string because = null,
+        public void BeBetween(short minimum, short maximum, string because = null,
             [CallerMemberName] string testMethodName = null, [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string sourceCodePath = null)
         {
             if (Value >= minimum && Value <= maximum)
@@ -77,14 +77,14 @@
         }
 
         /// <summary>
-        /// Assert that a given integer is not greater than a minimum value.
+        /// Assert that a given short is not greater than a minimum value.
         /// </summary>
-        /// <param name="minimum"> The allowed minimum value for the integer. </param>
+        /// <param name="minimum"> The allowed minimum value for the short. </param>
         /// <param name="because"> A reason why this assertion needs to be correct. </param>
         /// <param name="testMethodName"> Supplied by the compiler. </param>
         /// <param name="lineNumber"> Supplied by the compiler. </param>
         /// <param name="sourceCodePath"> Supplied by the compiler. </param>
-        public void BeGreaterThan(int minimum, string because = null,
+        public void BeGreaterThan(short minimum, string because = null,
             [CallerMemberName] string testMethodName = null, [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string sourceCodePath = null)
         {
             if (Value > minimum)
@@ -95,14 +95,14 @@
         }
 
         /// <summary>
-        /// Assert that a given integer is not greater than or equal to a minimum value.
+        /// Assert that a given short is not greater than or equal to a minimum value.
         /// </summary>
-        /// <param name="minimum"> The allowed minimum value for the integer. </param>
+        /// <param name="minimum"> The allowed minimum value for the short. </param>
         /// <param name="because"> A reason why this assertion needs to be correct. </param>
         /// <param name="testMethodName"> Supplied by the compiler. </param>
         /// <param name="lineNumber"> Supplied by the compiler. </param>
         /// <param name="sourceCodePath"> Supplied by the compiler. </param>
-        public void BeGreaterThanOrEqualTo(int minimum, string because = null,
+        public void BeGreaterThanOrEqualTo(short minimum, string because = null,
             [CallerMemberName] string testMethodName = null, [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string sourceCodePath = null)
         {
             if (Value >= minimum)
@@ -113,14 +113,14 @@
         }
 
         /// <summary>
-        /// Assert that a given integer is not less than a maximum value.
+        /// Assert that a given short is not less than a maximum value.
         /// </summary>
-        /// <param name="maximum"> The allowed maximum value for the integer. </param>
+        /// <param name="maximum"> The allowed maximum value for the short. </param>
         /// <param name="because"> A reason why this assertion needs to be correct. </param>
         /// <param name="testMethodName"> Supplied by the compiler. </param>
         /// <param name="lineNumber"> Supplied by the compiler. </param>
         /// <param name="sourceCodePath"> Supplied by the compiler. </param>
-        public void BeLessThan(int maximum, string because = null,
+        public void BeLessThan(short maximum, string because = null,
             [CallerMemberName] string testMethodName = null, [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string sourceCodePath = null)
         {
             if (Value < maximum)
@@ -131,14 +131,14 @@
         }
 
         /// <summary>
-        /// Assert that a given integer is not less than or equal to a maximum value.
+        /// Assert that a given short is not less than or equal to a maximum value.
         /// </summary>
-        /// <param name="maximum"> The allowed maximum value for the integer. </param>
+        /// <param name="maximum"> The allowed maximum value for the short. </param>
         /// <param name="because"> A reason why this assertion needs to be correct. </param>
         /// <param name="testMethodName"> Supplied by the compiler. </param>
         /// <param name="lineNumber"> Supplied by the compiler. </param>
         /// <param name="sourceCodePath"> Supplied by the compiler. </param>
-        public void BeLessThanOrEqualTo(int maximum, string because = null,
+        public void BeLessThanOrEqualTo(short maximum, string because = null,
             [CallerMemberName] string testMethodName = null, [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string sourceCodePath = null)
         {
             if (Value <= maximum)
@@ -149,7 +149,7 @@
         }
 
         /// <summary>
-        /// Assert that a given integer does not have a negative value (less than zero).
+        /// Assert that a given short does not have a negative value (less than zero).
         /// </summary>
         /// <param name="because"> A reason why this assertion needs to be correct. </param>
         /// <param name="testMethodName"> Supplied by the compiler. </param>
@@ -166,14 +166,14 @@
         }
 
         /// <summary>
-        /// Assert that a given integer does not match one of the expected values.
+        /// Assert that a given short does not match one of the expected values.
         /// </summary>
         /// <param name="expectedValues"> A list of expected values. </param>
         /// <param name="because"> A reason why this assertion needs to be correct. </param>
         /// <param name="testMethodName"> Supplied by the compiler. </param>
         /// <param name="lineNumber"> Supplied by the compiler. </param>
         /// <param name="sourceCodePath"> Supplied by the compiler. </param>
-        public void BeOneOf(IEnumerable<int> expectedValues, string because = null,
+        public void BeOneOf(IEnumerable<short> expectedValues, string because = null,
             [CallerMemberName] string testMethodName = null, [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string sourceCodePath = null)
         {
             var value = Value;
@@ -186,7 +186,7 @@
         }
 
         /// <summary>
-        /// Assert that a given integer does not have a positive value (greater than or equal to zero).
+        /// Assert that a given short does not have a positive value (greater than or equal to zero).
         /// </summary>
         /// <param name="because"> A reason why this assertion needs to be correct. </param>
         /// <param name="testMethodName"> Supplied by the compiler. </param>

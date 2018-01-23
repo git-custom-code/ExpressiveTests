@@ -88,6 +88,26 @@
         }
 
         /// <summary>
+        /// Assertions for the <see cref="short"/> data type.
+        /// </summary>
+        /// <param name="short"> The short value to be checked. </param>
+        /// <returns> A <see cref="ShortValidator"/> for specifying assertions. </returns>
+        public static ShortValidator Should(this short @short)
+        {
+            return new ShortValidator(@short);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the <see cref="short"/> data type.
+        /// </summary>
+        /// <param name="short"> The short value to be checked. </param>
+        /// <returns> A <see cref="ShortInverseValidator"/> for specifying inverse assertions. </returns>
+        public static ShortInverseValidator ShouldNot(this short @short)
+        {
+            return new ShortInverseValidator(@short);
+        }
+
+        /// <summary>
         /// Assertions for the <see cref="string"/> data type.
         /// </summary>
         /// <param name="string"> The string value to be checked. </param>
