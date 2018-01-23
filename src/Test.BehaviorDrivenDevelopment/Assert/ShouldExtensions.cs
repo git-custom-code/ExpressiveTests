@@ -8,6 +8,26 @@
         #region Logic
 
         /// <summary>
+        /// Assertions for the <see cref="bool"/> data type.
+        /// </summary>
+        /// <param name="integer"> The boolean value to be checked. </param>
+        /// <returns> A <see cref="BoolValidator"/> for specifying assertions. </returns>
+        public static BoolValidator Should(this bool boolean)
+        {
+            return new BoolValidator(boolean);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the <see cref="bool"/> data type.
+        /// </summary>
+        /// <param name="integer"> The boolean value to be checked. </param>
+        /// <returns> A <see cref="BoolInverseValidator"/> for specifying inverse assertions. </returns>
+        public static BoolInverseValidator ShouldNot(this bool boolean)
+        {
+            return new BoolInverseValidator(boolean);
+        }
+
+        /// <summary>
         /// Assertions for the <see cref="int"/> data type.
         /// </summary>
         /// <param name="integer"> The integer value to be checked. </param>

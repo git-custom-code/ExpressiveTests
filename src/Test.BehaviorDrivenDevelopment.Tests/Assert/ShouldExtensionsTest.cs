@@ -71,6 +71,62 @@
             Assert.IsType<ReferenceTypeInverseValidator<string>>(stringValidator);
         }
 
+        [Fact(DisplayName = "bool.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithBooleans()
+        {
+            // Given
+            var boolean = true;
+
+            // When
+            var validator = boolean.Should();
+
+            // Then
+            Assert.IsType<BoolValidator>(validator);
+        }
+
+        [Fact(DisplayName = "bool.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithBooleans()
+        {
+            // Given
+            var boolean = true;
+
+            // When
+            var validator = boolean.ShouldNot();
+
+            // Then
+            Assert.IsType<BoolInverseValidator>(validator);
+        }
+
+        [Fact(DisplayName = "int.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithIntegers()
+        {
+            // Given
+            var integer = 42;
+
+            // When
+            var validator = integer.Should();
+
+            // Then
+            Assert.IsType<IntValidator>(validator);
+        }
+
+        [Fact(DisplayName = "int.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithIntegers()
+        {
+            // Given
+            var integer = 42;
+
+            // When
+            var validator = integer.ShouldNot();
+
+            // Then
+            Assert.IsType<IntInverseValidator>(validator);
+        }
+
         [Fact(DisplayName = "string.Should()")]
         [Category("Should")]
         public void UseShouldExtensionWithStrings()
