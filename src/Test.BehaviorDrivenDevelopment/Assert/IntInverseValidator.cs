@@ -1,5 +1,7 @@
 ﻿namespace CustomCode.Test.BehaviorDrivenDevelopment
 {
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Runtime.CompilerServices;
 
     /// <summary>
@@ -160,6 +162,26 @@
             {
                 var context = Context.GetCallerContext(testMethodName, 0, sourceCodePath, lineNumber);
                 throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"not to have a negative value", because);
+            }
+        }
+
+        /// <summary>
+        /// Assert that a given integer does not match one of the expected values.
+        /// </summary>
+        /// <param name="expectedValues"> A list of expected values. </param>
+        /// <param name="because"> A reason why this assertion needs to be correct. </param>
+        /// <param name="testMethodName"> Supplied by the compiler. </param>
+        /// <param name="lineNumber"> Supplied by the compiler. </param>
+        /// <param name="sourceCodePath"> Supplied by the compiler. </param>
+        public void BeOneOf(IEnumerable<int> expectedValues, string because = null,
+            [CallerMemberName] string testMethodName = null, [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string sourceCodePath = null)
+        {
+            var value = Value;
+            if (expectedValues != null && expectedValues.Any(v => v == value))
+            {
+                var context = Context.GetCallerContext(testMethodName, 0, sourceCodePath, lineNumber);
+                var expected = $"not to be one of the following values: \"{string.Join("\", \"", expectedValues)}\"";
+                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", expected, because);
             }
         }
 

@@ -309,6 +309,40 @@
 
         #endregion
 
+        #region int.BeOneOf()
+
+        [Fact(DisplayName = "int.BeOneOf(int, int)")]
+        public void ValidateIntegerToBeOneOfExpectedValues()
+        {
+            // Given
+            var validator = new IntValidator(42);
+
+            // When
+            validator.BeOneOf(new[] { 10, 42 });
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact(DisplayName = "int.BeOneOf(other, other)")]
+        public void ValidateIntegerToBeOneOfViolated()
+        {
+            // Given
+            var validator = new IntValidator(42);
+
+            // When
+            var exception = Assert.Throws<XunitException>(() => validator.BeOneOf(new[] { 13, 39 }, because: "that's the bottom line"));
+
+            // Then
+            Assert.NotNull(exception);
+            var rn = Environment.NewLine;
+            Assert.Equal(
+                $"{rn}validator{rn}is \"42\"{rn}but was expected to be one of the following values: \"13\", \"39\"{rn}because that's the bottom line",
+                exception.UserMessage);
+        }
+
+        #endregion
+
         #region int.BePositive()
 
         [Fact(DisplayName = "int.BePositive()")]
