@@ -10,6 +10,16 @@ namespace CustomCode.Test.BehaviorDrivenDevelopment
         #region Logic
 
         /// <summary>
+        /// Assertions for the <see cref="int"/> data type.
+        /// </summary>
+        /// <param name="integer"> The integer value to be checked. </param>
+        /// <returns> A <see cref="IntValidator"/> for specifying assertions. </returns>
+        public static IntValidator Should(this int integer)
+        {
+            return new IntValidator(integer);
+        }
+
+        /// <summary>
         /// Assertions for nullable data types.
         /// </summary>
         /// <param name="nullable"> The nullable value to be checked. </param>

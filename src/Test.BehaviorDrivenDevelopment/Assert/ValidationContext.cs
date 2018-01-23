@@ -2,6 +2,7 @@
 {
     using Configuration;
     using System;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using Xunit.Sdk;
 
@@ -49,6 +50,28 @@
         /// <param name="validationMethodName"> The name of the called validation method. </param>
         /// <returns> The parsed caller context or null. </returns>
         public string GetCallerContext(string testMethodName, T expected, string sourceCodePath, int lineNumber,
+            [CallerMemberName] string validationMethodName = null)
+        {
+            var callerContext = TestConfiguration.GetCallerContextFor(testMethodName);
+            var context = callerContext?.GetCallerContext(
+                expected, testMethodName, validationMethodName, lineNumber, sourceCodePath);
+            return context;
+        }
+
+        /// <summary>
+        /// Gets the caller context for a given validation method.
+        /// </summary>
+        /// <param name="testMethodName">
+        /// The name of the test method that contains the call to the validation method.
+        /// </param>
+        /// <param name="expected"> The expected values specified as validation method parameter. </param>
+        /// <param name="sourceCodePath">
+        /// The path to the source code file that contains the call to the validation method.
+        /// </param>
+        /// <param name="lineNumber"> The line number that contains the call to the validation method. </param>
+        /// <param name="validationMethodName"> The name of the called validation method. </param>
+        /// <returns> The parsed caller context or null. </returns>
+        public string GetListCallerContext(string testMethodName, IEnumerable<T> expected, string sourceCodePath, int lineNumber,
             [CallerMemberName] string validationMethodName = null)
         {
             var callerContext = TestConfiguration.GetCallerContextFor(testMethodName);

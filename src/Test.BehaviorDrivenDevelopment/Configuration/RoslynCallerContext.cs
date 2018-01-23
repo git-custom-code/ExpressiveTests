@@ -1,8 +1,10 @@
 ﻿namespace CustomCode.Test.BehaviorDrivenDevelopment.Configuration
 {
+    using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Microsoft.CodeAnalysis.Text;
+    using System.Collections;
     using System.IO;
     using System.Linq;
     using System.Text;
@@ -63,14 +65,9 @@
 
                 if (nodeWithValidatorCall != null)
                 {
-                    var signature = nodeWithValidatorCall.Parent as InvocationExpressionSyntax;
-                    var parameter = signature?.ArgumentList?.Arguments.FirstOrDefault();
-                    if (expected != null && parameter != null && parameter.Expression is LiteralExpressionSyntax)
+                    if (!HasMatchingExpectedArgumentValues(expected, nodeWithValidatorCall))
                     {
-                        if (!Equals(((LiteralExpressionSyntax)parameter.Expression).Token.Value, expected))
-                        {
-                            return null;
-                        }
+                        return null;
                     }
 
                     var callerNameBuilder = new StringBuilder();
@@ -91,6 +88,48 @@
 
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Check that a validator method call matches with the expected value(s).
+        /// Note: This is necessary is 2 validator calls are within the same line.
+        /// </summary>
+        /// <typeparam name="T"> The type of the excepted value(s). </typeparam>
+        /// <param name="expected"> The expected value(s) to be checked. </param>
+        /// <param name="nodeWithValidatorCall"> The syntax node for the validator method call. </param>
+        /// <returns> True if the expected value(s) were found, false otherwise. </returns>
+        private bool HasMatchingExpectedArgumentValues<T>(T expected, SyntaxNode nodeWithValidatorCall)
+        {
+            var signature = nodeWithValidatorCall.Parent as InvocationExpressionSyntax;
+            if (!(expected is string) && expected is IEnumerable expectedList)
+            {
+                var index = 0;
+                foreach (var expectedValue in expectedList)
+                {
+                    var parameter = signature?.ArgumentList?.Arguments.ElementAt(index);
+                    if (expected != null && parameter != null && parameter.Expression is LiteralExpressionSyntax)
+                    {
+                        if (!Equals(((LiteralExpressionSyntax)parameter.Expression).Token.Value, expectedValue))
+                        {
+                            return false;
+                        }
+                    }
+                    ++index;
+                }
+            }
+            else
+            {
+                var parameter = signature?.ArgumentList?.Arguments.FirstOrDefault();
+                if (!Equals(expected, default(T)) && parameter != null && parameter.Expression is LiteralExpressionSyntax)
+                {
+                    if (!Equals(((LiteralExpressionSyntax)parameter.Expression).Token.Value, expected))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         #endregion
