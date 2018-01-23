@@ -311,7 +311,7 @@
 
         #region int.BePositive()
 
-        [Fact(DisplayName = "int.BeNegative()")]
+        [Fact(DisplayName = "int.BePositive()")]
         public void ValidateIntegerToBePositive()
         {
             // Given

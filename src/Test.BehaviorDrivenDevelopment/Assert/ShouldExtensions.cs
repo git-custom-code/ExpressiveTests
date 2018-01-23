@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CustomCode.Test.BehaviorDrivenDevelopment
+﻿namespace CustomCode.Test.BehaviorDrivenDevelopment
 {
     /// <summary>
     /// Extension methods for defining assertions on various data types.
@@ -17,6 +15,16 @@ namespace CustomCode.Test.BehaviorDrivenDevelopment
         public static IntValidator Should(this int integer)
         {
             return new IntValidator(integer);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the <see cref="int"/> data type.
+        /// </summary>
+        /// <param name="integer"> The integer value to be checked. </param>
+        /// <returns> A <see cref="IntInverseValidator"/> for specifying inverse assertions. </returns>
+        public static IntInverseValidator ShouldNot(this int integer)
+        {
+            return new IntInverseValidator(integer);
         }
 
         /// <summary>
