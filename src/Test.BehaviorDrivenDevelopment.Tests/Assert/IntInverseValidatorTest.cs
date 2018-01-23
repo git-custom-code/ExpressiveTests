@@ -290,7 +290,7 @@
 
         #endregion
 
-        #region int.BeOneOf()
+        #region int.NotBeOneOf()
 
         [Fact(DisplayName = "int.NotBeOneOf(other, other)")]
         public void ValidateIntegerNotToBeOneOfExpectedValues()

@@ -290,7 +290,7 @@
 
         #endregion
 
-        #region short.BeOneOf()
+        #region short.NotBeOneOf()
 
         [Fact(DisplayName = "short.NotBeOneOf(other, other)")]
         public void ValidateShortNotToBeOneOfExpectedValues()

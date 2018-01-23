@@ -290,7 +290,7 @@
 
         #endregion
 
-        #region long.BeOneOf()
+        #region long.NotBeOneOf()
 
         [Fact(DisplayName = "long.NotBeOneOf(other, other)")]
         public void ValidateLongNotToBeOneOfExpectedValues()
