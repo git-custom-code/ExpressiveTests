@@ -99,6 +99,34 @@
             Assert.IsType<BoolInverseValidator>(validator);
         }
 
+        [Fact(DisplayName = "byte.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithBytes()
+        {
+            // Given
+            byte @byte = 42;
+
+            // When
+            var validator = @byte.Should();
+
+            // Then
+            Assert.IsType<ByteValidator>(validator);
+        }
+
+        [Fact(DisplayName = "byte.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithBytes()
+        {
+            // Given
+            byte @byte = 42;
+
+            // When
+            var validator = @byte.ShouldNot();
+
+            // Then
+            Assert.IsType<ByteInverseValidator>(validator);
+        }
+
         [Fact(DisplayName = "int.Should()")]
         [Category("Should")]
         public void UseShouldExtensionWithIntegers()

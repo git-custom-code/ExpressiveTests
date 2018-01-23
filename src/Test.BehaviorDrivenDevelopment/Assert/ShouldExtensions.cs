@@ -10,7 +10,7 @@
         /// <summary>
         /// Assertions for the <see cref="bool"/> data type.
         /// </summary>
-        /// <param name="integer"> The boolean value to be checked. </param>
+        /// <param name="boolean"> The boolean value to be checked. </param>
         /// <returns> A <see cref="BoolValidator"/> for specifying assertions. </returns>
         public static BoolValidator Should(this bool boolean)
         {
@@ -20,11 +20,31 @@
         /// <summary>
         /// Inverse assertions for the <see cref="bool"/> data type.
         /// </summary>
-        /// <param name="integer"> The boolean value to be checked. </param>
+        /// <param name="boolean"> The boolean value to be checked. </param>
         /// <returns> A <see cref="BoolInverseValidator"/> for specifying inverse assertions. </returns>
         public static BoolInverseValidator ShouldNot(this bool boolean)
         {
             return new BoolInverseValidator(boolean);
+        }
+
+        /// <summary>
+        /// Assertions for the <see cref="byte"/> data type.
+        /// </summary>
+        /// <param name="byte"> The byte value to be checked. </param>
+        /// <returns> A <see cref="ByteValidator"/> for specifying assertions. </returns>
+        public static ByteValidator Should(this byte @byte)
+        {
+            return new ByteValidator(@byte);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the <see cref="byte"/> data type.
+        /// </summary>
+        /// <param name="byte"> The byte value to be checked. </param>
+        /// <returns> A <see cref="ByteInverseValidator"/> for specifying inverse assertions. </returns>
+        public static ByteInverseValidator ShouldNot(this byte @byte)
+        {
+            return new ByteInverseValidator(@byte);
         }
 
         /// <summary>
@@ -80,7 +100,7 @@
         /// <summary>
         /// Inverse assertions for nullable data types.
         /// </summary>
-        /// <param name="@referenceType"> The nullable value to be checked. </param>
+        /// <param name="nullable"> The nullable value to be checked. </param>
         /// <returns> A <see cref="NullableInverseValidator{T}"/> for specifying inverse assertions. </returns>
         public static NullableInverseValidator<T> ShouldNot<T>(this T? nullable) where T : struct
         {
