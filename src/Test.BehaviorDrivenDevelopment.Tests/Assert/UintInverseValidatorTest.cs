@@ -9,7 +9,7 @@
     /// </summary>
     [UnitTest]
     [Category("Assert", "UIntValidation")]
-    public sealed class UintInvereseValidatorTest
+    public sealed class UintInverseValidatorTest
     {
         #region uint.NotBe()
 

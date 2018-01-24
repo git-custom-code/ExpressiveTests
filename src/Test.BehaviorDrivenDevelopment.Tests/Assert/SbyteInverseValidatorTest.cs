@@ -9,7 +9,7 @@
     /// </summary>
     [UnitTest]
     [Category("Assert", "SByteValidation")]
-    public sealed class SbyteInvereseValidatorTest
+    public sealed class SbyteInverseValidatorTest
     {
         #region sbyte.NotBe()
 

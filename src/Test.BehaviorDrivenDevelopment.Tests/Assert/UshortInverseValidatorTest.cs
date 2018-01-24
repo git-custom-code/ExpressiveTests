@@ -9,7 +9,7 @@
     /// </summary>
     [UnitTest]
     [Category("Assert", "UShortValidation")]
-    public sealed class UshortInvereseValidatorTest
+    public sealed class UshortInverseValidatorTest
     {
         #region ushort.NotBe()
 

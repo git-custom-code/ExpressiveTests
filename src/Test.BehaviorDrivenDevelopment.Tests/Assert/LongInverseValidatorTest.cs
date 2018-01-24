@@ -9,7 +9,7 @@
     /// </summary>
     [UnitTest]
     [Category("Assert", "LongValidation")]
-    public sealed class LongInvereseValidatorTest
+    public sealed class LongInverseValidatorTest
     {
         #region long.NotBe()
 

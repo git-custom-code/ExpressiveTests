@@ -1,9 +1,7 @@
 ﻿namespace CustomCode.Test.BehaviorDrivenDevelopment.Tests
 {
     using System;
-    using System.IO;
     using Xunit;
-    using Xunit.Abstractions;
     using Xunit.Sdk;
 
     /// <summary>
@@ -11,7 +9,7 @@
     /// </summary>
     [UnitTest]
     [Category("Assert", "ByteValidation")]
-    public sealed class ByteInvereseValidatorTest
+    public sealed class ByteInverseValidatorTest
     {
         #region byte.NotBe()
 
