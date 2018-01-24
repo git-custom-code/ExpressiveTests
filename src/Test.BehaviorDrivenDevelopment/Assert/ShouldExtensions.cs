@@ -7,6 +7,8 @@
     {
         #region Logic
 
+        #region bool
+
         /// <summary>
         /// Assertions for the <see cref="bool"/> data type.
         /// </summary>
@@ -26,6 +28,10 @@
         {
             return new BoolInverseValidator(boolean);
         }
+
+        #endregion
+
+        #region byte
 
         /// <summary>
         /// Assertions for the <see cref="byte"/> data type.
@@ -47,6 +53,10 @@
             return new ByteInverseValidator(@byte);
         }
 
+        #endregion
+
+        #region int
+
         /// <summary>
         /// Assertions for the <see cref="int"/> data type.
         /// </summary>
@@ -66,6 +76,10 @@
         {
             return new IntInverseValidator(integer);
         }
+
+        #endregion
+
+        #region long
 
         /// <summary>
         /// Assertions for the <see cref="long"/> data type.
@@ -87,6 +101,10 @@
             return new LongInverseValidator(@long);
         }
 
+        #endregion
+
+        #region nullable
+
         /// <summary>
         /// Assertions for nullable data types.
         /// </summary>
@@ -106,6 +124,10 @@
         {
             return new NullableInverseValidator<T>(nullable);
         }
+
+        #endregion
+
+        #region reference type
 
         /// <summary>
         /// Assertions for reference data types.
@@ -127,6 +149,34 @@
             return new ReferenceTypeInverseValidator<T>(referenceType);
         }
 
+        #endregion
+
+        #region sbyte
+
+        /// <summary>
+        /// Assertions for the <see cref="sbyte"/> data type.
+        /// </summary>
+        /// <param name="byte"> The signed byte value to be checked. </param>
+        /// <returns> A <see cref="SbyteValidator"/> for specifying assertions. </returns>
+        public static SbyteValidator Should(this sbyte @byte)
+        {
+            return new SbyteValidator(@byte);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the <see cref="sbyte"/> data type.
+        /// </summary>
+        /// <param name="byte"> The signed byte value to be checked. </param>
+        /// <returns> A <see cref="SbyteInverseValidator"/> for specifying inverse assertions. </returns>
+        public static SbyteInverseValidator ShouldNot(this sbyte @byte)
+        {
+            return new SbyteInverseValidator(@byte);
+        }
+
+        #endregion
+
+        #region short
+
         /// <summary>
         /// Assertions for the <see cref="short"/> data type.
         /// </summary>
@@ -147,6 +197,10 @@
             return new ShortInverseValidator(@short);
         }
 
+        #endregion
+
+        #region string
+
         /// <summary>
         /// Assertions for the <see cref="string"/> data type.
         /// </summary>
@@ -166,6 +220,8 @@
         {
             return new StringInverseValidator(@string);
         }
+
+        #endregion
 
         #endregion
     }
