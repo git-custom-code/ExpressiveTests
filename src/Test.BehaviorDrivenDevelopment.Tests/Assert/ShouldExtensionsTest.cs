@@ -335,6 +335,38 @@
 
         #endregion
 
+        #region ulong
+
+        [Fact(DisplayName = "ulong.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithULongs()
+        {
+            // Given
+            ulong @long = 42;
+
+            // When
+            var validator = @long.Should();
+
+            // Then
+            Assert.IsType<UlongValidator>(validator);
+        }
+
+        [Fact(DisplayName = "ulong.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithULongs()
+        {
+            // Given
+            ulong @long = 42;
+
+            // When
+            var validator = @long.ShouldNot();
+
+            // Then
+            Assert.IsType<UlongInverseValidator>(validator);
+        }
+
+        #endregion
+
         #region ushort
 
         [Fact(DisplayName = "ushort.Should()")]

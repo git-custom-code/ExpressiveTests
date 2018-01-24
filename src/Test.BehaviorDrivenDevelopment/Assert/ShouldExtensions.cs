@@ -247,6 +247,30 @@
 
         #endregion
 
+        #region ulong
+
+        /// <summary>
+        /// Assertions for the <see cref="ulong"/> data type.
+        /// </summary>
+        /// <param name="int"> The unsigned long value to be checked. </param>
+        /// <returns> A <see cref="UlongValidator"/> for specifying assertions. </returns>
+        public static UlongValidator Should(this ulong @long)
+        {
+            return new UlongValidator(@long);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the <see cref="ulong"/> data type.
+        /// </summary>
+        /// <param name="int"> The unsigned long value to be checked. </param>
+        /// <returns> A <see cref="UlongInverseValidator"/> for specifying inverse assertions. </returns>
+        public static UlongInverseValidator ShouldNot(this ulong @long)
+        {
+            return new UlongInverseValidator(@long);
+        }
+
+        #endregion
+
         #region ushort
 
         /// <summary>
