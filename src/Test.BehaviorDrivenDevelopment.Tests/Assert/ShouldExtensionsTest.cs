@@ -72,6 +72,38 @@
         }
 
         #endregion
+        
+        #region float
+
+        [Fact(DisplayName = "float.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithFloats()
+        {
+            // Given
+            var @float = 42f;
+
+            // When
+            var validator = @float.Should();
+
+            // Then
+            Assert.IsType<FloatValidator>(validator);
+        }
+
+        [Fact(DisplayName = "float.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithFloats()
+        {
+            // Given
+            var @float = 42f;
+
+            // When
+            var validator = @float.ShouldNot();
+
+            // Then
+            Assert.IsType<FloatInverseValidator>(validator);
+        }
+
+        #endregion
 
         #region int
 

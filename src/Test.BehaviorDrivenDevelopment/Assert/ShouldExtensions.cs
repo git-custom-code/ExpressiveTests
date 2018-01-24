@@ -55,6 +55,30 @@
 
         #endregion
 
+        #region float
+
+        /// <summary>
+        /// Assertions for the <see cref="float"/> data type.
+        /// </summary>
+        /// <param name="float"> The float value to be checked. </param>
+        /// <returns> A <see cref="FloatValidator"/> for specifying assertions. </returns>
+        public static FloatValidator Should(this float @float)
+        {
+            return new FloatValidator(@float);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the <see cref="float"/> data type.
+        /// </summary>
+        /// <param name="float"> The float value to be checked. </param>
+        /// <returns> A <see cref="FloatInverseValidator"/> for specifying inverse assertions. </returns>
+        public static FloatInverseValidator ShouldNot(this float @float)
+        {
+            return new FloatInverseValidator(@float);
+        }
+
+        #endregion
+
         #region int
 
         /// <summary>
