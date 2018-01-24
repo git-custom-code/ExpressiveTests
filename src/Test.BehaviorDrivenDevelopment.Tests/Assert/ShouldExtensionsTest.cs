@@ -73,6 +73,38 @@
 
         #endregion
 
+        #region decimal
+
+        [Fact(DisplayName = "decimal.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithDecimals()
+        {
+            // Given
+            var @decimal = 42m;
+
+            // When
+            var validator = @decimal.Should();
+
+            // Then
+            Assert.IsType<DecimalValidator>(validator);
+        }
+
+        [Fact(DisplayName = "decimal.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithDecimals()
+        {
+            // Given
+            var @decimal = 42m;
+
+            // When
+            var validator = @decimal.ShouldNot();
+
+            // Then
+            Assert.IsType<DecimalInverseValidator>(validator);
+        }
+
+        #endregion
+
         #region double
 
         [Fact(DisplayName = "double.Should()")]

@@ -55,6 +55,30 @@
 
         #endregion
 
+        #region decimal
+
+        /// <summary>
+        /// Assertions for the <see cref="decimal"/> data type.
+        /// </summary>
+        /// <param name="decimal"> The decimal value to be checked. </param>
+        /// <returns> A <see cref="DecimalValidator"/> for specifying assertions. </returns>
+        public static DecimalValidator Should(this decimal @decimal)
+        {
+            return new DecimalValidator(@decimal);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the <see cref="decimal"/> data type.
+        /// </summary>
+        /// <param name="decimal"> The decimal value to be checked. </param>
+        /// <returns> A <see cref="DecimalInverseValidator"/> for specifying inverse assertions. </returns>
+        public static DecimalInverseValidator ShouldNot(this decimal @decimal)
+        {
+            return new DecimalInverseValidator(@decimal);
+        }
+
+        #endregion
+
         #region double
 
         /// <summary>
