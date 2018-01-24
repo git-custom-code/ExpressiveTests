@@ -74,7 +74,7 @@
         }
 
         [Fact(DisplayName = "string.Be(null)")]
-        public void ValidateStringToBeNullViolated()
+        public void ValidateStringToBeNullValueViolated()
         {
             // Given
             var validator = new StringValidator("string");
@@ -122,86 +122,189 @@
 
         #endregion
 
-        #region string.StartWith()
+        #region string.BeEmpty()
 
-        [Fact(DisplayName = "string.StartWith(str)")]
-        public void ValidateStringStartWithValue()
+        [Fact(DisplayName = "empty.BeEmpty()")]
+        public void ValidateStringToBeEmpty()
         {
             // Given
-            var validator = new StringValidator("string");
+            var validator = new StringValidator(string.Empty);
 
             // When
-            validator.StartWith("str");
+            validator.BeEmpty();
 
             // Then
             Assert.True(true);
         }
 
-        [Fact(DisplayName = "string.StartWith(other)")]
-        public void ValidateStringStartWithValueViolated()
+        [Fact(DisplayName = "string.BeEmpty()")]
+        public void ValidateStringToBeEmptyViolated()
         {
             // Given
             var validator = new StringValidator("string");
 
             // When
-            var exception = Assert.Throws<XunitException>(() => validator.StartWith("other", "that's the bottom line"));
+            var exception = Assert.Throws<XunitException>(() => validator.BeEmpty(because: "that's the bottom line"));
 
             // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
-                $"{rn}validator{rn}is \"string\"{rn}but was expected to start with \"other\"{rn}because that's the bottom line",
+                $"{rn}validator{rn}is \"string\"{rn}but was expected to be empty{rn}because that's the bottom line",
                 exception.UserMessage);
         }
 
-        [Fact(DisplayName = "null.StartWith(other)")]
-        public void ValidateNullStringStartWithValueViolated()
+        #endregion
+
+        #region string.BeNull()
+
+        [Fact(DisplayName = "null.BeNull()")]
+        public void ValidateStringToBeNull()
         {
             // Given
             var validator = new StringValidator(null);
 
             // When
-            var exception = Assert.Throws<XunitException>(() => validator.StartWith("other"));
+            validator.BeNull();
 
             // Then
-            Assert.NotNull(exception);
-            var rn = Environment.NewLine;
-            Assert.Equal(
-                $"{rn}validator{rn}is \"\"{rn}but was expected to start with \"other\"",
-                exception.UserMessage);
+            Assert.True(true);
         }
 
-        [Fact(DisplayName = "string.StartWith(null)")]
-        public void ValidateStringStartWithNullViolated()
+        [Fact(DisplayName = "string.BeNull()")]
+        public void ValidateStringToBeNullViolated()
         {
             // Given
             var validator = new StringValidator("string");
 
             // When
-            var exception = Assert.Throws<XunitException>(() => validator.StartWith(null));
+            var exception = Assert.Throws<XunitException>(() => validator.BeNull(because: "that's the bottom line"));
 
             // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
-                $"{rn}validator{rn}is \"string\"{rn}but was expected to start with \"\"",
+                $"{rn}validator{rn}is \"string\"{rn}but was expected to be null{rn}because that's the bottom line",
                 exception.UserMessage);
         }
 
-        [Fact(DisplayName = "null.StartWith(null)")]
-        public void ValidateNullStringStartWithNullViolated()
+        #endregion
+
+        #region string.BeNullOrEmpty()
+
+        [Fact(DisplayName = "null.BeNullOrEmpty()")]
+        public void ValidateStringToBeNullOrEmpty()
         {
             // Given
             var validator = new StringValidator(null);
 
             // When
-            var exception = Assert.Throws<XunitException>(() => validator.StartWith(null));
+            validator.BeNullOrEmpty();
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact(DisplayName = "empty.BeNullOrEmpty()")]
+        public void ValidateEmptyStringToBeNullOrEmpty()
+        {
+            // Given
+            var validator = new StringValidator(string.Empty);
+
+            // When
+            validator.BeNullOrEmpty();
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact(DisplayName = "string.BeNullOrEmpty()")]
+        public void ValidateStringToBeNullOrEmptyViolated()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            var exception = Assert.Throws<XunitException>(() => validator.BeNullOrEmpty(because: "that's the bottom line"));
 
             // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
-                $"{rn}validator{rn}is \"\"{rn}but was expected to start with \"\"",
+                $"{rn}validator{rn}is \"string\"{rn}but was expected to be null or empty{rn}because that's the bottom line",
+                exception.UserMessage);
+        }
+
+        #endregion
+
+        #region string.Contain()
+
+        [Fact(DisplayName = "string.Contain(tri)")]
+        public void ValidateStringContainsValue()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            validator.Contain("tri");
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact(DisplayName = "string.Contain(str)")]
+        public void ValidateStringContainsStartValue()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            validator.Contain("str");
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact(DisplayName = "string.Contain(ing)")]
+        public void ValidateStringContainsEndValue()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            validator.Contain("ing");
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact(DisplayName = "string.Contain(TRI, ignoreCase)")]
+        public void ValidateStringContainsValueIgnoreCase()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            validator.Contain("TRI", ignoreCase: true);
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact(DisplayName = "string.Contain(other)")]
+        public void ValidateStringContainsValueViolated()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            var exception = Assert.Throws<XunitException>(() => validator.Contain("other", "that's the bottom line"));
+
+            // Then
+            Assert.NotNull(exception);
+            var rn = Environment.NewLine;
+            Assert.Equal(
+                $"{rn}validator{rn}is \"string\"{rn}but was expected to contain \"other\"{rn}because that's the bottom line",
                 exception.UserMessage);
         }
 
@@ -287,6 +390,198 @@
             var rn = Environment.NewLine;
             Assert.Equal(
                 $"{rn}validator{rn}is \"\"{rn}but was expected to end with \"\"",
+                exception.UserMessage);
+        }
+
+        #endregion
+
+        #region string.Match()
+
+        [Fact(DisplayName = "string.Match(string)")]
+        public void ValidateStringMatchValue()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            validator.Match("string");
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact(DisplayName = "string.Match(st*ng)")]
+        public void ValidateStringMatchWildcardValue()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            validator.Match("st*ng");
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact(DisplayName = "string.Match(sT*Ng)")]
+        public void ValidateStringMatchWildcardIgnoreCaseValue()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            validator.Match("sT*Ng", ignoreCase: true);
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact(DisplayName = "string.Match(other)")]
+        public void ValidateStringMatchValueViolated()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            var exception = Assert.Throws<XunitException>(() => validator.Match("other", "that's the bottom line"));
+
+            // Then
+            Assert.NotNull(exception);
+            var rn = Environment.NewLine;
+            Assert.Equal(
+                $"{rn}validator{rn}is \"string\"{rn}but was expected to match pattern \"other\"{rn}because that's the bottom line",
+                exception.UserMessage);
+        }
+
+        #endregion
+
+        #region string.MatchRegex()
+
+        [Fact(DisplayName = "string.MatchRegex(string)")]
+        public void ValidateStringMatchRegex()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            validator.MatchRegex("string");
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact(DisplayName = "string.MatchRegex(.*)")]
+        public void ValidateStringMatchRegexPattern()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            validator.MatchRegex(".*");
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact(DisplayName = "string.MatchRegex(^.$)")]
+        public void ValidateStringMatchRegexViolated()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            var exception = Assert.Throws<XunitException>(() => validator.MatchRegex("^.$", "that's the bottom line"));
+
+            // Then
+            Assert.NotNull(exception);
+            var rn = Environment.NewLine;
+            Assert.Equal(
+                $"{rn}validator{rn}is \"string\"{rn}but was expected to match regular expression \"^.$\"{rn}because that's the bottom line",
+                exception.UserMessage);
+        }
+
+        #endregion
+
+        #region string.StartWith()
+
+        [Fact(DisplayName = "string.StartWith(str)")]
+        public void ValidateStringStartWithValue()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            validator.StartWith("str");
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact(DisplayName = "string.StartWith(other)")]
+        public void ValidateStringStartWithValueViolated()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            var exception = Assert.Throws<XunitException>(() => validator.StartWith("other", "that's the bottom line"));
+
+            // Then
+            Assert.NotNull(exception);
+            var rn = Environment.NewLine;
+            Assert.Equal(
+                $"{rn}validator{rn}is \"string\"{rn}but was expected to start with \"other\"{rn}because that's the bottom line",
+                exception.UserMessage);
+        }
+
+        [Fact(DisplayName = "null.StartWith(other)")]
+        public void ValidateNullStringStartWithValueViolated()
+        {
+            // Given
+            var validator = new StringValidator(null);
+
+            // When
+            var exception = Assert.Throws<XunitException>(() => validator.StartWith("other"));
+
+            // Then
+            Assert.NotNull(exception);
+            var rn = Environment.NewLine;
+            Assert.Equal(
+                $"{rn}validator{rn}is \"\"{rn}but was expected to start with \"other\"",
+                exception.UserMessage);
+        }
+
+        [Fact(DisplayName = "string.StartWith(null)")]
+        public void ValidateStringStartWithNullViolated()
+        {
+            // Given
+            var validator = new StringValidator("string");
+
+            // When
+            var exception = Assert.Throws<XunitException>(() => validator.StartWith(null));
+
+            // Then
+            Assert.NotNull(exception);
+            var rn = Environment.NewLine;
+            Assert.Equal(
+                $"{rn}validator{rn}is \"string\"{rn}but was expected to start with \"\"",
+                exception.UserMessage);
+        }
+
+        [Fact(DisplayName = "null.StartWith(null)")]
+        public void ValidateNullStringStartWithNullViolated()
+        {
+            // Given
+            var validator = new StringValidator(null);
+
+            // When
+            var exception = Assert.Throws<XunitException>(() => validator.StartWith(null));
+
+            // Then
+            Assert.NotNull(exception);
+            var rn = Environment.NewLine;
+            Assert.Equal(
+                $"{rn}validator{rn}is \"\"{rn}but was expected to start with \"\"",
                 exception.UserMessage);
         }
 
