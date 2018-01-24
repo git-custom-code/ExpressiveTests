@@ -72,7 +72,39 @@
         }
 
         #endregion
-        
+
+        #region double
+
+        [Fact(DisplayName = "double.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithDoubles()
+        {
+            // Given
+            var @double = 42d;
+
+            // When
+            var validator = @double.Should();
+
+            // Then
+            Assert.IsType<DoubleValidator>(validator);
+        }
+
+        [Fact(DisplayName = "double.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithDoubles()
+        {
+            // Given
+            var @double = 42d;
+
+            // When
+            var validator = @double.ShouldNot();
+
+            // Then
+            Assert.IsType<DoubleInverseValidator>(validator);
+        }
+
+        #endregion
+
         #region float
 
         [Fact(DisplayName = "float.Should()")]

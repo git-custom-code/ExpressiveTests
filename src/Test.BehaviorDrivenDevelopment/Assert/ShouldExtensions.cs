@@ -55,6 +55,30 @@
 
         #endregion
 
+        #region double
+
+        /// <summary>
+        /// Assertions for the <see cref="double"/> data type.
+        /// </summary>
+        /// <param name="double"> The double value to be checked. </param>
+        /// <returns> A <see cref="DoubleValidator"/> for specifying assertions. </returns>
+        public static DoubleValidator Should(this double @double)
+        {
+            return new DoubleValidator(@double);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the <see cref="double"/> data type.
+        /// </summary>
+        /// <param name="double"> The double value to be checked. </param>
+        /// <returns> A <see cref="DoubleInverseValidator"/> for specifying inverse assertions. </returns>
+        public static DoubleInverseValidator ShouldNot(this double @double)
+        {
+            return new DoubleInverseValidator(@double);
+        }
+
+        #endregion
+
         #region float
 
         /// <summary>
