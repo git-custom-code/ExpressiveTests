@@ -204,7 +204,7 @@
         /// <summary>
         /// Assertions for reference data types.
         /// </summary>
-        /// <param name="@referenceType"> The reference type value to be checked. </param>
+        /// <param name="referenceType"> The reference type value to be checked. </param>
         /// <returns> A <see cref="ReferenceTypeValidator{T}"/> for specifying assertions. </returns>
         public static ReferenceTypeValidator<T> Should<T>(this T referenceType) where T : class
         {
@@ -214,7 +214,7 @@
         /// <summary>
         /// Inverse assertions for reference data types.
         /// </summary>
-        /// <param name="@referenceType"> The reference type value to be checked. </param>
+        /// <param name="referenceType"> The reference type value to be checked. </param>
         /// <returns> A <see cref="ReferenceTypeInverseValidator{T}"/> for specifying inverse assertions. </returns>
         public static ReferenceTypeInverseValidator<T> ShouldNot<T>(this T referenceType) where T : class
         {
@@ -324,7 +324,7 @@
         /// <summary>
         /// Assertions for the <see cref="ulong"/> data type.
         /// </summary>
-        /// <param name="int"> The unsigned long value to be checked. </param>
+        /// <param name="long"> The unsigned long value to be checked. </param>
         /// <returns> A <see cref="UlongValidator"/> for specifying assertions. </returns>
         public static UlongValidator Should(this ulong @long)
         {
@@ -334,7 +334,7 @@
         /// <summary>
         /// Inverse assertions for the <see cref="ulong"/> data type.
         /// </summary>
-        /// <param name="int"> The unsigned long value to be checked. </param>
+        /// <param name="long"> The unsigned long value to be checked. </param>
         /// <returns> A <see cref="UlongInverseValidator"/> for specifying inverse assertions. </returns>
         public static UlongInverseValidator ShouldNot(this ulong @long)
         {
