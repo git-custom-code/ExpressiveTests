@@ -9,6 +9,136 @@
     [Category("Assert")]
     public sealed class ShouldExtensionsTest
     {
+        #region bool
+
+        [Fact(DisplayName = "bool.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithBooleans()
+        {
+            // Given
+            var boolean = true;
+
+            // When
+            var validator = boolean.Should();
+
+            // Then
+            Assert.IsType<BoolValidator>(validator);
+        }
+
+        [Fact(DisplayName = "bool.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithBooleans()
+        {
+            // Given
+            var boolean = true;
+
+            // When
+            var validator = boolean.ShouldNot();
+
+            // Then
+            Assert.IsType<BoolInverseValidator>(validator);
+        }
+
+        #endregion
+
+        #region byte
+
+        [Fact(DisplayName = "byte.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithBytes()
+        {
+            // Given
+            byte @byte = 42;
+
+            // When
+            var validator = @byte.Should();
+
+            // Then
+            Assert.IsType<ByteValidator>(validator);
+        }
+
+        [Fact(DisplayName = "byte.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithBytes()
+        {
+            // Given
+            byte @byte = 42;
+
+            // When
+            var validator = @byte.ShouldNot();
+
+            // Then
+            Assert.IsType<ByteInverseValidator>(validator);
+        }
+
+        #endregion
+
+        #region int
+
+        [Fact(DisplayName = "int.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithIntegers()
+        {
+            // Given
+            var integer = 42;
+
+            // When
+            var validator = integer.Should();
+
+            // Then
+            Assert.IsType<IntValidator>(validator);
+        }
+
+        [Fact(DisplayName = "int.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithIntegers()
+        {
+            // Given
+            var integer = 42;
+
+            // When
+            var validator = integer.ShouldNot();
+
+            // Then
+            Assert.IsType<IntInverseValidator>(validator);
+        }
+
+        #endregion
+
+        #region long
+
+        [Fact(DisplayName = "long.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithLongs()
+        {
+            // Given
+            long @long = 42;
+
+            // When
+            var validator = @long.Should();
+
+            // Then
+            Assert.IsType<LongValidator>(validator);
+        }
+
+        [Fact(DisplayName = "long.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithLongs()
+        {
+            // Given
+            long @long = 42;
+
+            // When
+            var validator = @long.ShouldNot();
+
+            // Then
+            Assert.IsType<LongInverseValidator>(validator);
+        }
+
+        #endregion
+
+        #region nullable
+
         [Fact(DisplayName = "Nullable.Should()")]
         [Category("Should")]
         public void UseShouldExtensionWithNullables()
@@ -36,6 +166,10 @@
             // Then
             Assert.IsType<NullableInverseValidator<int>>(intValidator);
         }
+
+        #endregion
+
+        #region reference types
 
         [Fact(DisplayName = "ReferenceType.Should()")]
         [Category("Should")]
@@ -71,61 +205,9 @@
             Assert.IsType<ReferenceTypeInverseValidator<string>>(stringValidator);
         }
 
-        [Fact(DisplayName = "bool.Should()")]
-        [Category("Should")]
-        public void UseShouldExtensionWithBooleans()
-        {
-            // Given
-            var boolean = true;
+        #endregion
 
-            // When
-            var validator = boolean.Should();
-
-            // Then
-            Assert.IsType<BoolValidator>(validator);
-        }
-
-        [Fact(DisplayName = "bool.ShouldNot()")]
-        [Category("ShouldNot")]
-        public void UseShouldNotExtensionWithBooleans()
-        {
-            // Given
-            var boolean = true;
-
-            // When
-            var validator = boolean.ShouldNot();
-
-            // Then
-            Assert.IsType<BoolInverseValidator>(validator);
-        }
-
-        [Fact(DisplayName = "byte.Should()")]
-        [Category("Should")]
-        public void UseShouldExtensionWithBytes()
-        {
-            // Given
-            byte @byte = 42;
-
-            // When
-            var validator = @byte.Should();
-
-            // Then
-            Assert.IsType<ByteValidator>(validator);
-        }
-
-        [Fact(DisplayName = "byte.ShouldNot()")]
-        [Category("ShouldNot")]
-        public void UseShouldNotExtensionWithBytes()
-        {
-            // Given
-            byte @byte = 42;
-
-            // When
-            var validator = @byte.ShouldNot();
-
-            // Then
-            Assert.IsType<ByteInverseValidator>(validator);
-        }
+        #region sbyte
 
         [Fact(DisplayName = "sbyte.Should()")]
         [Category("Should")]
@@ -155,61 +237,9 @@
             Assert.IsType<SbyteInverseValidator>(validator);
         }
 
-        [Fact(DisplayName = "int.Should()")]
-        [Category("Should")]
-        public void UseShouldExtensionWithIntegers()
-        {
-            // Given
-            var integer = 42;
+        #endregion
 
-            // When
-            var validator = integer.Should();
-
-            // Then
-            Assert.IsType<IntValidator>(validator);
-        }
-
-        [Fact(DisplayName = "int.ShouldNot()")]
-        [Category("ShouldNot")]
-        public void UseShouldNotExtensionWithIntegers()
-        {
-            // Given
-            var integer = 42;
-
-            // When
-            var validator = integer.ShouldNot();
-
-            // Then
-            Assert.IsType<IntInverseValidator>(validator);
-        }
-
-        [Fact(DisplayName = "long.Should()")]
-        [Category("Should")]
-        public void UseShouldExtensionWithLongs()
-        {
-            // Given
-            long @long = 42;
-
-            // When
-            var validator = @long.Should();
-
-            // Then
-            Assert.IsType<LongValidator>(validator);
-        }
-
-        [Fact(DisplayName = "long.ShouldNot()")]
-        [Category("ShouldNot")]
-        public void UseShouldNotExtensionWithLongs()
-        {
-            // Given
-            long @long = 42;
-
-            // When
-            var validator = @long.ShouldNot();
-
-            // Then
-            Assert.IsType<LongInverseValidator>(validator);
-        }
+        #region short
 
         [Fact(DisplayName = "short.Should()")]
         [Category("Should")]
@@ -239,6 +269,10 @@
             Assert.IsType<ShortInverseValidator>(validator);
         }
 
+        #endregion
+
+        #region string
+
         [Fact(DisplayName = "string.Should()")]
         [Category("Should")]
         public void UseShouldExtensionWithStrings()
@@ -266,5 +300,39 @@
             // Then
             Assert.IsType<StringInverseValidator>(validator);
         }
+
+        #endregion
+
+        #region ushort
+
+        [Fact(DisplayName = "ushort.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithUShorts()
+        {
+            // Given
+            ushort @short = 42;
+
+            // When
+            var validator = @short.Should();
+
+            // Then
+            Assert.IsType<UshortValidator>(validator);
+        }
+
+        [Fact(DisplayName = "ushort.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithUShorts()
+        {
+            // Given
+            ushort @short = 42;
+
+            // When
+            var validator = @short.ShouldNot();
+
+            // Then
+            Assert.IsType<UshortInverseValidator>(validator);
+        }
+
+        #endregion
     }
 }

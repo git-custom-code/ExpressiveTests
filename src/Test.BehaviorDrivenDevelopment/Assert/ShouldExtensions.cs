@@ -223,6 +223,30 @@
 
         #endregion
 
+        #region ushort
+
+        /// <summary>
+        /// Assertions for the <see cref="ushort"/> data type.
+        /// </summary>
+        /// <param name="short"> The unsigned short value to be checked. </param>
+        /// <returns> A <see cref="UshortValidator"/> for specifying assertions. </returns>
+        public static UshortValidator Should(this ushort @short)
+        {
+            return new UshortValidator(@short);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the <see cref="ushort"/> data type.
+        /// </summary>
+        /// <param name="short"> The unsigned short value to be checked. </param>
+        /// <returns> A <see cref="UshortInverseValidator"/> for specifying inverse assertions. </returns>
+        public static UshortInverseValidator ShouldNot(this ushort @short)
+        {
+            return new UshortInverseValidator(@short);
+        }
+
+        #endregion
+
         #endregion
     }
 }
