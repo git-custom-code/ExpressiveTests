@@ -303,6 +303,38 @@
 
         #endregion
 
+        #region uint
+
+        [Fact(DisplayName = "uint.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithUInts()
+        {
+            // Given
+            uint @int = 42;
+
+            // When
+            var validator = @int.Should();
+
+            // Then
+            Assert.IsType<UintValidator>(validator);
+        }
+
+        [Fact(DisplayName = "uint.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithUInts()
+        {
+            // Given
+            uint @int = 42;
+
+            // When
+            var validator = @int.ShouldNot();
+
+            // Then
+            Assert.IsType<UintInverseValidator>(validator);
+        }
+
+        #endregion
+
         #region ushort
 
         [Fact(DisplayName = "ushort.Should()")]

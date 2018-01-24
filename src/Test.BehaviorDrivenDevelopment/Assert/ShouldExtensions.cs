@@ -223,6 +223,30 @@
 
         #endregion
 
+        #region uint
+
+        /// <summary>
+        /// Assertions for the <see cref="uint"/> data type.
+        /// </summary>
+        /// <param name="int"> The unsigned integer value to be checked. </param>
+        /// <returns> A <see cref="UintValidator"/> for specifying assertions. </returns>
+        public static UintValidator Should(this uint @int)
+        {
+            return new UintValidator(@int);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the <see cref="uint"/> data type.
+        /// </summary>
+        /// <param name="int"> The unsigned integer value to be checked. </param>
+        /// <returns> A <see cref="UintInverseValidator"/> for specifying inverse assertions. </returns>
+        public static UintInverseValidator ShouldNot(this uint @int)
+        {
+            return new UintInverseValidator(@int);
+        }
+
+        #endregion
+
         #region ushort
 
         /// <summary>
