@@ -111,6 +111,7 @@
                     if (expected != null && parameter != null && parameter.Expression is LiteralExpressionSyntax)
                     {
                         var elementType = expectedList.GetType().GetElementType();
+                        elementType = Nullable.GetUnderlyingType(elementType) ?? elementType;
                         var value = Convert.ChangeType(((LiteralExpressionSyntax)parameter.Expression).Token.Value, elementType);
                         if (!Equals(value, expectedValue))
                         {
@@ -125,7 +126,8 @@
                 var parameter = signature?.ArgumentList?.Arguments.FirstOrDefault();
                 if (!Equals(expected, default(T)) && parameter != null && parameter.Expression is LiteralExpressionSyntax)
                 {
-                    var value = Convert.ChangeType(((LiteralExpressionSyntax)parameter.Expression).Token.Value, typeof(T));
+                    var type = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
+                    var value = Convert.ChangeType(((LiteralExpressionSyntax)parameter.Expression).Token.Value, type);
                     if (!Equals(value, expected))
                     {
                         return false;
