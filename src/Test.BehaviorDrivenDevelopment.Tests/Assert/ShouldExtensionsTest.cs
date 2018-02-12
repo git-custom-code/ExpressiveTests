@@ -39,6 +39,34 @@
             Assert.IsType<BoolInverseValidator>(validator);
         }
 
+        [Fact(DisplayName = "bool?.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithNullableBooleans()
+        {
+            // Given
+            bool? boolean = true;
+
+            // When
+            var validator = boolean.Should();
+
+            // Then
+            Assert.IsType<NullableBoolValidator>(validator);
+        }
+
+        [Fact(DisplayName = "bool?.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithNullableBooleans()
+        {
+            // Given
+            bool? boolean = true;
+
+            // When
+            var validator = boolean.ShouldNot();
+
+            // Then
+            Assert.IsType<NullableBoolInverseValidator>(validator);
+        }
+
         #endregion
 
         #region byte

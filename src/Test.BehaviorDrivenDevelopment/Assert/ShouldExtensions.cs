@@ -29,6 +29,26 @@
             return new BoolInverseValidator(boolean);
         }
 
+        /// <summary>
+        /// Assertions for the nullable <see cref="bool"/> data type.
+        /// </summary>
+        /// <param name="boolean"> The nullable boolean value to be checked. </param>
+        /// <returns> A <see cref="NullableBoolValidator"/> for specifying assertions. </returns>
+        public static NullableBoolValidator Should(this bool? boolean)
+        {
+            return new NullableBoolValidator(boolean);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the nullable <see cref="bool"/> data type.
+        /// </summary>
+        /// <param name="boolean"> nullable The boolean value to be checked. </param>
+        /// <returns> A <see cref="NullableBoolInverseValidator"/> for specifying inverse assertions. </returns>
+        public static NullableBoolInverseValidator ShouldNot(this bool? boolean)
+        {
+            return new NullableBoolInverseValidator(boolean);
+        }
+
         #endregion
 
         #region byte
