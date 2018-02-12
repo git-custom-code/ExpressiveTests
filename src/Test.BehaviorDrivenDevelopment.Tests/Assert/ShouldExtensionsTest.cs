@@ -228,6 +228,34 @@
             Assert.IsType<GuidInverseValidator>(validator);
         }
 
+        [Fact(DisplayName = "guid?.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithNullableGuids()
+        {
+            // Given
+            Guid? guid = Guid.Empty;
+
+            // When
+            var validator = guid.Should();
+
+            // Then
+            Assert.IsType<NullableGuidValidator>(validator);
+        }
+
+        [Fact(DisplayName = "guid?.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithNullableGuids()
+        {
+            // Given
+            Guid? guid = Guid.Empty;
+
+            // When
+            var validator = guid.ShouldNot();
+
+            // Then
+            Assert.IsType<NullableGuidInverseValidator>(validator);
+        }
+
         #endregion
 
         #region int

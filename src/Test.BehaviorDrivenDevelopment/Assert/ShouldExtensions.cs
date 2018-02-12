@@ -171,6 +171,26 @@
             return new GuidInverseValidator(guid);
         }
 
+        /// <summary>
+        /// Assertions for the nullable <see cref="Guid"/> data type.
+        /// </summary>
+        /// <param name="guid"> The nullable guid to be checked. </param>
+        /// <returns> A <see cref="NullableGuidValidator"/> for specifying assertions. </returns>
+        public static NullableGuidValidator Should(this Guid? guid)
+        {
+            return new NullableGuidValidator(guid);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the nullable <see cref="Guid"/> data type.
+        /// </summary>
+        /// <param name="guid"> The nullable guid to be checked. </param>
+        /// <returns> A <see cref="NullableGuidInverseValidator"/> for specifying inverse assertions. </returns>
+        public static NullableGuidInverseValidator ShouldNot(this Guid? guid)
+        {
+            return new NullableGuidInverseValidator(guid);
+        }
+
         #endregion
 
         #region int
