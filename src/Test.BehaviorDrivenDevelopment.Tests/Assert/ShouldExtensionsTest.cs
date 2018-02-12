@@ -1,5 +1,6 @@
 ﻿namespace CustomCode.Test.BehaviorDrivenDevelopment.Tests
 {
+    using System;
     using Xunit;
 
     /// <summary>
@@ -193,6 +194,38 @@
 
             // Then
             Assert.IsType<FloatInverseValidator>(validator);
+        }
+
+        #endregion
+
+        #region guid
+
+        [Fact(DisplayName = "guid.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithGuids()
+        {
+            // Given
+            var guid = Guid.Empty;
+
+            // When
+            var validator = guid.Should();
+
+            // Then
+            Assert.IsType<GuidValidator>(validator);
+        }
+
+        [Fact(DisplayName = "guid.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithGuids()
+        {
+            // Given
+            var guid = Guid.Empty;
+
+            // When
+            var validator = guid.ShouldNot();
+
+            // Then
+            Assert.IsType<GuidInverseValidator>(validator);
         }
 
         #endregion

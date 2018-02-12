@@ -1,5 +1,7 @@
 ﻿namespace CustomCode.Test.BehaviorDrivenDevelopment
 {
+    using System;
+
     /// <summary>
     /// Extension methods for defining assertions on various data types.
     /// </summary>
@@ -143,6 +145,30 @@
         public static FloatInverseValidator ShouldNot(this float @float)
         {
             return new FloatInverseValidator(@float);
+        }
+
+        #endregion
+
+        #region guid
+
+        /// <summary>
+        /// Assertions for the <see cref="Guid"/> data type.
+        /// </summary>
+        /// <param name="guid"> The guid to be checked. </param>
+        /// <returns> A <see cref="GuidValidator"/> for specifying assertions. </returns>
+        public static GuidValidator Should(this Guid guid)
+        {
+            return new GuidValidator(guid);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the <see cref="Guid"/> data type.
+        /// </summary>
+        /// <param name="guid"> The guid to be checked. </param>
+        /// <returns> A <see cref="GuidInverseValidator"/> for specifying inverse assertions. </returns>
+        public static GuidInverseValidator ShouldNot(this Guid guid)
+        {
+            return new GuidInverseValidator(guid);
         }
 
         #endregion
