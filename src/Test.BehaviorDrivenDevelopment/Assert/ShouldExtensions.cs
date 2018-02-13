@@ -375,6 +375,26 @@
             return new ShortInverseValidator(@short);
         }
 
+        /// <summary>
+        /// Assertions for the nullable <see cref="short"/> data type.
+        /// </summary>
+        /// <param name="short"> The nullable short value to be checked. </param>
+        /// <returns> A <see cref="NullableShortValidator"/> for specifying assertions. </returns>
+        public static NullableShortValidator Should(this short? @short)
+        {
+            return new NullableShortValidator(@short);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the nullable <see cref="short"/> data type.
+        /// </summary>
+        /// <param name="short"> The nullable short value to be checked. </param>
+        /// <returns> A <see cref="NullableShortInverseValidator"/> for specifying inverse assertions. </returns>
+        public static NullableShortInverseValidator ShouldNot(this short? @short)
+        {
+            return new NullableShortInverseValidator(@short);
+        }
+
         #endregion
 
         #region string
