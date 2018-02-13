@@ -279,6 +279,26 @@
             return new LongInverseValidator(@long);
         }
 
+        /// <summary>
+        /// Assertions for the nullable <see cref="long"/> data type.
+        /// </summary>
+        /// <param name="long"> The nullable long value to be checked. </param>
+        /// <returns> A <see cref="NullableLongValidator"/> for specifying assertions. </returns>
+        public static NullableLongValidator Should(this long? @long)
+        {
+            return new NullableLongValidator(@long);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the nullable <see cref="long"/> data type.
+        /// </summary>
+        /// <param name="long"> The nullable long value to be checked. </param>
+        /// <returns> A <see cref="NullableLongInverseValidator"/> for specifying inverse assertions. </returns>
+        public static NullableLongInverseValidator ShouldNot(this long? @long)
+        {
+            return new NullableLongInverseValidator(@long);
+        }
+
         #endregion
 
         #region nullable

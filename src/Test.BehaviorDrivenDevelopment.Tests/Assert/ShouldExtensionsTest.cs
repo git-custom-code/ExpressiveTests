@@ -376,6 +376,34 @@
             Assert.IsType<LongInverseValidator>(validator);
         }
 
+        [Fact(DisplayName = "long?.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithNullableLongs()
+        {
+            // Given
+            long? @long = 42;
+
+            // When
+            var validator = @long.Should();
+
+            // Then
+            Assert.IsType<NullableLongValidator>(validator);
+        }
+
+        [Fact(DisplayName = "long?.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithNullableLongs()
+        {
+            // Given
+            long? @long = 42;
+
+            // When
+            var validator = @long.ShouldNot();
+
+            // Then
+            Assert.IsType<NullableLongInverseValidator>(validator);
+        }
+
         #endregion
 
         #region nullable
