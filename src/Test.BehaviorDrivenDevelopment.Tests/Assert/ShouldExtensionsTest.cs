@@ -610,6 +610,34 @@
             Assert.IsType<UshortInverseValidator>(validator);
         }
 
+        [Fact(DisplayName = "ushort?.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithNullableUShorts()
+        {
+            // Given
+            ushort? @short = 42;
+
+            // When
+            var validator = @short.Should();
+
+            // Then
+            Assert.IsType<NullableUshortValidator>(validator);
+        }
+
+        [Fact(DisplayName = "ushort?.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithNullableUShorts()
+        {
+            // Given
+            ushort? @short = 42;
+
+            // When
+            var validator = @short.ShouldNot();
+
+            // Then
+            Assert.IsType<NullableUshortInverseValidator>(validator);
+        }
+
         #endregion
     }
 }

@@ -451,6 +451,26 @@
             return new UshortInverseValidator(@short);
         }
 
+        /// <summary>
+        /// Assertions for the nullable <see cref="ushort"/> data type.
+        /// </summary>
+        /// <param name="short"> The nullable unsigned short value to be checked. </param>
+        /// <returns> A <see cref="NullableUshortValidator"/> for specifying assertions. </returns>
+        public static NullableUshortValidator Should(this ushort? @short)
+        {
+            return new NullableUshortValidator(@short);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the nullable <see cref="ushort"/> data type.
+        /// </summary>
+        /// <param name="short"> The nullable unsigned short value to be checked. </param>
+        /// <returns> A <see cref="NullableUshortInverseValidator"/> for specifying inverse assertions. </returns>
+        public static NullableUshortInverseValidator ShouldNot(this ushort? @short)
+        {
+            return new NullableUshortInverseValidator(@short);
+        }
+
         #endregion
 
         #endregion
