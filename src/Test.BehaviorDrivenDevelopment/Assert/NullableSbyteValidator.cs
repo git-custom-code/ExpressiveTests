@@ -14,7 +14,7 @@
         /// <summary>
         /// Creates a new instance of the <see cref="NullableSbyteValidator"/> type.
         /// </summary>
-        /// <param name="value"> The nullable sbyte value to be validated. </param>
+        /// <param name="value"> The nullable signed byte value to be validated. </param>
         public NullableSbyteValidator(sbyte? value)
         {
             Context = new ValidationContext<sbyte?>();
@@ -31,7 +31,7 @@
         private ValidationContext<sbyte?> Context { get; }
 
         /// <summary>
-        /// Gets the nullable sbyte value to be validated.
+        /// Gets the nullable signed byte value to be validated.
         /// </summary>
         private sbyte? Value { get; }
 
