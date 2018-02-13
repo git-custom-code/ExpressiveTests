@@ -546,6 +546,34 @@
             Assert.IsType<UintInverseValidator>(validator);
         }
 
+        [Fact(DisplayName = "uint?.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithNullableUInts()
+        {
+            // Given
+            uint? @int = 42;
+
+            // When
+            var validator = @int.Should();
+
+            // Then
+            Assert.IsType<NullableUintValidator>(validator);
+        }
+
+        [Fact(DisplayName = "uint?.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithNullableUInts()
+        {
+            // Given
+            uint? @int = 42;
+
+            // When
+            var validator = @int.ShouldNot();
+
+            // Then
+            Assert.IsType<NullableUintInverseValidator>(validator);
+        }
+
         #endregion
 
         #region ulong

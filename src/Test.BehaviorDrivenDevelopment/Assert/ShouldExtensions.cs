@@ -403,6 +403,26 @@
             return new UintInverseValidator(@int);
         }
 
+        /// <summary>
+        /// Assertions for the nullable <see cref="uint"/> data type.
+        /// </summary>
+        /// <param name="int"> The nullable unsigned integer value to be checked. </param>
+        /// <returns> A <see cref="NullableUintValidator"/> for specifying assertions. </returns>
+        public static NullableUintValidator Should(this uint? @int)
+        {
+            return new NullableUintValidator(@int);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the nullable <see cref="uint"/> data type.
+        /// </summary>
+        /// <param name="int"> The nullable unsigned integer value to be checked. </param>
+        /// <returns> A <see cref="NullableUintInverseValidator"/> for specifying inverse assertions. </returns>
+        public static NullableUintInverseValidator ShouldNot(this uint? @int)
+        {
+            return new NullableUintInverseValidator(@int);
+        }
+
         #endregion
 
         #region ulong
