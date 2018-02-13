@@ -450,6 +450,34 @@
             Assert.IsType<SbyteInverseValidator>(validator);
         }
 
+        [Fact(DisplayName = "sbyte?.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithNullableSBytes()
+        {
+            // Given
+            sbyte? @byte = 42;
+
+            // When
+            var validator = @byte.Should();
+
+            // Then
+            Assert.IsType<NullableSbyteValidator>(validator);
+        }
+
+        [Fact(DisplayName = "sbyte?.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithNullableSBytes()
+        {
+            // Given
+            sbyte? @byte = 42;
+
+            // When
+            var validator = @byte.ShouldNot();
+
+            // Then
+            Assert.IsType<NullableSbyteInverseValidator>(validator);
+        }
+
         #endregion
 
         #region short

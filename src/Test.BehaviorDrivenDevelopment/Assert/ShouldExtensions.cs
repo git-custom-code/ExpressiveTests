@@ -331,6 +331,26 @@
             return new SbyteInverseValidator(@byte);
         }
 
+        /// <summary>
+        /// Assertions for the nullable <see cref="sbyte"/> data type.
+        /// </summary>
+        /// <param name="byte"> The nullable signed byte value to be checked. </param>
+        /// <returns> A <see cref="NullableSbyteValidator"/> for specifying assertions. </returns>
+        public static NullableSbyteValidator Should(this sbyte? @byte)
+        {
+            return new NullableSbyteValidator(@byte);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the nullable <see cref="sbyte"/> data type.
+        /// </summary>
+        /// <param name="byte"> The nullable signed byte value to be checked. </param>
+        /// <returns> A <see cref="NullableSbyteInverseValidator"/> for specifying inverse assertions. </returns>
+        public static NullableSbyteInverseValidator ShouldNot(this sbyte? @byte)
+        {
+            return new NullableSbyteInverseValidator(@byte);
+        }
+
         #endregion
 
         #region short
