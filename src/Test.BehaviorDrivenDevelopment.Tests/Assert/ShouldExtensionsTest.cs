@@ -606,6 +606,34 @@
             Assert.IsType<UlongInverseValidator>(validator);
         }
 
+        [Fact(DisplayName = "ulong?.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithNullableULongs()
+        {
+            // Given
+            ulong? @long = 42;
+
+            // When
+            var validator = @long.Should();
+
+            // Then
+            Assert.IsType<NullableUlongValidator>(validator);
+        }
+
+        [Fact(DisplayName = "ulong?.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithNullableULongs()
+        {
+            // Given
+            ulong? @long = 42;
+
+            // When
+            var validator = @long.ShouldNot();
+
+            // Then
+            Assert.IsType<NullableUlongInverseValidator>(validator);
+        }
+
         #endregion
 
         #region ushort

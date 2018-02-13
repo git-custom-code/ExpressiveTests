@@ -447,6 +447,26 @@
             return new UlongInverseValidator(@long);
         }
 
+        /// <summary>
+        /// Assertions for the nullable <see cref="ulong"/> data type.
+        /// </summary>
+        /// <param name="long"> The nullable unsigned long value to be checked. </param>
+        /// <returns> A <see cref="NullableUlongValidator"/> for specifying assertions. </returns>
+        public static NullableUlongValidator Should(this ulong? @long)
+        {
+            return new NullableUlongValidator(@long);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the nullable <see cref="ulong"/> data type.
+        /// </summary>
+        /// <param name="long"> The nullable unsigned long value to be checked. </param>
+        /// <returns> A <see cref="NullableUlongInverseValidator"/> for specifying inverse assertions. </returns>
+        public static NullableUlongInverseValidator ShouldNot(this ulong? @long)
+        {
+            return new NullableUlongInverseValidator(@long);
+        }
+
         #endregion
 
         #region ushort
