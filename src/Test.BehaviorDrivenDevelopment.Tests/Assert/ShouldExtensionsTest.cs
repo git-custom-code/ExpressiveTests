@@ -316,6 +316,34 @@
             Assert.IsType<IntInverseValidator>(validator);
         }
 
+        [Fact(DisplayName = "int?.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithNullableIntegers()
+        {
+            // Given
+            int? integer = 42;
+
+            // When
+            var validator = integer.Should();
+
+            // Then
+            Assert.IsType<NullableIntValidator>(validator);
+        }
+
+        [Fact(DisplayName = "int?.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithNullableIntegers()
+        {
+            // Given
+            int? integer = 42;
+
+            // When
+            var validator = integer.ShouldNot();
+
+            // Then
+            Assert.IsType<NullableIntInverseValidator>(validator);
+        }
+
         #endregion
 
         #region long
@@ -360,7 +388,7 @@
             int? @int = null;
 
             // When
-            var intValidator = @int.Should();
+            var intValidator = @int.Should<int>();
 
             // Then
             Assert.IsType<NullableValidator<int>>(intValidator);
@@ -374,7 +402,7 @@
             int? @int = null;
 
             // When
-            var intValidator = @int.ShouldNot();
+            var intValidator = @int.ShouldNot<int>();
 
             // Then
             Assert.IsType<NullableInverseValidator<int>>(intValidator);

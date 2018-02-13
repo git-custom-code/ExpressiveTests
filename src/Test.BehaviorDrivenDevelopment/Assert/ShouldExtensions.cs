@@ -235,6 +235,26 @@
             return new IntInverseValidator(integer);
         }
 
+        /// <summary>
+        /// Assertions for the nullable <see cref="int"/> data type.
+        /// </summary>
+        /// <param name="integer"> The nullable integer value to be checked. </param>
+        /// <returns> A <see cref="NullableIntValidator"/> for specifying assertions. </returns>
+        public static NullableIntValidator Should(this int? integer)
+        {
+            return new NullableIntValidator(integer);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the nullable <see cref="int"/> data type.
+        /// </summary>
+        /// <param name="integer"> The nullable integer value to be checked. </param>
+        /// <returns> A <see cref="NullableIntInverseValidator"/> for specifying inverse assertions. </returns>
+        public static NullableIntInverseValidator ShouldNot(this int? integer)
+        {
+            return new NullableIntInverseValidator(integer);
+        }
+
         #endregion
 
         #region long
