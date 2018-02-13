@@ -100,6 +100,34 @@
             Assert.IsType<ByteInverseValidator>(validator);
         }
 
+        [Fact(DisplayName = "byte?.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithNullableBytes()
+        {
+            // Given
+            byte? @byte = 42;
+
+            // When
+            var validator = @byte.Should();
+
+            // Then
+            Assert.IsType<NullableByteValidator>(validator);
+        }
+
+        [Fact(DisplayName = "byte?.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithNullableBytes()
+        {
+            // Given
+            byte? @byte = 42;
+
+            // When
+            var validator = @byte.ShouldNot();
+
+            // Then
+            Assert.IsType<NullableByteInverseValidator>(validator);
+        }
+
         #endregion
 
         #region decimal

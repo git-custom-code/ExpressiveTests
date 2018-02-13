@@ -75,6 +75,26 @@
             return new ByteInverseValidator(@byte);
         }
 
+        /// <summary>
+        /// Assertions for the nullable <see cref="byte"/> data type.
+        /// </summary>
+        /// <param name="byte"> The nullable byte value to be checked. </param>
+        /// <returns> A <see cref="NullableByteValidator"/> for specifying assertions. </returns>
+        public static NullableByteValidator Should(this byte? @byte)
+        {
+            return new NullableByteValidator(@byte);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the nullable <see cref="byte"/> data type.
+        /// </summary>
+        /// <param name="byte"> The nullable byte value to be checked. </param>
+        /// <returns> A <see cref="NullableByteInverseValidator"/> for specifying inverse assertions. </returns>
+        public static NullableByteInverseValidator ShouldNot(this byte? @byte)
+        {
+            return new NullableByteInverseValidator(@byte);
+        }
+
         #endregion
 
         #region decimal
