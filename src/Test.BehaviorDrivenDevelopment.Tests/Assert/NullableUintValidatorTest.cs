@@ -8,7 +8,7 @@
     /// Test cases for the <see cref="NullableUintValidator"/> type.
     /// </summary>
     [UnitTest]
-    [Category("Assert", "UintValidation")]
+    [Category("Assert", "UIntValidation")]
     public sealed class NullableUintValidatorTest
     {
         #region uint?.Be()

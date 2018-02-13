@@ -8,7 +8,7 @@
     /// Test cases for the <see cref="NullableUshortValidator"/> type.
     /// </summary>
     [UnitTest]
-    [Category("Assert", "UshortValidation")]
+    [Category("Assert", "UShortValidation")]
     public sealed class NullableUshortValidatorTest
     {
         #region ushort?.Be()

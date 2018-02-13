@@ -8,7 +8,7 @@
     /// Test cases for the <see cref="NullableUintInverseValidator"/> type.
     /// </summary>
     [UnitTest]
-    [Category("Assert", "UintValidation")]
+    [Category("Assert", "UIntValidation")]
     public sealed class NullableUintInverseValidatorTest
     {
         #region uint?.NotBe()

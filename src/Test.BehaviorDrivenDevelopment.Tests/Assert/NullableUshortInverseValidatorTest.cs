@@ -8,7 +8,7 @@
     /// Test cases for the <see cref="NullableUshortInverseValidator"/> type.
     /// </summary>
     [UnitTest]
-    [Category("Assert", "UshortValidation")]
+    [Category("Assert", "UShortValidation")]
     public sealed class NullableUshortInverseValidatorTest
     {
         #region ushort?.NotBe()
