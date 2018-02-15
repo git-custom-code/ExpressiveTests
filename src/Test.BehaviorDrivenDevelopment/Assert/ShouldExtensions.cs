@@ -143,6 +143,26 @@
             return new DoubleInverseValidator(@double);
         }
 
+        /// <summary>
+        /// Assertions for the nullable <see cref="double"/> data type.
+        /// </summary>
+        /// <param name="double"> The nullable double value to be checked. </param>
+        /// <returns> A <see cref="NullableDoubleValidator"/> for specifying assertions. </returns>
+        public static NullableDoubleValidator Should(this double? @double)
+        {
+            return new NullableDoubleValidator(@double);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the nullable <see cref="double"/> data type.
+        /// </summary>
+        /// <param name="double"> The nullable double value to be checked. </param>
+        /// <returns> A <see cref="NullableDoubleInverseValidator"/> for specifying inverse assertions. </returns>
+        public static NullableDoubleInverseValidator ShouldNot(this double? @double)
+        {
+            return new NullableDoubleInverseValidator(@double);
+        }
+
         #endregion
 
         #region float

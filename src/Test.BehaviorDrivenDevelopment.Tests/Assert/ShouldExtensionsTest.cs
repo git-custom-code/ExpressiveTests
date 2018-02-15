@@ -192,6 +192,34 @@
             Assert.IsType<DoubleInverseValidator>(validator);
         }
 
+        [Fact(DisplayName = "double?.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithNullableDoubles()
+        {
+            // Given
+            double? @double = 42d;
+
+            // When
+            var validator = @double.Should();
+
+            // Then
+            Assert.IsType<NullableDoubleValidator>(validator);
+        }
+
+        [Fact(DisplayName = "double?.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithNullableDoubles()
+        {
+            // Given
+            double? @double = 42d;
+
+            // When
+            var validator = @double.ShouldNot();
+
+            // Then
+            Assert.IsType<NullableDoubleInverseValidator>(validator);
+        }
+
         #endregion
 
         #region float
