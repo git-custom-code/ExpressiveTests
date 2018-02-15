@@ -160,6 +160,34 @@
             Assert.IsType<DecimalInverseValidator>(validator);
         }
 
+        [Fact(DisplayName = "decimal?.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithNullableDecimals()
+        {
+            // Given
+            decimal? @decimal = 42m;
+
+            // When
+            var validator = @decimal.Should();
+
+            // Then
+            Assert.IsType<NullableDecimalValidator>(validator);
+        }
+
+        [Fact(DisplayName = "decimal?.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithNullableDecimals()
+        {
+            // Given
+            decimal? @decimal = 42m;
+
+            // When
+            var validator = @decimal.ShouldNot();
+
+            // Then
+            Assert.IsType<NullableDecimalInverseValidator>(validator);
+        }
+
         #endregion
 
         #region double

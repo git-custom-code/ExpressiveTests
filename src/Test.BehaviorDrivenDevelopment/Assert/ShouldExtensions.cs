@@ -119,6 +119,26 @@
             return new DecimalInverseValidator(@decimal);
         }
 
+        /// <summary>
+        /// Assertions for the nullable <see cref="decimal"/> data type.
+        /// </summary>
+        /// <param name="decimal"> The nullable decimal value to be checked. </param>
+        /// <returns> A <see cref="NullableDecimalValidator"/> for specifying assertions. </returns>
+        public static NullableDecimalValidator Should(this decimal? @decimal)
+        {
+            return new NullableDecimalValidator(@decimal);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the nullable <see cref="decimal"/> data type.
+        /// </summary>
+        /// <param name="decimal"> The nullable decimal value to be checked. </param>
+        /// <returns> A <see cref="NullableDecimalInverseValidator"/> for specifying inverse assertions. </returns>
+        public static NullableDecimalInverseValidator ShouldNot(this decimal? @decimal)
+        {
+            return new NullableDecimalInverseValidator(@decimal);
+        }
+
         #endregion
 
         #region double
