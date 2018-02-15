@@ -224,6 +224,34 @@
             Assert.IsType<FloatInverseValidator>(validator);
         }
 
+        [Fact(DisplayName = "float?.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithNullableFloats()
+        {
+            // Given
+            float? @float = 42f;
+
+            // When
+            var validator = @float.Should();
+
+            // Then
+            Assert.IsType<NullableFloatValidator>(validator);
+        }
+
+        [Fact(DisplayName = "float?.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithNullableFloats()
+        {
+            // Given
+            float? @float = 42f;
+
+            // When
+            var validator = @float.ShouldNot();
+
+            // Then
+            Assert.IsType<NullableFloatInverseValidator>(validator);
+        }
+
         #endregion
 
         #region guid

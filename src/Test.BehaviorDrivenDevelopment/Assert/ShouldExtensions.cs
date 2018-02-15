@@ -167,6 +167,26 @@
             return new FloatInverseValidator(@float);
         }
 
+        /// <summary>
+        /// Assertions for the nullable <see cref="float"/> data type.
+        /// </summary>
+        /// <param name="float"> The nullable float value to be checked. </param>
+        /// <returns> A <see cref="NullableFloatValidator"/> for specifying assertions. </returns>
+        public static NullableFloatValidator Should(this float? @float)
+        {
+            return new NullableFloatValidator(@float);
+        }
+
+        /// <summary>
+        /// Inverse assertions for the nullable <see cref="float"/> data type.
+        /// </summary>
+        /// <param name="float"> The nullable float value to be checked. </param>
+        /// <returns> A <see cref="NullableFloatInverseValidator"/> for specifying inverse assertions. </returns>
+        public static NullableFloatInverseValidator ShouldNot(this float? @float)
+        {
+            return new NullableFloatInverseValidator(@float);
+        }
+
         #endregion
 
         #region guid
