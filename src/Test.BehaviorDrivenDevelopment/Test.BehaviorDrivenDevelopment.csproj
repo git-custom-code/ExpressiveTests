@@ -6,9 +6,30 @@
     <RootNamespace>CustomCode.Test.BehaviorDrivenDevelopment</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <IsPackable>True</IsPackable>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>CustomCode</Authors>
+    <RepositoryUrl>https://github.com/git-custom-code/Test-BehaviorDrivenDevelopment</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/git-custom-code/Test-BehaviorDrivenDevelopment</PackageProjectUrl>
+    <PackageId>CustomCode.Test.BehaviorDrivenDevelopment</PackageId>
+    <PackageTags>C#, Behavior driven development</PackageTags>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netstandard1.6\CustomCode.Test.BehaviorDrivenDevelopment.xml</DocumentationFile>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.6\CustomCode.Test.BehaviorDrivenDevelopment.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
+    <Compile Include="..\Shared\SharedAssemblyVersion.cs" Link="Properties\SharedAssemblyVersion.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="LightInject" Version="5.1.1" />
@@ -16,5 +37,9 @@
     <PackageReference Include="Moq" Version="4.7.145" />
     <PackageReference Include="xunit" Version="2.3.1" />
   </ItemGroup>
+
+  <Target Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'" Name="PostBuild" AfterTargets="Pack">
+    <Exec Command="xcopy &quot;$(ProjectDir)bin\Release\*.nupkg&quot; &quot;$(SolutionDir)..\..\.nuget\packages\&quot; /Y /I" />
+  </Target>
 
 </Project>
