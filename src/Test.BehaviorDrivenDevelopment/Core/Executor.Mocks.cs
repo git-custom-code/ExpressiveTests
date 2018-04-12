@@ -4,6 +4,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Executes a method (to be tested) on an instance of type <typeparamref name="T"/>.
@@ -51,10 +52,23 @@
         }
 
         /// <summary>
+        /// Define the asynchronous (void) method under test via the <paramref name="actAsync"/> delegate.
+        /// </summary>
+        /// <param name="actAsync"> A delegate that executes the asynchronous (void) method under test. </param>
+        /// <returns>
+        /// A <see cref="ValidatorAsyncWithMocks{T}"/> that can be used to execute any number of assertions
+        /// on the type under test.
+        /// </returns>
+        public ValidatorAsyncWithMocks<T> When(Func<T, Task> actAsync)
+        {
+            return new ValidatorAsyncWithMocks<T>(actAsync, Arrangements);
+        }
+
+        /// <summary>
         /// Define the (non-void) method under test via the <paramref name="act"/> delegate.
         /// </summary>
         /// <typeparam name="TResult"> The type of the result of the method under test. </typeparam>
-        /// <param name="act"> A delegate that executes the (void) method under test. </param>
+        /// <param name="act"> A delegate that executes the (non-void) method under test. </param>
         /// <returns>
         /// A <see cref="ValidatorWithMocks{T, TResult}"/> that can be used to execute any number of
         /// assertions on the method result.
@@ -62,6 +76,20 @@
         public ValidatorWithMocks<T, TResult> When<TResult>(Func<T, TResult> act)
         {
             return new ValidatorWithMocks<T, TResult>(act, Arrangements);
+        }
+
+        /// <summary>
+        /// Define the asynchronous (non-void) method under test via the <paramref name="actAsync"/> delegate.
+        /// </summary>
+        /// <typeparam name="TResult"> The type of the result of the asynchronous method under test. </typeparam>
+        /// <param name="actAsync"> A delegate that executes the asynchronous (non-void) method under test. </param>
+        /// <returns>
+        /// A <see cref="ValidatorAsyncWithMocks{T, TResult}"/> that can be used to execute any number of
+        /// assertions on the asynchronous method result.
+        /// </returns>
+        public ValidatorAsyncWithMocks<T, TResult> When<TResult>(Func<T, Task<TResult>> actAsync)
+        {
+            return new ValidatorAsyncWithMocks<T, TResult>(actAsync, Arrangements);
         }
 
         /// <summary>
