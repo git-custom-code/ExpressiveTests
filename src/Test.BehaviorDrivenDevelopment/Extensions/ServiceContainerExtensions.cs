@@ -39,7 +39,24 @@
             var instanciatedMocks = new HashSet<Mock>();
             foreach (var dependency in FindDependenciesFor(typeUnderTest))
             {
-                var mockType = typeof(Mock<>).MakeGenericType(dependency);
+                var serviceType = dependency;
+                Type mockType;
+
+                if (dependency.GetTypeInfo().IsGenericType &&
+                    dependency.GetTypeInfo().GetGenericTypeDefinition() == typeof(IEnumerable<>))
+                {
+                    serviceType = dependency.GenericTypeArguments[0];
+                    mockType = typeof(Mock<>).MakeGenericType(serviceType);
+                    if (!arrangments.ContainsKey(mockType))
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    mockType = typeof(Mock<>).MakeGenericType(serviceType);
+                }
+                
                 var mockedDependency = new ServiceRegistration();
                 mockedDependency.FactoryExpression = (Func<IServiceFactory, object>)((IServiceFactory f) =>
                     {
@@ -56,7 +73,7 @@
                         return mock.Object;
                     });
                 mockedDependency.ServiceName = string.Empty;
-                mockedDependency.ServiceType = dependency;
+                mockedDependency.ServiceType = serviceType;
 
                 iocContainer.Register(mockedDependency);
             }
