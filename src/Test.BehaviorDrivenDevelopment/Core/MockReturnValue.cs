@@ -13,7 +13,6 @@
     /// <typeparam name="TMock"> The type of the mock object. </typeparam>
     /// <typeparam name="TResult"> The result value of the mock object's arranged method call. </typeparam>
     public struct MockReturnValue<T, TMock, TResult> : IFluentInterface
-        where T : class
         where TMock : class
     {
         #region Dependencies

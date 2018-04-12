@@ -12,7 +12,7 @@
     /// </summary>
     /// <typeparam name="T"> The type under test. </typeparam>
     /// <typeparam name="TResult"> The type of the result of the method under test. </typeparam>
-    public struct ValidatorWithMocks<T, TResult> : IFluentInterface where T : class
+    public struct ValidatorWithMocks<T, TResult> : IFluentInterface
     {
         #region Dependencies
 

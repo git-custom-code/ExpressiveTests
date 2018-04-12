@@ -6,7 +6,7 @@
     /// <summary>
     /// Define any number of assertions on an instance of a created type (when testing the constructor call).
     /// </summary>
-    public struct ValidatorForConstructor<T> : IFluentInterface where T : class
+    public struct ValidatorForConstructor<T> : IFluentInterface
     {
         #region Dependencies
 

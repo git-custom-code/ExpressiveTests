@@ -32,7 +32,7 @@
         /// An <see cref="Executor{T}"/> that can be used to execute a method (to be tested)
         /// on an instance of type <typeparamref name="T"/>.
         /// </returns>
-        public Executor<T> Given<T>(Func<T> arrange) where T : class
+        public Executor<T> Given<T>(Func<T> arrange)
         {
             return new Executor<T>(arrange);
         }
@@ -46,7 +46,7 @@
         /// An <see cref="ExecutorWithMocks{T}"/> that can be used to arrange mock objects and/or execute a method
         /// (to be tested) on an instance of type <typeparamref name="T"/>.
         /// </returns>
-        public ExecutorWithMocks<T> Given<T>() where T : class
+        public ExecutorWithMocks<T> Given<T>()
         {
             return new ExecutorWithMocks<T>(null);
         }

@@ -9,7 +9,7 @@
     /// Executes a method (to be tested) on an instance of type <typeparamref name="T"/>.
     /// </summary>
     /// <typeparam name="T"> The type under test. </typeparam>
-    public struct ExecutorWithMocks<T> : IFluentInterface where T : class
+    public struct ExecutorWithMocks<T> : IFluentInterface
     {
         #region Dependencies
 
