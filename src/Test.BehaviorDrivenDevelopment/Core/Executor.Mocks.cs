@@ -113,6 +113,27 @@
             return new MockReturnValue<T, TMock, TResult>(arrange, Arrangements);
         }
 
+        /// <summary>
+        /// Define an arrangment for a method that should be called on the specified mock object.
+        /// </summary>
+        /// <typeparam name="TMock"> The type of the mock object. </typeparam>
+        /// <typeparam name="TResult">
+        /// The result of the method of the mock object that should return a specific value.
+        /// </typeparam>
+        /// <param name="arrangeAsync">
+        /// A delegate that can be used to define the type of a mock object as well as a method that should return a
+        /// specific value.
+        /// </param>
+        /// <returns>
+        /// A <see cref="MockReturnValue{T, TMock, TResult}"/> that can be used to specify the return value of the
+        /// arranged mock object's method.
+        /// </returns>
+        public MockAsyncReturnValue<T, TMock, TResult> With<TMock, TResult>(Expression<Func<TMock, Task<TResult>>> arrangeAsync)
+            where TMock : class
+        {
+            return new MockAsyncReturnValue<T, TMock, TResult>(arrangeAsync, Arrangements);
+        }
+
         #endregion
     }
 }

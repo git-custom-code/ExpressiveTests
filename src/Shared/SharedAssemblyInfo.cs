@@ -4,7 +4,7 @@ using System.Reflection;
 
 [assembly: AssemblyCompany("CustomCode")]
 [assembly: AssemblyCopyright("Copyright © 2018")]
-[assembly: AssemblyTrademark("C# behavior driven development")]
+[assembly: AssemblyTrademark("Behavior driven development implementation for c#.")]
 
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]

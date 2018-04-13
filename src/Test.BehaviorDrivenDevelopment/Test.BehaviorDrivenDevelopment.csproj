@@ -2,28 +2,35 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
-    <AssemblyName>CustomCode.Test.BehaviorDrivenDevelopment</AssemblyName>
+    <AssemblyName>Test.BehaviorDrivenDevelopment</AssemblyName>
     <RootNamespace>CustomCode.Test.BehaviorDrivenDevelopment</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <PropertyGroup>
     <IsPackable>True</IsPackable>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    
+    <PackageId>CustomCode.Test.BehaviorDrivenDevelopment</PackageId>
+    <PackageVersion>1.1.2-alpha.2</PackageVersion>
+    <Title>Behavior driven development implementation for c#.</Title>
     <Authors>CustomCode</Authors>
+    <Company>CustomCode</Company>
+    <Description>Behavior driven development implementation using xunit, lightinject and moq for c#.</Description>
+    <Copyright>Copyright @ 2018</Copyright>
+    <PackageLicenseUrl>https://github.com/git-custom-code/Test-BehaviorDrivenDevelopment/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/git-custom-code/Test-BehaviorDrivenDevelopment</PackageProjectUrl>
+    <PackageTags>C#, XUnit, LightInject, Moq, Behavior driven development</PackageTags>
     <RepositoryUrl>https://github.com/git-custom-code/Test-BehaviorDrivenDevelopment</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageProjectUrl>https://github.com/git-custom-code/Test-BehaviorDrivenDevelopment</PackageProjectUrl>
-    <PackageId>CustomCode.Test.BehaviorDrivenDevelopment</PackageId>
-    <PackageTags>C#, Behavior driven development</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netstandard1.6\CustomCode.Test.BehaviorDrivenDevelopment.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netstandard1.6\Test.BehaviorDrivenDevelopment.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard1.6\CustomCode.Test.BehaviorDrivenDevelopment.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netstandard1.6\Test.BehaviorDrivenDevelopment.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
