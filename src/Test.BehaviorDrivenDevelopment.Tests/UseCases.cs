@@ -11,7 +11,11 @@ namespace CustomCode.Test.BehaviorDrivenDevelopment.Tests
         {
             int DoSomething(int a, int b);
 
+            int DoSomething(IBar bar);
+
             void DoSomethingWithoutResult(int a, int b);
+
+            void DoSomethingWithoutResult(IBar bar);
 
             int Count { get; }
         }
@@ -38,9 +42,20 @@ namespace CustomCode.Test.BehaviorDrivenDevelopment.Tests
                 return Count;
             }
 
+            public int DoSomething(IBar bar)
+            {
+                Count = bar.DoSomethingElse(1, 2);
+                return Count;
+            }
+
             public void DoSomethingWithoutResult(int a, int b)
             {
                 Count = Bar.DoSomethingElse(a, b);
+            }
+
+            public void DoSomethingWithoutResult(IBar bar)
+            {
+                Count = bar.DoSomethingElse(1, 2);
             }
         }
 

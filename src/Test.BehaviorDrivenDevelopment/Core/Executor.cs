@@ -35,6 +35,23 @@
         #region Logic
 
         /// <summary>
+        /// Define a delegate that creates an additional parameter of type <typeparamref name="TFirstParameter"/> that
+        /// is needed by the method under test.
+        /// </summary>
+        /// <typeparam name="TFirstParameter"> The type of the first parameter needed for the method under test. </typeparam>
+        /// <param name="arrangeFirstParameter"> A delegate that creates the needed first parameter instance. </param>
+        /// <returns>
+        /// An <see cref="Executor{T, TFirstParameter}"/> that can be used to execute a method (to be tested)
+        /// on an instance of type <typeparamref name="T"/> that needs an additional parameter of type
+        /// <typeparamref name="TFirstParameter"/>.
+        /// </returns>
+        public Executor<T, TFirstParameter> Also<TFirstParameter>(Func<TFirstParameter> arrangeFirstParameter)
+            where TFirstParameter : class
+        {
+            return new Executor<T, TFirstParameter>(Arrange, arrangeFirstParameter);
+        }
+
+        /// <summary>
         /// Define the (void) method under test via the <paramref name="act"/> delegate.
         /// </summary>
         /// <param name="act"> A delegate that executes the (void) method under test. </param>
