@@ -10,7 +10,7 @@
     /// If you group your tests by trait in the test explorer, tests marked this way will be
     /// displayed under the Type [Smoke Test].
     /// </remarks>
-    [TraitDiscoverer("CustomCode.Test.BehaviorDrivenDevelopment.SmokeTestDiscoverer", "CustomCode.Test.BehaviorDrivenDevelopment")]
+    [TraitDiscoverer("CustomCode.Test.BehaviorDrivenDevelopment.SmokeTestDiscoverer", "Test.BehaviorDrivenDevelopment")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
     public sealed class SmokeTestAttribute : Attribute, ITraitAttribute
     { }

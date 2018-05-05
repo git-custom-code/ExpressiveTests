@@ -10,7 +10,7 @@
     /// If you group your tests by trait in the test explorer, tests marked this way will be
     /// displayed under the Type [Integration Test].
     /// </remarks>
-    [TraitDiscoverer("CustomCode.Test.BehaviorDrivenDevelopment.IntegrationTestDiscoverer", "CustomCode.Test.BehaviorDrivenDevelopment")]
+    [TraitDiscoverer("CustomCode.Test.BehaviorDrivenDevelopment.IntegrationTestDiscoverer", "Test.BehaviorDrivenDevelopment")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
     public sealed class IntegrationTestAttribute : Attribute, ITraitAttribute
     { }

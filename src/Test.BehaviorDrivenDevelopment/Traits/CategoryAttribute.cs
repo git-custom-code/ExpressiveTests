@@ -10,7 +10,7 @@
     /// If you group your tests by trait in the test explorer, tests marked this way will be
     /// displayed under the Category ["your category here"].
     /// </remarks>
-    [TraitDiscoverer("CustomCode.Test.BehaviorDrivenDevelopment.CategoryDiscoverer", "CustomCode.Test.BehaviorDrivenDevelopment")]
+    [TraitDiscoverer("CustomCode.Test.BehaviorDrivenDevelopment.CategoryDiscoverer", "Test.BehaviorDrivenDevelopment")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
     public sealed class CategoryAttribute : Attribute, ITraitAttribute
     {

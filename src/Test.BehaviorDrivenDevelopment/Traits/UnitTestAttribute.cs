@@ -10,7 +10,7 @@
     /// If you group your tests by trait in the test explorer, tests marked this way will be
     /// displayed under the Type [Unit Test].
     /// </remarks>
-    [TraitDiscoverer("CustomCode.Test.BehaviorDrivenDevelopment.UnitTestDiscoverer", "CustomCode.Test.BehaviorDrivenDevelopment")]
+    [TraitDiscoverer("CustomCode.Test.BehaviorDrivenDevelopment.UnitTestDiscoverer", "Test.BehaviorDrivenDevelopment")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
     public sealed class UnitTestAttribute : Attribute, ITraitAttribute
     { }
