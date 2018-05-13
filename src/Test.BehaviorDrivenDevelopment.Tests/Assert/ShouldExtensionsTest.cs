@@ -1,5 +1,6 @@
 ﻿namespace CustomCode.Test.BehaviorDrivenDevelopment.Tests
 {
+    using Enum;
     using System;
     using Xunit;
 
@@ -249,6 +250,67 @@
         }
 
         #endregion
+
+        #region double
+
+        [Fact(DisplayName = "enum.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithEnums()
+        {
+            // Given
+            var @enum = StringComparison.Ordinal;
+
+            // When
+            var validator = @enum.Should();
+
+            // Then
+            Assert.IsType<EnumValidator<StringComparison>>(validator);
+        }
+
+        [Fact(DisplayName = "enum.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithEnums()
+        {
+            // Given
+            var @enum = StringComparison.Ordinal;
+
+            // When
+            var validator = @enum.ShouldNot();
+
+            // Then
+            Assert.IsType<EnumInverseValidator<StringComparison>>(validator);
+        }
+
+        //[Fact(DisplayName = "double?.Should()")]
+        //[Category("Should")]
+        //public void UseShouldExtensionWithNullableDoubles()
+        //{
+        //    // Given
+        //    double? @double = 42d;
+
+        //    // When
+        //    var validator = @double.Should();
+
+        //    // Then
+        //    Assert.IsType<NullableDoubleValidator>(validator);
+        //}
+
+        //[Fact(DisplayName = "double?.ShouldNot()")]
+        //[Category("ShouldNot")]
+        //public void UseShouldNotExtensionWithNullableDoubles()
+        //{
+        //    // Given
+        //    double? @double = 42d;
+
+        //    // When
+        //    var validator = @double.ShouldNot();
+
+        //    // Then
+        //    Assert.IsType<NullableDoubleInverseValidator>(validator);
+        //}
+
+        #endregion
+
 
         #region float
 
