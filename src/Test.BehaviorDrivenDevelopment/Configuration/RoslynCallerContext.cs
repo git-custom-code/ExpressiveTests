@@ -74,7 +74,8 @@
                     var callerNameBuilder = new StringBuilder();
                     var identifier = nodeWithValidatorCall
                         .DescendantNodes()
-                        .OfType<IdentifierNameSyntax>();
+                        .OfType<IdentifierNameSyntax>()
+                        .Where(i => i?.Parent?.Parent?.IsKind(SyntaxKind.GenericName) != true);
                     foreach (var i in identifier)
                     {
                         if (validationMethodName != i.Identifier.Text &&

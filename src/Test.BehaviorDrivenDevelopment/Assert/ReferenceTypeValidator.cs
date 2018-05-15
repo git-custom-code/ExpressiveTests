@@ -54,6 +54,24 @@
             }
         }
 
+        /// <summary>
+        /// Assert that a given reference type is of the specified type.
+        /// </summary>
+        /// <typeparam name="TType"> The reference type's expected type. </typeparam>
+        /// <param name="because"> A reason why this assertion needs to be correct. </param>
+        /// <param name="testMethodName"> Supplied by the compiler. </param>
+        /// <param name="lineNumber"> Supplied by the compiler. </param>
+        /// <param name="sourceCodePath"> Supplied by the compiler. </param>
+        public void BeOfType<TType>(string because = null,
+            [CallerMemberName] string testMethodName = null, [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string sourceCodePath = null)
+        {
+            if (Value?.GetType() != typeof(TType))
+            {
+                var context = Context.GetCallerContext(testMethodName, null, sourceCodePath, lineNumber);
+                throw Context.GetFormattedException(testMethodName, context, $"\"{Value?.GetType()?.Name ?? "undefined"}\"", $"to be of type \"{typeof(TType).Name}\"", because);
+            }
+        }
+
         #endregion
     }
 }
