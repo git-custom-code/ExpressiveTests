@@ -54,30 +54,36 @@
         /// <param name="assert">
         /// A delegate that is used to execute any number of assertions on the type under test.
         /// </param>
-        public async void Then(Action<T> assert)
+        public void Then(Action<T> assert)
         {
-            try
+            var validator = this;
+            async Task ThenAsync()
             {
-                // given
-                var container = new ServiceContainer();
-                var instanciatedMocks = container.RegisterWithMocks(typeof(T), Arrangements);
-                var typeUnderTest = container.GetInstance<T>();
-
-                // when
-                await ActAsync(typeUnderTest);
-
-                // then
-                assert(typeUnderTest);
-                foreach (var mock in instanciatedMocks)
+                try
                 {
-                    mock.VerifyAll();
+                    // given
+                    var container = new ServiceContainer();
+                    var instanciatedMocks = container.RegisterWithMocks(typeof(T), validator.Arrangements);
+                    var typeUnderTest = container.GetInstance<T>();
+
+                    // when
+                    await validator.ActAsync(typeUnderTest);
+
+                    // then
+                    assert(typeUnderTest);
+                    foreach (var mock in instanciatedMocks)
+                    {
+                        mock.VerifyAll();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                    // TODO
                 }
             }
-            catch (Exception e)
-            {
-                throw e;
-                // TODO
-            }
+
+            Task.WaitAll(Task.Run(ThenAsync));
         }
 
         /// <summary>
@@ -88,57 +94,63 @@
         /// <param name="assert">
         /// A delegate that is used to execute any number of assertions on the thrown exception of the asynchronous method under test.
         /// </param>
-        public async void ThenThrow<TException>(Action<TException> assert = null)
+        public void ThenThrow<TException>(Action<TException> assert = null)
             where TException : Exception
         {
-            try
+            var validator = this;
+            async Task ThenThrowAsync()
             {
-                // given
-                var container = new ServiceContainer();
-                var instanciatedMocks = container.RegisterWithMocks(typeof(T), Arrangements);
-                var typeUnderTest = container.GetInstance<T>();
-
-                // when
                 try
                 {
-                    await ActAsync(typeUnderTest);
+                    // given
+                    var container = new ServiceContainer();
+                    var instanciatedMocks = container.RegisterWithMocks(typeof(T), validator.Arrangements);
+                    var typeUnderTest = container.GetInstance<T>();
 
-                    var rn = Environment.NewLine;
-                    var message = $"{rn}Expected exception of type {typeof(TException).Name}{rn}but no exception was thrown";
-                    throw new XunitException(message);
+                    // when
+                    try
+                    {
+                        await validator.ActAsync(typeUnderTest);
+
+                        var rn = Environment.NewLine;
+                        var message = $"{rn}Expected exception of type {typeof(TException).Name}{rn}but no exception was thrown";
+                        throw new XunitException(message);
+                    }
+                    catch (XunitException)
+                    {
+                        throw;
+                    }
+                    catch (TException exception)
+                    {
+                        // then
+                        assert?.Invoke(exception);
+                    }
+                    catch (Exception exception)
+                    {
+                        var rn = Environment.NewLine;
+                        var message = $"{rn}Expected exception of type {typeof(TException).Name}{rn}but instead caught {exception.GetType().Name}";
+                        throw new XunitException(message);
+                    }
+                    finally
+                    {
+                        foreach (var mock in instanciatedMocks)
+                        {
+                            mock.VerifyAll();
+                        }
+                    }
                 }
                 catch (XunitException)
                 {
                     throw;
                 }
-                catch (TException exception)
+                catch (Exception e)
                 {
-                    // then
-                    assert?.Invoke(exception);
-                }
-                catch (Exception exception)
-                {
-                    var rn = Environment.NewLine;
-                    var message = $"{rn}Expected exception of type {typeof(TException).Name}{rn}but instead caught {exception.GetType().Name}";
-                    throw new XunitException(message);
-                }
-                finally
-                {
-                    foreach (var mock in instanciatedMocks)
-                    {
-                        mock.VerifyAll();
-                    }
+                    // TODO
+                    throw e;
                 }
             }
-            catch (XunitException)
-            {
-                throw;
-            }
-            catch (Exception e)
-            {
-                // TODO
-                throw e;
-            }
+
+            Task.WaitAll(Task.Run(ThenThrowAsync));
         }
 
         #endregion

@@ -122,13 +122,6 @@
         /// <param name="assert">
         /// A delegate that is used to execute any number of assertions on the result of the method under test.
         /// </param>
-        /// <remarks>
-        /// Normally in production code you shouldn't use async void.
-        /// It is used here because:
-        /// a) tests become more readable (from a bdd point of view) if you don't have to worry about async/await
-        /// b) xunit handles async void (see https://github.com/xunit/xunit/blob/master/src/xunit.execution/Sdk/AsyncTestSyncContext.cs)
-        ///    methods and guarantess that the fire and forget method will run until completion.
-        /// </remarks>
         public void Then(Action<IEnumerable<Diagnostic>> assert)
         {
             var validator = this;
@@ -156,7 +149,7 @@
                 }
             };
 
-            Task.WaitAll(Task.Run(() => ThenAsync()));
+            Task.WaitAll(Task.Run(ThenAsync));
         }
 
         #endregion

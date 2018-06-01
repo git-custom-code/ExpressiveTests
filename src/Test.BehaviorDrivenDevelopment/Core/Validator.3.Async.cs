@@ -12,7 +12,7 @@
     /// <typeparam name="TSecond"> The type of the second parameter needed for the asynchronous method under test. </typeparam>
     /// <typeparam name="TResult"> The type of the result of the asynchronous method under test. </typeparam>
     public struct ValidatorWithTwoParametersAsync<T, TFirst, TSecond, TResult> : IFluentInterface
-        where TFirst: class
+        where TFirst : class
         where TSecond : class
     {
         #region Dependencies
@@ -71,26 +71,32 @@
         /// <param name="assert">
         /// A delegate that is used to execute any number of assertions on the result of the asynchronous method under test.
         /// </param>
-        public async void Then(Action<TResult> assert)
+        public void Then(Action<TResult> assert)
         {
-            try
+            var validator = this;
+            async Task ThenAsync()
             {
-                // given
-                var typeUnderTest = Arrange();
-                var firstParameter = ArrangeFirstParameter();
-                var secondParameter = ArrangeSecondParameter();
+                try
+                {
+                    // given
+                    var typeUnderTest = validator.Arrange();
+                    var firstParameter = validator.ArrangeFirstParameter();
+                    var secondParameter = validator.ArrangeSecondParameter();
 
-                // when
-                var result = await ActAsync(typeUnderTest, firstParameter, secondParameter);
+                    // when
+                    var result = await validator.ActAsync(typeUnderTest, firstParameter, secondParameter);
 
-                // then
-                assert(result);
+                    // then
+                    assert(result);
+                }
+                catch (Exception e)
+                {
+                    // TODO
+                    throw e;
+                }
             }
-            catch (Exception e)
-            {
-                // TODO
-                throw e;
-            }
+
+            Task.WaitAll(Task.Run(ThenAsync));
         }
 
         /// <summary>
@@ -101,50 +107,56 @@
         /// <param name="assert">
         /// A delegate that is used to execute any number of assertions on the thrown exception of the asynchronous method under test.
         /// </param>
-        public async void ThenThrow<TException>(Action<TException> assert = null)
+        public void ThenThrow<TException>(Action<TException> assert = null)
             where TException : Exception
         {
-            try
+            var validator = this;
+            async Task ThenThrowAsync()
             {
-                // given
-                var typeUnderTest = Arrange();
-                var firstParameter = ArrangeFirstParameter();
-                var secondParameter = ArrangeSecondParameter();
-
-                // when
                 try
                 {
-                    await ActAsync(typeUnderTest, firstParameter, secondParameter);
+                    // given
+                    var typeUnderTest = validator.Arrange();
+                    var firstParameter = validator.ArrangeFirstParameter();
+                    var secondParameter = validator.ArrangeSecondParameter();
 
-                    var rn = Environment.NewLine;
-                    var message = $"{rn}Expected exception of type {typeof(TException).Name}{rn}but no exception was thrown";
-                    throw new XunitException(message);
+                    // when
+                    try
+                    {
+                        await validator.ActAsync(typeUnderTest, firstParameter, secondParameter);
+
+                        var rn = Environment.NewLine;
+                        var message = $"{rn}Expected exception of type {typeof(TException).Name}{rn}but no exception was thrown";
+                        throw new XunitException(message);
+                    }
+                    catch (XunitException)
+                    {
+                        throw;
+                    }
+                    catch (TException exception)
+                    {
+                        // then
+                        assert?.Invoke(exception);
+                    }
+                    catch (Exception exception)
+                    {
+                        var rn = Environment.NewLine;
+                        var message = $"{rn}Expected exception of type {typeof(TException).Name}{rn}but instead caught {exception.GetType().Name}";
+                        throw new XunitException(message);
+                    }
                 }
                 catch (XunitException)
                 {
                     throw;
                 }
-                catch (TException exception)
+                catch (Exception e)
                 {
-                    // then
-                    assert?.Invoke(exception);
-                }
-                catch (Exception exception)
-                {
-                    var rn = Environment.NewLine;
-                    var message = $"{rn}Expected exception of type {typeof(TException).Name}{rn}but instead caught {exception.GetType().Name}";
-                    throw new XunitException(message);
+                    // TODO
+                    throw e;
                 }
             }
-            catch (XunitException)
-            {
-                throw;
-            }
-            catch (Exception e)
-            {
-                // TODO
-                throw e;
-            }
+
+            Task.WaitAll(Task.Run(ThenThrowAsync));
         }
 
         #endregion
