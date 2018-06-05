@@ -185,6 +185,38 @@
 
         #endregion
 
+        #region enum
+
+        /// <summary>
+        /// Assertions for <see cref="Enum"/> data types.
+        /// </summary>
+        /// <param name="enum"> The enumeration value to be checked. </param>
+        /// <returns> A <see cref="EnumValidator{T}"/> for specifying assertions. </returns>
+        /// <remarks>
+        /// Note that those will require c# 7.3 language version in order to work.
+        /// </remarks>
+        public static EnumValidator<T> Should<T>(this T @enum)
+            where T : System.Enum
+        {
+            return new EnumValidator<T>(@enum);
+        }
+
+        /// <summary>
+        /// Inverse assertions for <see cref="Enum"/> data types.
+        /// </summary>
+        /// <param name="enum"> The enumeration value to be checked. </param>
+        /// <returns> A <see cref="EnumInverseValidator{T}"/> for specifying inverse assertions. </returns>
+        /// <remarks>
+        /// Note that those will require c# 7.3 language version in order to work.
+        /// </remarks>
+        public static EnumInverseValidator<T> ShouldNot<T>(this T @enum)
+            where T : System.Enum
+        {
+            return new EnumInverseValidator<T>(@enum);
+        }
+
+        #endregion
+
         #region float
 
         /// <summary>
@@ -385,26 +417,26 @@
 
         #endregion
 
-        #region reference type
+        #region object
 
         /// <summary>
-        /// Assertions for reference data types.
+        /// Assertions for object data types.
         /// </summary>
-        /// <param name="referenceType"> The reference type value to be checked. </param>
-        /// <returns> A <see cref="ReferenceTypeValidator{T}"/> for specifying assertions. </returns>
-        public static ReferenceTypeValidator<T> Should<T>(this T referenceType) where T : class
+        /// <param name="object"> The object value to be checked. </param>
+        /// <returns> A <see cref="ObjectValidator"/> for specifying assertions. </returns>
+        public static ObjectValidator Should(this object @object)
         {
-            return new ReferenceTypeValidator<T>(referenceType);
+            return new ObjectValidator(@object);
         }
 
         /// <summary>
-        /// Inverse assertions for reference data types.
+        /// Inverse assertions for object data types.
         /// </summary>
-        /// <param name="referenceType"> The reference type value to be checked. </param>
-        /// <returns> A <see cref="ReferenceTypeInverseValidator{T}"/> for specifying inverse assertions. </returns>
-        public static ReferenceTypeInverseValidator<T> ShouldNot<T>(this T referenceType) where T : class
+        /// <param name="object"> The object value to be checked. </param>
+        /// <returns> A <see cref="ObjectInverseValidator"/> for specifying inverse assertions. </returns>
+        public static ObjectInverseValidator ShouldNot(this object @object)
         {
-            return new ReferenceTypeInverseValidator<T>(referenceType);
+            return new ObjectInverseValidator(@object);
         }
 
         #endregion

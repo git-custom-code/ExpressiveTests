@@ -5,19 +5,19 @@
     using Xunit.Sdk;
 
     /// <summary>
-    /// Test cases for the <see cref="ReferenceTypeInverseValidator{T}"/> type.
+    /// Test cases for the <see cref="ObjectInverseValidator"/> type.
     /// </summary>
     [UnitTest]
-    [Category("Assert", "ReferenceTypeValidation")]
-    public sealed class ReferenceTypeInverseValidatorTest
+    [Category("Assert", "ObjectValidation")]
+    public sealed class ObjectInverseValidatorTest
     {
-        #region ReferenceType.BeNull()
+        #region Object.BeNull()
 
         [Fact(DisplayName = "((object)o).NotBeNull()")]
-        public void ValidateReferenceTypeNotToBeNull()
+        public void ValidateObjectNotToBeNull()
         {
             // Given
-            var validator = new ReferenceTypeInverseValidator<object>(new object());
+            var validator = new ObjectInverseValidator(new object());
 
             // When
             validator.BeNull();
@@ -27,10 +27,10 @@
         }
 
         [Fact(DisplayName = "((object)null).NotBeNull()")]
-        public void ValidateReferenceTypeNotToBeNullViolated()
+        public void ValidateObjectNotToBeNullViolated()
         {
             // Given
-            var validator = new ReferenceTypeInverseValidator<object>(null);
+            var validator = new ObjectInverseValidator(null);
 
             // When
             var exception = Assert.Throws<XunitException>(() => validator.BeNull());
@@ -44,10 +44,10 @@
         }
 
         [Fact(DisplayName = "((object)null).NotBeNull(reason)")]
-        public void ValidateReferenceTypeNotToBeNullWithReasonViolated()
+        public void ValidateObjectNotToBeNullWithReasonViolated()
         {
             // Given
-            var validator = new ReferenceTypeInverseValidator<object>(null);
+            var validator = new ObjectInverseValidator(null);
 
             // When
             var exception = Assert.Throws<XunitException>(() => validator.BeNull("that's the bottom line"));
@@ -62,13 +62,13 @@
 
         #endregion
 
-        #region ReferenceType.BeOfType()
+        #region Object.BeOfType()
 
         [Fact(DisplayName = "((object)o).NotBeOfType<T>()")]
-        public void ValidateReferenceTypeNotToBeOfType()
+        public void ValidateObjectNotToBeOfType()
         {
             // Given
-            var validator = new ReferenceTypeInverseValidator<object>(42);
+            var validator = new ObjectInverseValidator(42);
 
             // When
             validator.BeOfType<String>();
@@ -78,10 +78,10 @@
         }
 
         [Fact(DisplayName = "((object)o).NotBeOfType<TOther>()")]
-        public void ValidateReferenceTypeNotToBeOfTypeViolated()
+        public void ValidateObjectNotToBeOfTypeViolated()
         {
             // Given
-            var validator = new ReferenceTypeInverseValidator<object>(42);
+            var validator = new ObjectInverseValidator(42);
 
             // When
             var exception = Assert.Throws<XunitException>(() => validator.BeOfType<Int32>());
@@ -95,10 +95,10 @@
         }
 
         [Fact(DisplayName = "((object)o).NotBeOfType<TOther>(reason)")]
-        public void ValidateReferenceTypeNotToBeOfTypeWithReasonViolated()
+        public void ValidateObjectNotToBeOfTypeWithReasonViolated()
         {
             // Given
-            var validator = new ReferenceTypeInverseValidator<object>(42);
+            var validator = new ObjectInverseValidator(42);
 
             // When
             var exception = Assert.Throws<XunitException>(() => validator.BeOfType<Int32>("that's the bottom line"));

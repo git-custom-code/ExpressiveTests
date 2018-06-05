@@ -3,19 +3,19 @@
     using System.Runtime.CompilerServices;
 
     /// <summary>
-    /// A validator that defines assertions for reference data types.
+    /// A validator that defines assertions for <see cref="object"/> data types.
     /// </summary>
-    public struct ReferenceTypeValidator<T> : IFluentInterface where T : class
+    public struct ObjectValidator : IFluentInterface
     {
         #region Dependencies
 
         /// <summary>
-        /// Creates a new instance of the <see cref="ReferenceTypeValidator{T}"/> type.
+        /// Creates a new instance of the <see cref="ObjectValidator"/> type.
         /// </summary>
-        /// <param name="value"> The reference type to be validated. </param>
-        public ReferenceTypeValidator(T value)
+        /// <param name="value"> The object to be validated. </param>
+        public ObjectValidator(object value)
         {
-            Context = new ValidationContext<T>();
+            Context = new ValidationContext<object>();
             Value = value;
         }
 
@@ -26,19 +26,19 @@
         /// <summary>
         /// Gets the validation context.
         /// </summary>
-        private ValidationContext<T> Context { get; }
+        private ValidationContext<object> Context { get; }
 
         /// <summary>
-        /// Gets the reference type value to be validated.
+        /// Gets the object value to be validated.
         /// </summary>
-        private T Value { get; }
+        private object Value { get; }
 
         #endregion
 
         #region Logic
 
         /// <summary>
-        /// Assert that a given reference type is null.
+        /// Assert that a given object is null.
         /// </summary>
         /// <param name="because"> A reason why this assertion needs to be correct. </param>
         /// <param name="testMethodName"> Supplied by the compiler. </param>
@@ -55,20 +55,20 @@
         }
 
         /// <summary>
-        /// Assert that a given reference type is of the specified type.
+        /// Assert that a given object is of the specified type.
         /// </summary>
-        /// <typeparam name="TType"> The reference type's expected type. </typeparam>
+        /// <typeparam name="T"> The object's expected type. </typeparam>
         /// <param name="because"> A reason why this assertion needs to be correct. </param>
         /// <param name="testMethodName"> Supplied by the compiler. </param>
         /// <param name="lineNumber"> Supplied by the compiler. </param>
         /// <param name="sourceCodePath"> Supplied by the compiler. </param>
-        public void BeOfType<TType>(string because = null,
+        public void BeOfType<T>(string because = null,
             [CallerMemberName] string testMethodName = null, [CallerLineNumber] int lineNumber = 0, [CallerFilePath] string sourceCodePath = null)
         {
-            if (Value?.GetType() != typeof(TType))
+            if (Value?.GetType() != typeof(T))
             {
                 var context = Context.GetCallerContext(testMethodName, null, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value?.GetType()?.Name ?? "undefined"}\"", $"to be of type \"{typeof(TType).Name}\"", because);
+                throw Context.GetFormattedException(testMethodName, context, $"\"{Value?.GetType()?.Name ?? "undefined"}\"", $"to be of type \"{typeof(T).Name}\"", because);
             }
         }
 
