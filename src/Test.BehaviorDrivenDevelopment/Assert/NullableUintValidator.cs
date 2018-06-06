@@ -53,7 +53,7 @@
             if (Value != expected)
             {
                 var context = Context.GetCallerContext(testMethodName, expected, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be \"{expected}\"", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be \"{expected}\"", because);
             }
         }
 
@@ -72,7 +72,7 @@
             if (Value < minimum || Value > maximum || Value == null)
             {
                 var context = Context.GetListCallerContext(testMethodName, new uint?[] { minimum, maximum }, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be between \"{minimum}\" and \"{maximum}\"", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be between \"{minimum}\" and \"{maximum}\"", because);
             }
         }
 
@@ -90,7 +90,7 @@
             if (Value <= minimum || Value == null)
             {
                 var context = Context.GetCallerContext(testMethodName, minimum, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be greater than \"{minimum}\"", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be greater than \"{minimum}\"", because);
             }
         }
 
@@ -108,7 +108,7 @@
             if (Value < minimum || Value == null)
             {
                 var context = Context.GetCallerContext(testMethodName, minimum, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be greater than or equal to \"{minimum}\"", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be greater than or equal to \"{minimum}\"", because);
             }
         }
 
@@ -126,7 +126,7 @@
             if (Value >= maximum || Value == null)
             {
                 var context = Context.GetCallerContext(testMethodName, maximum, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be less than \"{maximum}\"", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be less than \"{maximum}\"", because);
             }
         }
 
@@ -144,7 +144,7 @@
             if (Value > maximum || Value == null)
             {
                 var context = Context.GetCallerContext(testMethodName, maximum, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be less than or equal to \"{maximum}\"", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be less than or equal to \"{maximum}\"", because);
             }
         }
 
@@ -161,7 +161,7 @@
             if (Value.HasValue)
             {
                 var context = Context.GetCallerContext(testMethodName, null, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be null", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be null", because);
             }
         }
 
@@ -181,7 +181,7 @@
             {
                 var context = Context.GetCallerContext(testMethodName, 0, sourceCodePath, lineNumber);
                 var expected = $"to be one of the following values: \"{string.Join("\", \"", expectedValues)}\"";
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", expected, because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", expected, because);
             }
         }
 

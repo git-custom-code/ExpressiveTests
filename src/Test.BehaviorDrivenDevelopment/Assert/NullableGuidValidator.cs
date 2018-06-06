@@ -52,7 +52,7 @@
             if (Value != expected)
             {
                 var context = Context.GetCallerContext(testMethodName, expected, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be \"{expected}\"", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be \"{expected}\"", because);
             }
         }
 
@@ -69,7 +69,7 @@
             if (Value != Guid.Empty)
             {
                 var context = Context.GetCallerContext(testMethodName, default(Guid?), sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be empty", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be empty", because);
             }
         }
 
@@ -86,7 +86,7 @@
             if (Value.HasValue)
             {
                 var context = Context.GetCallerContext(testMethodName, null, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be null", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be null", because);
             }
         }
 
@@ -103,7 +103,7 @@
             if (Value != Guid.Empty && Value.HasValue)
             {
                 var context = Context.GetCallerContext(testMethodName, default(Guid?), sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be null or empty", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be null or empty", because);
             }
         }
 

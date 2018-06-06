@@ -56,7 +56,7 @@
                 if (!string.Equals(Value, expected, StringComparison.OrdinalIgnoreCase))
                 {
                     var context = Context.GetCallerContext(testMethodName, expected, sourceCodePath, lineNumber);
-                    throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be \"{expected}\"", because);
+                    throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be \"{expected}\"", because);
                 }
             }
             else
@@ -64,7 +64,7 @@
                 if (!string.Equals(Value, expected))
                 {
                     var context = Context.GetCallerContext(testMethodName, expected, sourceCodePath, lineNumber);
-                    throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be \"{expected}\"", because);
+                    throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be \"{expected}\"", because);
                 }
             }
         }
@@ -82,7 +82,7 @@
             if (Value != string.Empty)
             {
                 var context = Context.GetCallerContext(testMethodName, null, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be empty", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be empty", because);
             }
         }
 
@@ -99,7 +99,7 @@
             if (Value != null)
             {
                 var context = Context.GetCallerContext(testMethodName, null, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be null", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be null", because);
             }
         }
 
@@ -116,7 +116,7 @@
             if (!string.IsNullOrEmpty(Value))
             {
                 var context = Context.GetCallerContext(testMethodName, null, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to be null or empty", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to be null or empty", because);
             }
         }
 
@@ -137,7 +137,7 @@
                 if (Value?.IndexOf(expected, StringComparison.OrdinalIgnoreCase) == -1)
                 {
                     var context = Context.GetCallerContext(testMethodName, expected, sourceCodePath, lineNumber);
-                    throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to contain \"{expected}\"", because);
+                    throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to contain \"{expected}\"", because);
                 }
             }
             else
@@ -145,7 +145,7 @@
                 if (Value?.IndexOf(expected) == -1)
                 {
                     var context = Context.GetCallerContext(testMethodName, expected, sourceCodePath, lineNumber);
-                    throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to contain \"{expected}\"", because);
+                    throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to contain \"{expected}\"", because);
                 }
             }
         }
@@ -167,7 +167,7 @@
                 if (Value == null || string.IsNullOrEmpty(end) || !Value.EndsWith(end, StringComparison.OrdinalIgnoreCase))
                 {
                     var context = Context.GetCallerContext(testMethodName, end, sourceCodePath, lineNumber);
-                    throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to end with \"{end}\"", because);
+                    throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to end with \"{end}\"", because);
                 }
             }
             else
@@ -175,7 +175,7 @@
                 if (Value == null || string.IsNullOrEmpty(end) || !Value.EndsWith(end))
                 {
                     var context = Context.GetCallerContext(testMethodName, end, sourceCodePath, lineNumber);
-                    throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to end with \"{end}\"", because);
+                    throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to end with \"{end}\"", because);
                 }
             }
         }
@@ -205,7 +205,7 @@
             if (!regex.IsMatch(Value))
             {
                 var context = Context.GetCallerContext(testMethodName, pattern, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to match pattern \"{pattern}\"", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to match pattern \"{pattern}\"", because);
             }
         }
 
@@ -226,7 +226,7 @@
             if (!expression.IsMatch(Value))
             {
                 var context = Context.GetCallerContext(testMethodName, regex, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to match regular expression \"{regex}\"", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to match regular expression \"{regex}\"", because);
             }
         }
 
@@ -247,7 +247,7 @@
                 if (Value == null || string.IsNullOrEmpty(start) || !Value.StartsWith(start, StringComparison.OrdinalIgnoreCase))
                 {
                     var context = Context.GetCallerContext(testMethodName, start, sourceCodePath, lineNumber);
-                    throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to start with \"{start}\"", because);
+                    throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to start with \"{start}\"", because);
                 }
             }
             else
@@ -255,7 +255,7 @@
                 if (Value == null || string.IsNullOrEmpty(start) || !Value.StartsWith(start))
                 {
                     var context = Context.GetCallerContext(testMethodName, start, sourceCodePath, lineNumber);
-                    throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"to start with \"{start}\"", because);
+                    throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"to start with \"{start}\"", because);
                 }
             }
         }

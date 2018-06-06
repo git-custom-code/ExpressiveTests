@@ -53,7 +53,7 @@
             if (Equals(Value, expected))
             {
                 var context = Context.GetCallerContext(testMethodName, expected, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"not to be \"{expected}\"", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"not to be \"{expected}\"", because);
             }
         }
 

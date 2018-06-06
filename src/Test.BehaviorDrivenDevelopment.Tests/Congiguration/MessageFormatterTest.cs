@@ -17,7 +17,7 @@
             var formatter = new MessageFormatter();
 
             // When
-            var actual = formatter.FormatMessage("1", "2", "to be 3", null);
+            var actual = formatter.FormatMessage("1", "is 2", "to be 3", null);
 
             // Then
             var rn = Environment.NewLine;
@@ -31,7 +31,7 @@
             var formatter = new MessageFormatter();
 
             // When
-            var actual = formatter.FormatMessage("1", "2", "to be 3", "4");
+            var actual = formatter.FormatMessage("1", "is 2", "to be 3", "4");
 
             // Then
             var rn = Environment.NewLine;

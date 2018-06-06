@@ -51,7 +51,7 @@
             if (Value == expected)
             {
                 var context = Context.GetCallerContext(testMethodName, expected, sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"not to be \"{expected}\"", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"not to be \"{expected}\"", because);
             }
         }
 
@@ -68,7 +68,7 @@
             if (Value == true)
             {
                 var context = Context.GetCallerContext(testMethodName, default(bool), sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"not to be true", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"not to be true", because);
             }
         }
 
@@ -85,7 +85,7 @@
             if (Value == false)
             {
                 var context = Context.GetCallerContext(testMethodName, default(bool), sourceCodePath, lineNumber);
-                throw Context.GetFormattedException(testMethodName, context, $"\"{Value}\"", $"not to be false", because);
+                throw Context.GetFormattedException(testMethodName, context, $"is \"{Value}\"", $"not to be false", because);
             }
         }
 
