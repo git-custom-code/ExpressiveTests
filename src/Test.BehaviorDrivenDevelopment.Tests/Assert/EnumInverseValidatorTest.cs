@@ -5,41 +5,41 @@
     using Xunit.Sdk;
 
     /// <summary>
-    /// Test cases for the <see cref="EnumValidator{T}"/> type.
+    /// Test cases for the <see cref="EnumInverseValidator{T}"/> type.
     /// </summary>
     [UnitTest]
     [Category("Assert", "EnumValidation")]
-    public sealed class EnumValidatorTest
+    public sealed class EnumInverseValidatorTest
     {
-        #region enum.Be()
+        #region enum.NotBe()
 
-        [Fact(DisplayName = "enum.Be(enum)")]
-        public void ValidateEnumToBeValue()
+        [Fact(DisplayName = "enum.NotBe(enum)")]
+        public void ValidateEnumNotToBeValue()
         {
             // Given
-            var validator = new EnumValidator<StringComparison>(StringComparison.Ordinal);
+            var validator = new EnumInverseValidator<StringComparison>(StringComparison.Ordinal);
 
             // When
-            validator.Be(StringComparison.Ordinal);
+            validator.Be(StringComparison.InvariantCulture);
 
             // Then
             Assert.True(true);
         }
 
-        [Fact(DisplayName = "enum.Be(other)")]
-        public void ValidateEnumToBeValueViolated()
+        [Fact(DisplayName = "enum.NotBe(other)")]
+        public void ValidateEnumNotToBeValueViolated()
         {
             // Given
-            var validator = new EnumValidator<StringComparison>(StringComparison.Ordinal);
+            var validator = new EnumInverseValidator<StringComparison>(StringComparison.Ordinal);
 
             // When
-            var exception = Assert.Throws<XunitException>(() => validator.Be(StringComparison.InvariantCulture, "that's the bottom line"));
+            var exception = Assert.Throws<XunitException>(() => validator.Be(StringComparison.Ordinal, "that's the bottom line"));
 
             // Then
             Assert.NotNull(exception);
             var rn = Environment.NewLine;
             Assert.Equal(
-                $"{rn}validator{rn}is \"{StringComparison.Ordinal}\"{rn}but was expected to be \"{StringComparison.InvariantCulture}\"{rn}because that's the bottom line",
+                $"{rn}validator{rn}is \"{StringComparison.Ordinal}\"{rn}but was expected not to be \"{StringComparison.Ordinal}\"{rn}because that's the bottom line",
                 exception.UserMessage);
         }
 

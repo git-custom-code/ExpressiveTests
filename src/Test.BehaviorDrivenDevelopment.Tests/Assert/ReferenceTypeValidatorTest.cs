@@ -5,19 +5,19 @@
     using Xunit.Sdk;
 
     /// <summary>
-    /// Test cases for the <see cref="ObjectValidator"/> type.
+    /// Test cases for the <see cref="ReferenceTypeValidator{T}"/> type.
     /// </summary>
     [UnitTest]
-    [Category("Assert", "ObjectValidation")]
-    public sealed class ObjectValidatorTest
+    [Category("Assert", "ReferenceTypeValidation")]
+    public sealed class ReferenceTypeValidatorTest
     {
-        #region Object.BeNull()
+        #region ReferenceType.BeNull()
 
         [Fact(DisplayName = "((object)null).BeNull()")]
-        public void ValidateObjectToBeNull()
+        public void ValidateReferenceTypeToBeNull()
         {
             // Given
-            var validator = new ObjectValidator(null);
+            var validator = new ReferenceTypeValidator<object>(null);
 
             // When
             validator.BeNull();
@@ -27,10 +27,10 @@
         }
 
         [Fact(DisplayName = "((object)o).BeNull()")]
-        public void ValidateObjectToBeNullViolated()
+        public void ValidateReferenceTypeToBeNullViolated()
         {
             // Given
-            var validator = new ObjectValidator(new object());
+            var validator = new ReferenceTypeValidator<object>(new object());
 
             // When
             var exception = Assert.Throws<XunitException>(() => validator.BeNull());
@@ -44,10 +44,10 @@
         }
 
         [Fact(DisplayName = "((object)o).BeNull(reason)")]
-        public void ValidateObjectToBeNullWithReasonViolated()
+        public void ValidateReferenceTypeToBeNullWithReasonViolated()
         {
             // Given
-            var validator = new ObjectValidator(new object());
+            var validator = new ReferenceTypeValidator<object>(new object());
 
             // When
             var exception = Assert.Throws<XunitException>(() => validator.BeNull("that's the bottom line"));
@@ -62,13 +62,13 @@
 
         #endregion
 
-        #region Object.BeOfType()
+        #region ReferenceType.BeOfType()
 
         [Fact(DisplayName = "((object)o).BeOfType<T>()")]
-        public void ValidateObjectToBeOfType()
+        public void ValidateReferenceTypeToBeOfType()
         {
             // Given
-            var validator = new ObjectValidator(42);
+            var validator = new ReferenceTypeValidator<object>(42);
 
             // When
             validator.BeOfType<Int32>();
@@ -78,10 +78,10 @@
         }
 
         [Fact(DisplayName = "((object)o).BeOfType<TOther>()")]
-        public void ValidateObjectToBeOfTypeViolated()
+        public void ValidateReferenceTypeToBeOfTypeViolated()
         {
             // Given
-            var validator = new ObjectValidator(42);
+            var validator = new ReferenceTypeValidator<object>(42);
 
             // When
             var exception = Assert.Throws<XunitException>(() => validator.BeOfType<String>());
@@ -95,10 +95,10 @@
         }
 
         [Fact(DisplayName = "((object)o).BeOfType<TOther>(reason)")]
-        public void ValidateObjectToBeOfTypeWithReasonViolated()
+        public void ValidateReferenceTypeToBeOfTypeWithReasonViolated()
         {
             // Given
-            var validator = new ObjectValidator(42);
+            var validator = new ReferenceTypeValidator<object>(42);
 
             // When
             var exception = Assert.Throws<XunitException>(() => validator.BeOfType<String>("that's the bottom line"));
