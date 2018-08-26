@@ -1,6 +1,7 @@
 ﻿namespace CustomCode.Test.BehaviorDrivenDevelopment.Tests
 {
     using System;
+    using System.Linq;
     using System.Text;
     using Xunit;
 
@@ -403,6 +404,38 @@
 
         #endregion
 
+        #region ienumerable
+
+        [Fact(DisplayName = "ienumerable.Should()")]
+        [Category("Should")]
+        public void UseShouldExtensionWithIEnumerables()
+        {
+            // Given
+            var enumerable = Enumerable.Empty<int>();
+
+            // When
+            var validator = enumerable.Should();
+
+            // Then
+            Assert.IsType<EnumerableValidator<int>>(validator);
+        }
+
+        [Fact(DisplayName = "ienumerable.ShouldNot()")]
+        [Category("ShouldNot")]
+        public void UseShouldNotExtensionWithIEnumerables()
+        {
+            // Given
+            var enumerable = Enumerable.Empty<int>();
+
+            // When
+            var validator = enumerable.ShouldNot();
+
+            // Then
+            Assert.IsType<EnumerableInverseValidator<int>>(validator);
+        }
+
+        #endregion
+
         #region int
 
         [Fact(DisplayName = "int.Should()")]
@@ -555,7 +588,7 @@
 
         #endregion
 
-        #region reference types
+        #region objects
 
         [Fact(DisplayName = "object.Should()")]
         [Category("Should")]
@@ -563,15 +596,12 @@
         {
             // Given
             var @object = new object();
-            var @string = new StringBuilder();
-
+            
             // When
             var objectValidator = @object.Should();
-            var stringValidator = @string.Should();
-
+            
             // Then
-            Assert.IsType<ObjectValidator>(objectValidator);
-            Assert.IsType<ObjectValidator>(stringValidator);
+            Assert.IsType<ReferenceTypeValidator<object>>(objectValidator);
         }
 
         [Fact(DisplayName = "object.ShouldNot()")]
@@ -580,15 +610,12 @@
         {
             // Given
             var @object = new object();
-            var @string = new StringBuilder();
-
+            
             // When
             var objectValidator = @object.ShouldNot();
-            var stringValidator = @string.ShouldNot();
-
+            
             // Then
-            Assert.IsType<ObjectInverseValidator>(objectValidator);
-            Assert.IsType<ObjectInverseValidator>(stringValidator);
+            Assert.IsType<ReferenceTypeInverseValidator<object>>(objectValidator);
         }
 
         #endregion

@@ -13,7 +13,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     
     <PackageId>CustomCode.Test.BehaviorDrivenDevelopment</PackageId>
-    <PackageVersion>1.4.0-alpha.4</PackageVersion>
+    <PackageVersion>1.5.0-alpha.4</PackageVersion>
     <Title>Behavior driven development implementation for c#.</Title>
     <Authors>CustomCode</Authors>
     <Company>CustomCode</Company>
